@@ -1,0 +1,30 @@
+{
+  "title": "Nom du projet",
+  "description": "Desription du projet",
+  "primaryImg": "/formation-anglais_b1sflx.jpg",
+  "secondaryImg": "/Image_6_vuloum.png",
+  "methods": [
+    {
+      "method": "UX Design"
+    },
+    {
+      "method": "React JS"
+    }
+  ],
+  "liens": [
+    {
+      "website": "www.casian.fr"
+    },
+    {
+      "figma": "www.casian.fr"
+    },
+    {
+      "autre": "www.casian.fr"
+    }
+  ],
+
+  "seo": {
+    "title": "Nom du projet",
+    "description": "description du projet dadadazdzad"
+  }
+}
