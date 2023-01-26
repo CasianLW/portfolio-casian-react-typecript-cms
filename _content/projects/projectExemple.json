@@ -3,6 +3,7 @@
   "description": "Desription du projet",
   "primaryImg": "/formation-anglais_b1sflx.jpg",
   "secondaryImg": "/Image_6_vuloum.png",
+  "order": 1,
   "methods": [
     {
       "method": "UX Design"
