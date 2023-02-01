@@ -23,7 +23,6 @@ const Home: NextPage<Props> = ({ seo }) => {
   useEffect(() => {
     setActiveNavLink(NavLinkEnum.Home)
   }, [setActiveNavLink])
-  console.log(setActiveNavLink)
 
   return (
     <>
