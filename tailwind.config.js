@@ -25,7 +25,7 @@ module.exports = {
           blue: '#a8c5de',
           rose: '#c79dde',
         },
-        'cas-gradient-purple': '#00B3D2',
+        'cas-gradient-purple': '#9b23ea',
         'cas-gradient-orange': '#2A3B7C',
         'cwr-yellow': '#F8AE00',
         'cwr-green': '#009642',
