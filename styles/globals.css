@@ -8,8 +8,23 @@
 @layer base {
   body {
     /* on peut appliquer des class tailwind mais aussi du css classique */
-    @apply pt-5 font-sans;
-    background-color: #f1f1f1;
+    @apply pt-5 font-sans bg-cas-black-600 text-cas-white-100;
+    /* background-color: #f1f1f1; */
+  }
+  .top-header {
+    @apply mt-16;
+  }
+  .lateral-space {
+    @apply px-[5vw];
+  }
+  .main-title {
+    @apply text-5xl font-bold;
+  }
+  .link-active {
+    @apply text-cas-gradient-purple;
+  }
+  .link-special {
+    @apply lg:text-cas-gradient-orangeLight;
   }
 }
 
