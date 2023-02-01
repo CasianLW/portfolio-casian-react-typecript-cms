@@ -24,9 +24,9 @@ const BurgerComponent: FC = () => {
       onClick={handleClick}
     >
       <span>{navIsClosed ? 'Menu' : 'Fermer'}</span>
-      <div className="grid gap-[4px]">
+      <div className="grid gap-[5px]">
         <BurgerBarComponent transform={navIsClosed ? null : 'translate-y-[3.5px] rotate-45'} />
-        <BurgerBarComponent transform={navIsClosed ? 'w-3/4' : '-translate-y-[3.5px] -rotate-45'} />
+        <BurgerBarComponent transform={navIsClosed ? 'w-3/4 ml-auto' : 'w-full -translate-y-[3.5px] -rotate-45'} />
       </div>
     </div>
   )
