@@ -83,8 +83,8 @@ const NavComponent: FC = () => {
   return (
     <nav
       className={
-        'fixed inset-0 z-10 grid content-center justify-items-start gap-4 px-[5vw] py-6 before:fixed  before:inset-0 before:bg-cas-black-400 before:transition-all lg:absolute lg:bottom-[initial] lg:flex lg:gap-10 lg:py-8 lg:before:hidden ' +
-        `${navIsClosed ? ' absolute before:translate-x-full before:delay-[500ms] before:rounded-l-[48%]' : ' fixed'}`
+        'overflow-x-hidden fixed inset-0 z-10 grid content-center justify-items-start gap-4 px-[5vw] py-6 before:fixed  before:inset-0 before:bg-cas-black-400 before:transition-all lg:absolute lg:bottom-[initial] lg:flex lg:gap-10 lg:py-8 lg:before:hidden ' +
+        `${navIsClosed ? ' fixed before:translate-x-full before:delay-[500ms] before:rounded-l-[48%]' : ' fixed'}`
       }
       ref={navRef}
     >
@@ -150,7 +150,7 @@ const NavLinkComponent: FC<NavLinkComponentProp> = ({ href, supplentaryClasses, 
     <Link
       href={href}
       className={
-        'z-0 text-[44px] font-semibold no-underline transition-all lg:translate-x-0 lg:text-[20px]' +
+        'z-0 text-[44px] font-semibold no-underline transition-all lg:translate-x-0 lg:text-[20px] lg:font-normal' +
         ` ${supplentaryClasses} ${navIsClosed && !img ? 'translate-x-[100vw]' : 'translate-x-0'} 
                     ${activeNavLink === navLink && 'link-active'}`
       }
