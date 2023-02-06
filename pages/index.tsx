@@ -29,6 +29,12 @@ const Home: NextPage<Props> = ({ seo }) => {
       <SeoComponent seo={seo} />
       <header className="top-header lateral-space">
         <h1 className="main-title">Homepage</h1>
+        <div className="fixed top-[30%] left-[10%] w-[80%] h-[300px] overflow-hidden z-0">
+          <div className="absolute top-0 left-0 h-full w-[4000px] flex will-change-transform">
+            {/* la div a repeter sur les projets affihées */}
+            <div></div>
+          </div>
+        </div>
       </header>
     </>
   )
