@@ -30,7 +30,7 @@ const Home: NextPage<Props> = ({ seo }) => {
     <>
       <SeoComponent seo={seo} />
       <header className="top-header lateral-space">
-        <h1 className="main-title">Homepage</h1>
+        <h1 className="main-title">Freelancer</h1>
         <TypingTextComponent />
         <SliderComponent />
       </header>
