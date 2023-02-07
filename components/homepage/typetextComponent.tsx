@@ -1,82 +1,55 @@
-import { FC, useEffect, WheelEvent, TouchEvent, useRef, useState } from 'react'
+import { FC, useState } from 'react'
 import Link from 'next/link'
 
 import Image from 'next/image'
-import { getPathFromNavLink, NavLinkEnum } from '../nav'
-import { homepageMobileApps } from '@/assets/homepage'
+import Typewriter from 'typewriter-effect'
 
-const SliderComponent: FC = () => {
+const TypingTextComponent: FC = () => {
+  const [text, setText] = useState('')
+
   return (
-    <section className="bg-cwr-blue-400 pt-8 text-center text-white">
-      <div className="fixed top-[30%] left-[10%] w-[80%] h-[300px] overflow-hidden z-0">
-        <div className="absolute top-0 left-0 h-full w-[2000px] flex will-change-transform">
-          <SliderItemComponent />
-          <SliderItemComponent />
-          <SliderItemComponent />
-          <SliderItemComponent />
-          <SliderItemComponent />
-          <SliderItemComponent />
-        </div>
-      </div>
-    </section>
+    <h3 className="text-2xl mt-5">
+      <Typewriter
+        options={{
+          autoStart: true,
+          loop: true,
+        }}
+        onInit={(typewriter) => {
+          typewriter
+            //   .typeString('<strong>UX / UI Designer')
+            //   .pauseFor(2500)
+            //   .callFunction(() => {
+            //     console.log('ux/ui typed out!')
+            //   })
+            //   .pauseFor(2500)
+            //   .deleteAll()
+            .typeString("<strong>Création <span class='span_title'>site internet</span>")
+            .pauseFor(1500)
+            .deleteChars(13)
+            .typeString("<strong><span style='text-decoration:underline;'>application mobile</span>")
+            .pauseFor(700)
+            .deleteChars(28)
+            .typeString('<strong>UX / UI Designer')
+            .pauseFor(1000)
+            .deleteChars(16)
+            .typeString('<strong>Fullstack / Mobile Developer')
+            .pauseFor(1000)
+            .deleteChars(28)
+            .typeString("<strong>Services <span class='span_title'>webdesign</span>")
+            .pauseFor(700)
+            .deleteChars(9)
+            .typeString("<strong><span class='span_title2'>web development</span>")
+            .pauseFor(700)
+            .deleteChars(24)
+            .deleteChars(37)
+            //   .callFunction(() => {
+            //     console.log('All strings were deleted')
+            //   })
+            .start()
+        }}
+      />
+    </h3>
   )
 }
 
-export default SliderComponent
-
-const SliderItemComponent: FC = () => {
-  const [translateX, setTranslateX] = useState(-200)
-  const [previousTouchY, setpreviousTouchY] = useState(0)
-  const [previousTouchX, setpreviousTouchX] = useState(0)
-  useEffect(() => {
-    // touch up or down
-    const degChoisiWeb = 10
-    const degChoisiMobile = 5
-    const sliderPourcentx = 2
-    var mouvementStepCounter = -405
-
-    // let previousTouchY = 0
-    setpreviousTouchY(previousTouchY)
-    const handleScroll = (event: WheelEvent | TouchEvent) => {
-      if (event.type === 'wheel') {
-        if (event.deltaY > 0) {
-          console.log('Scrolling down...')
-          setTranslateX(translateX - degChoisiWeb)
-        } else {
-          console.log('Scrolling up...')
-          setTranslateX(translateX + degChoisiWeb)
-        }
-      } else if (event.type === 'touchmove') {
-        const currentTouchY = event.touches[0].clientY - 20
-        const currentTouchX = event.touches[0].clientX - 20
-        console.log(currentTouchY)
-        console.log(currentTouchX)
-        if (previousTouchY < currentTouchY || previousTouchX < currentTouchX) {
-          console.log('Touching down...')
-          setTranslateX(translateX + degChoisiMobile)
-        } else {
-          console.log('Touching up...')
-          setTranslateX(translateX - degChoisiMobile)
-        }
-        setpreviousTouchY(currentTouchY)
-        setpreviousTouchX(currentTouchX)
-      }
-    }
-    window.addEventListener('wheel', handleScroll)
-    window.addEventListener('touchmove', handleScroll)
-    return () => {
-      window.removeEventListener('wheel', handleScroll)
-      window.removeEventListener('touchmove', handleScroll)
-    }
-  }, [translateX, previousTouchY, previousTouchX])
-  return (
-    <div style={{ transform: `translateX(${translateX}px)` }} className="slider-item flex-1 overflow-hidden w-[50px] ">
-      <div className="relative left-[1%] top-[2.5%] w-[98%] h-[95%] flex">
-        <Link className="w-fit" href={getPathFromNavLink(NavLinkEnum.Works)}>
-          {/* <a className="md:order-1">About</a> */}
-          <Image className="w-[80vw]" src={homepageMobileApps} alt="image applications mobiles casian.fr"></Image>
-        </Link>
-      </div>
-    </div>
-  )
-}
+export default TypingTextComponent
