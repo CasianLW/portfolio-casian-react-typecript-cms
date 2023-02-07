@@ -26,6 +26,9 @@
   .link-special {
     @apply lg:text-cas-gradient-orangeLight;
   }
+  .slider-item {
+    transition: all 1s ease-out;
+  }
 }
 
 /* components = mieux se retrouver, expres pour les composants */
