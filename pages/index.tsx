@@ -8,6 +8,7 @@ import NavComponent, { NavLinkEnum } from '@/components/nav'
 import { useNavSettingsContext } from '@/context/nav-settings-context'
 import { useEffect } from 'react'
 import SliderComponent from '@/components/homepage/sliderComponent'
+import TypingTextComponent from '@/components/homepage/typetextComponent'
 
 interface Props {
   seo: Seo
@@ -30,6 +31,7 @@ const Home: NextPage<Props> = ({ seo }) => {
       <SeoComponent seo={seo} />
       <header className="top-header lateral-space">
         <h1 className="main-title">Homepage</h1>
+        <TypingTextComponent />
         <SliderComponent />
       </header>
     </>
