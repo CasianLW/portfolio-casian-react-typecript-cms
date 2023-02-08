@@ -12,7 +12,7 @@ export enum NavLinkEnum {
   About = 'About',
   Works = 'Works',
   Contact = 'Contact',
-  Tarifs = 'Tarifs',
+  Services = 'Services',
   Blog = 'Blog',
   MentionsLegales = 'MentionsLegales',
   DonneesPersonnelles = 'DonneesPersonnelles',
@@ -27,8 +27,8 @@ export const getPathFromNavLink: (navLink: NavLinkEnum) => string = (navLink: Na
       return '/works/'
     case NavLinkEnum.Contact:
       return '/contact/'
-    case NavLinkEnum.Tarifs:
-      return '/tarifs/'
+    case NavLinkEnum.Services:
+      return '/services/'
     case NavLinkEnum.Blog:
       return '/blog/'
     case NavLinkEnum.MentionsLegales:
