@@ -29,6 +29,9 @@
   .slider-item {
     transition: all 1s ease-out;
   }
+  .link-translate-z {
+    transform: translateZ(30px);
+  }
 
   .span_title {
     background-image: linear-gradient(45deg, #a8c5de 0%, #c79dde 100%);
