@@ -5,34 +5,59 @@ import Image from 'next/image'
 import { getPathFromNavLink, NavLinkEnum } from '../nav'
 import { homepageMobileApps } from '@/assets/homepage'
 
-const SliderComponent: FC = () => (
+const TextSpinnerComponent: FC = () => (
   <section className="bg-cwr-blue-400 pt-8 text-center text-white">
-    <div className="p-ctnr grid gap-16 !py-10 text-left">
-      <Image
-        className="m-auto w-2/6 md:w-1/6"
-        src={homepageMobileApps}
-        alt="image applications mobiles casian.fr"
-      ></Image>
-      <ul className="grid gap-4 text-sm md:grid-cols-4 md:text-xl lg:gap-x-8">
-        <Link href={getPathFromNavLink(NavLinkEnum.About)}>
-          <a className="md:order-1">About</a>
-        </Link>
-      </ul>
-      <ul className="grid gap-4 border-t-[1px] border-white pt-10 text-xs md:grid-cols-4 md:text-sm">
-        <p>©2022 CWR</p>
-        <Link href={getPathFromNavLink(NavLinkEnum.DonneesPersonnelles)}>
-          <a>Données personnelles</a>
-        </Link>
-        <Link href={getPathFromNavLink(NavLinkEnum.MentionsLegales)}>
-          <a>Mentions légales</a>
-        </Link>
-      </ul>
+    <div className="fixed left-[70%] top-[70%]">
+      <div>
+        <LinkSpinnerComponent
+          degValue={0}
+          linkRef={NavLinkEnum.About}
+          title={'About'}
+          titleSecondary={'Behind casian.fr'}
+        />
+        <LinkSpinnerComponent
+          degValue={90}
+          linkRef={NavLinkEnum.Works}
+          title={'Works'}
+          titleSecondary={'Quelques projets '}
+        />
+        <LinkSpinnerComponent
+          degValue={180}
+          linkRef={NavLinkEnum.Services}
+          title={'Services'}
+          titleSecondary={'Comment puis-je vous aider?'}
+        />
+        <LinkSpinnerComponent
+          degValue={270}
+          linkRef={NavLinkEnum.Contact}
+          title={'Contact'}
+          titleSecondary={'Travaillons ensemble !'}
+        />
+      </div>
     </div>
   </section>
 )
 
-export default SliderComponent
+export default TextSpinnerComponent
 
+interface LinkProps {
+  degValue: number
+  linkRef: NavLinkEnum
+  title: string
+  titleSecondary: string
+}
+const LinkSpinnerComponent: FC<LinkProps> = ({ degValue, linkRef, title, titleSecondary }) => {
+  return (
+    <div className={`link-translate-z translate-x-${degValue}`}>
+      <Link className="w-fit" href={getPathFromNavLink(linkRef)}>
+        ${title}
+      </Link>
+      <Link className="w-fit" href={getPathFromNavLink(linkRef)}>
+        ${titleSecondary}
+      </Link>
+    </div>
+  )
+}
 // const navLinks = [
 //   {
 //     navLink: NavLinkEnum.Home,
