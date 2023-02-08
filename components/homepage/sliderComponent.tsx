@@ -7,6 +7,7 @@ import { logoCasianBlanc } from '@/assets/shared'
 import Image from 'next/image'
 import { getPathFromNavLink, NavLinkEnum } from '../nav'
 import { homepageMobileApps } from '@/assets/homepage'
+import { GetTransformX } from '@/utils/scroll-touchmove'
 
 const SliderComponent: FC = () => {
   return (
@@ -28,50 +29,7 @@ const SliderComponent: FC = () => {
 export default SliderComponent
 
 const SliderItemComponent: FC = () => {
-  const [translateX, setTranslateX] = useState(-200)
-  const [previousTouchY, setpreviousTouchY] = useState(0)
-  const [previousTouchX, setpreviousTouchX] = useState(0)
-  useEffect(() => {
-    // touch up or down
-    const degChoisiWeb = 10
-    const degChoisiMobile = 5
-    const sliderPourcentx = 2
-    var mouvementStepCounter = -405
-
-    // let previousTouchY = 0
-    setpreviousTouchY(previousTouchY)
-    const handleScroll = (event: WheelEvent | TouchEvent) => {
-      if (event.type === 'wheel') {
-        if (event.deltaY > 0) {
-          console.log('Scrolling down...')
-          setTranslateX(translateX - degChoisiWeb)
-        } else {
-          console.log('Scrolling up...')
-          setTranslateX(translateX + degChoisiWeb)
-        }
-      } else if (event.type === 'touchmove') {
-        const currentTouchY = event.touches[0].clientY - 30
-        const currentTouchX = event.touches[0].clientX - 30
-        console.log(currentTouchY)
-        console.log(currentTouchX)
-        if (previousTouchY < currentTouchY || previousTouchX < currentTouchX) {
-          console.log('Touching down...')
-          setTranslateX(translateX + degChoisiMobile)
-        } else {
-          console.log('Touching up...')
-          setTranslateX(translateX - degChoisiMobile)
-        }
-        setpreviousTouchY(currentTouchY)
-        setpreviousTouchX(currentTouchX)
-      }
-    }
-    window.addEventListener('wheel', handleScroll)
-    window.addEventListener('touchmove', handleScroll)
-    return () => {
-      window.removeEventListener('wheel', handleScroll)
-      window.removeEventListener('touchmove', handleScroll)
-    }
-  }, [translateX, previousTouchY, previousTouchX])
+  const translateX = GetTransformX(-200)
   return (
     <div style={{ transform: `translateX(${translateX}px)` }} className="slider-item flex-1 overflow-hidden w-[50px] ">
       <div className="relative left-[1%] top-[2.5%] w-[98%] h-[95%] flex">
