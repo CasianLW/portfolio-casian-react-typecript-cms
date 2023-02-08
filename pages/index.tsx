@@ -8,6 +8,7 @@ import { useEffect } from 'react'
 import SliderComponent from '@/components/homepage/sliderComponent'
 import TypingTextComponent from '@/components/homepage/typetextComponent'
 import BlobComponent from '@/components/homepage/blobComponent'
+import TextSpinnerComponent from '@/components/homepage/spinnerLinkComponent'
 
 interface Props {
   seo: Seo
@@ -33,6 +34,7 @@ const Home: NextPage<Props> = ({ seo }) => {
         <TypingTextComponent />
         <BlobComponent />
         <SliderComponent />
+        <TextSpinnerComponent />
       </header>
     </>
   )
