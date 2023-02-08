@@ -50,8 +50,8 @@ const SliderItemComponent: FC = () => {
           setTranslateX(translateX + degChoisiWeb)
         }
       } else if (event.type === 'touchmove') {
-        const currentTouchY = event.touches[0].clientY - 20
-        const currentTouchX = event.touches[0].clientX - 20
+        const currentTouchY = event.touches[0].clientY - 30
+        const currentTouchX = event.touches[0].clientX - 30
         console.log(currentTouchY)
         console.log(currentTouchX)
         if (previousTouchY < currentTouchY || previousTouchX < currentTouchX) {
