@@ -30,7 +30,17 @@
     transition: all 1s ease-out;
   }
   .link-translate-z {
-    transform: translateZ(30px);
+    width: max-content;
+    height: 120%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+  .link-box {
+    transition: all 1s ease-out;
+    transform: perspective(2000px);
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
   }
 
   .span_title {
