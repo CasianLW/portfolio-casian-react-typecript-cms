@@ -57,11 +57,33 @@
   }
 }
 
+@keyframes move-point {
+  0% {
+    opacity: 0;
+
+    transform: translateY(-550%);
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  80% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+
+    transform: translateY(-50%);
+  }
+}
+
 /* components = mieux se retrouver, expres pour les composants */
 @layer components {
   /* autre exemple que la base, une classe composé d'autres classes: */
   .home-card {
-    @apply border rounded-3xl bg-slate-300;
+    @apply border rounded-3xl;
   }
 }
 
