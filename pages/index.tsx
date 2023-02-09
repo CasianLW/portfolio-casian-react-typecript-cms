@@ -9,6 +9,7 @@ import SliderComponent from '@/components/homepage/sliderComponent'
 import TypingTextComponent from '@/components/homepage/typetextComponent'
 import BlobComponent from '@/components/homepage/blobComponent'
 import TextSpinnerComponent from '@/components/homepage/spinnerLinkComponent'
+import ScrollAnimationComponent from '@/components/homepage/scrollAnimationComponent'
 
 interface Props {
   seo: Seo
@@ -35,6 +36,7 @@ const Home: NextPage<Props> = ({ seo }) => {
         <BlobComponent />
         <SliderComponent />
         <TextSpinnerComponent />
+        <ScrollAnimationComponent />
       </header>
     </>
   )
