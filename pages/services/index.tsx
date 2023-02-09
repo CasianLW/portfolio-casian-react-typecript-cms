@@ -1,6 +1,6 @@
 // import ContectComponent from '@/components/contact-components/formComponent'
 import { Seo } from '@/cas-types'
-import NavComponent, { NavLinkEnum } from '@/components/nav'
+import { NavLinkEnum } from '@/components/nav'
 import SeoComponent from '@/components/shared/seo-component'
 import { useNavSettingsContext } from '@/context/nav-settings-context'
 import { getPageSeoBySlug } from '@/utils/content-api'
