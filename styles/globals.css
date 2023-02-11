@@ -92,4 +92,7 @@
 }
 
 @layer utilities {
+  .btn-filter-on {
+    @apply text-cas-gradient-purple;
+  }
 } ;
