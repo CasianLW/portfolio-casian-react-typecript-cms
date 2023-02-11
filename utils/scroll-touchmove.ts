@@ -25,8 +25,8 @@ export const GetTransformX = (start: number) => {
       } else if (event.type === 'touchmove') {
         const currentTouchY = event.touches[0].clientY - 30
         const currentTouchX = event.touches[0].clientX - 30
-        console.log(currentTouchY)
-        console.log(currentTouchX)
+        // console.log(currentTouchY)
+        // console.log(currentTouchX)
         if (previousTouchY < currentTouchY || previousTouchX < currentTouchX) {
           console.log('Touching down...')
           setTranslateX(translateX + degChoisiMobile)
