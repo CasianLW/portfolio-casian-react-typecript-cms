@@ -132,8 +132,12 @@ const navLinks = [
     supplementaryClasses: 'delay-[300ms]',
   },
   {
+    navLink: NavLinkEnum.Services,
+    supplementaryClasses: 'delay-[400ms]',
+  },
+  {
     navLink: NavLinkEnum.Contact,
-    supplementaryClasses: 'lg:ml-auto delay-[400ms]',
+    supplementaryClasses: 'lg:ml-auto delay-[500ms]',
   },
 ]
 
