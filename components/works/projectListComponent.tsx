@@ -36,7 +36,7 @@ const ProjectComponent: FC<ProjectProps> = ({
         {/* <a className="md:order-1">About</a> */}
         <div className="absolute ml-[12%] text-left -top-8 sm:-top-1">
           <h2 className="text-4xl font-semibold line-clamp-1">{title}</h2>
-          <h3 className="text-xs line-clamp-1">{titleSecondary}</h3>
+          <h3 className="text-xs md:text-lg line-clamp-1">{titleSecondary}</h3>
         </div>
         <Image width={500} height={500} className="w-[80vw]" src={imageRef} alt={title}></Image>
       </Link>
