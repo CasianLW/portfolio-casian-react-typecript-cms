@@ -14,3 +14,11 @@ export interface Project {
   liens: string[]
   order: number
 }
+export interface Service {
+  title: string
+  slug: string
+  categorie: string | any
+  primaryImage: string
+  description: string
+  order: number
+}
