@@ -1,0 +1,7 @@
+{
+  "title": "Nom du service",
+  "description": "Desription du service",
+  "primaryImg": "/test-image.jpg",
+  "order": 1,
+  "categorie": "pack"
+}
