@@ -51,7 +51,7 @@ const LinkSpinnerComponent: FC<LinkProps> = ({ degValue, linkRef, title, titleSe
   return (
     <div
       style={{ transform: `rotateX(${degValue}deg) translateZ(40px)` }}
-      className={`link-translate-z flex items-center justify-center flex-col  text-left fixed`}
+      className={`link-translate-z flex items-center justify-center flex-col z-10 text-left fixed`}
     >
       <Link className="mr-auto text-3xl" href={getPathFromNavLink(linkRef)}>
         {title}
