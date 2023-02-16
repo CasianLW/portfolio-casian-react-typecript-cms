@@ -44,12 +44,29 @@ module.exports = {
       },
       animation: {
         'view-more-bellow': 'view-more-bellow 3s infinite',
+        'move-point': 'move-point 1.5s cubic-bezier(0.42, 0.04, 0.14, 0.99) infinite',
       },
       keyframes: {
         'view-more-bellow': {
           '0%, 20%, 80%, 100%': { transform: 'none', opacity: '0' },
           '30%, 70%': { transform: 'none', opacity: '1' },
           '50%': { transform: 'translateY(28%)', opacity: '1' },
+        },
+        movePoint: {
+          '0%': {
+            opacity: '0',
+            transform: 'translateY(-550%)',
+          },
+          '20%': {
+            opacity: '1',
+          },
+          '80%': {
+            opacity: '1',
+          },
+          '100%': {
+            opacity: '1',
+            transform: 'translateY(-50%)',
+          },
         },
       },
     },
