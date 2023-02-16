@@ -43,8 +43,6 @@
     transition: all 1s ease-out;
     transform: perspective(2000px);
     transform-style: preserve-3d;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
   }
 
   .span_title {
