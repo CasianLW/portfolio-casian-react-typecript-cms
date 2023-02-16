@@ -52,7 +52,7 @@ module.exports = {
           '30%, 70%': { transform: 'none', opacity: '1' },
           '50%': { transform: 'translateY(28%)', opacity: '1' },
         },
-        movePoint: {
+        'move-point': {
           '0%': {
             opacity: '0',
             transform: 'translateY(-550%)',
@@ -64,7 +64,7 @@ module.exports = {
             opacity: '1',
           },
           '100%': {
-            opacity: '1',
+            opacity: '0',
             transform: 'translateY(-50%)',
           },
         },
