@@ -5,7 +5,7 @@ import PanelComponent from '@/components/services/panelComponent'
 import SeoComponent from '@/components/shared/seo-component'
 import { useNavSettingsContext } from '@/context/nav-settings-context'
 import { getPageSeoBySlug } from '@/utils/content-api'
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import { GetStaticProps, NextPage } from 'next'
 import { FC, useEffect, useState } from 'react'
 
@@ -40,12 +40,12 @@ const Services: NextPage<Props> = ({ seo }) => {
         <h1 className="main-title">Services</h1>
       </header>
 
-      <div className="max-w-3xl mx-auto px-8 sm:px-0">
-        <div className="sm:w-7/12 sm:mx-auto">
+      <div className="mx-auto px-8 sm:px-0">
+        <div className="">
           <div
             role="tablist"
             aria-label="tabs"
-            className="relative w-full mx-auto h-14 grid grid-cols-3 items-center  rounded-full bg-cas-black-400 overflow-hidden shadow-2xl shadow-900/20 transition"
+            className="relative max-w-3xl  w-full mx-auto h-14 grid grid-cols-3 items-center  rounded-full bg-cas-black-400 overflow-hidden shadow-2xl shadow-900/20 transition"
           >
             <motion.div
               layout
@@ -69,7 +69,7 @@ const Services: NextPage<Props> = ({ seo }) => {
               Autres
             </Tab>
           </div>
-          <motion.div layout className="tab-content mt-12">
+          <motion.div layout className="tab-content mt-12 w-4/5 m-auto">
             <PanelComponent index={0} activeIndex={activeIndex} tabCategory={'packs'} />
 
             <PanelComponent index={1} activeIndex={activeIndex} tabCategory={'specific'} />
