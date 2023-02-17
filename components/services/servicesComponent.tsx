@@ -15,7 +15,14 @@ const ServicesComponent: FC<ServicesProps> = ({ title, description }) => {
     console.log(activeIndex)
   }
   return (
-    <motion.div layout data-activeIndex={activeIndex} className="custom-gradient-primary p-1 rounded-3xl">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      layout
+      data-activeIndex={activeIndex}
+      className="custom-gradient-primary p-1 rounded-3xl h-fit mx-auto w-full md:w-1/3"
+    >
       <motion.div
         layout
         data-activeIndex={activeIndex}
