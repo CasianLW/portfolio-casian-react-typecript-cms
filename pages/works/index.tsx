@@ -37,6 +37,9 @@ const Works: NextPage<Props> = ({ seo }) => {
   useEffect(() => {
     fetchPopular()
   }, [])
+
+  // artworks test
+  // const data = await fetch(`https://api.artic.edu/api/v1/artworks`)
   const fetchPopular = async () => {
     const data = await fetch(`https://api.artic.edu/api/v1/artworks`)
     const projects = await data.json()
