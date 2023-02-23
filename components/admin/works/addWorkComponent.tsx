@@ -68,11 +68,13 @@ const AddWorkComponent: FC = () => {
   const alertComponent = () => {
     switch (submitStatus) {
       case 'submitting':
-        return <div className="alert alert-info">Submitting form...</div>
+        return <div className="alert alert-info text-cas-white-100">Submitting form...</div>
       case 'success':
-        return <div className="alert alert-success">Form submitted successfully!</div>
+        return <div className="alert alert-success text-cas-white-100">Form submitted successfully!</div>
       case 'error':
-        return <div className="alert alert-danger">Form submission failed. Please try again later.</div>
+        return (
+          <div className="alert alert-danger text-cas-white-100">Form submission failed. Please try again later.</div>
+        )
       default:
         return null
     }
@@ -122,11 +124,13 @@ const AddWorkComponent: FC = () => {
                   })
                 }
               />
-              <span>{formData.published ? 'Yes' : 'No'}</span>
+              <span className="text-cas-white-100">{formData.published ? 'Yes' : 'No'}</span>
             </div>
           </div>
         </div>
-        <button type="submit">Enregistrer projet</button>
+        <button className="text-cas-white-100" type="submit">
+          Enregistrer projet
+        </button>
       </form>
       {alertComponent()}
     </>
