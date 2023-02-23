@@ -6,7 +6,8 @@
 
 /* base = va s'executer au chargement de la page partout */
 @layer base {
-  input {
+  input,
+  textarea {
     @apply rounded-lg border-cas-white-100 px-4 py-2 focus-visible:outline-cas-gradient-purple text-cas-black-600;
   }
 
