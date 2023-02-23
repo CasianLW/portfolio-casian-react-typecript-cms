@@ -13,7 +13,7 @@ const AddWorkComponent: FC = () => {
     published: false,
   })
   const [submitStatus, setSubmitStatus] = useState<'submitting' | 'success' | 'error' | 'idle'>('idle')
-
+  const [messageText, setMessageText] = useState()
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
@@ -35,10 +35,12 @@ const AddWorkComponent: FC = () => {
         published: formData.published,
       }),
     })
+    const data = await response.json()
 
     if (response.ok) {
       // Handle success
       setSubmitStatus('success')
+      setMessageText(data.message)
       setFormData({
         seoTitle: '',
         seoDescription: '',
@@ -53,7 +55,10 @@ const AddWorkComponent: FC = () => {
       }, 4000)
     } else {
       // Handle error
+      // console.log(data.message)
+
       setSubmitStatus('error')
+      setMessageText(data.message)
       setTimeout(() => {
         setSubmitStatus('idle')
       }, 4000)
@@ -73,9 +78,9 @@ const AddWorkComponent: FC = () => {
       case 'success':
         return <div className="alert alert-success text-cas-white-100">Form submitted successfully!</div>
       case 'error':
-        return (
-          <div className="alert alert-danger text-cas-white-100">Form submission failed. Please try again later.</div>
-        )
+        return <div className="alert alert-danger text-cas-white-100">{messageText}</div>
+      case 'idle':
+        return <div className="alert alert-danger text-cas-white-100">No error here</div>
       default:
         return null
     }
@@ -83,7 +88,7 @@ const AddWorkComponent: FC = () => {
   return (
     <>
       <h1 className="main-title">AdminPage</h1>
-      <form className="mt-10 text-cas-black-600" onSubmit={handleSubmit}>
+      <form className="mt-10 " onSubmit={handleSubmit}>
         <h2>Ajouter un projet</h2>
         <div className="grid">
           <label htmlFor="title">Title</label>
@@ -95,7 +100,13 @@ const AddWorkComponent: FC = () => {
         </div>
         <div className="grid">
           <label htmlFor="description">Description</label>
-          <textarea required name="description" value={formData.description} onChange={handleInputChange} />
+          <textarea
+            className="text-cas-black-600"
+            required
+            name="description"
+            value={formData.description}
+            onChange={handleInputChange}
+          />
         </div>
         <div className="grid">
           <label htmlFor="imgLink">Lien image</label>
