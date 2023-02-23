@@ -80,7 +80,7 @@ const AddWorkComponent: FC = () => {
   return (
     <>
       <h1 className="main-title">AdminPage</h1>
-      <form className="mt-10" onSubmit={handleSubmit}>
+      <form className="mt-10 text-cas-black-600" onSubmit={handleSubmit}>
         <h2>Ajouter un projet</h2>
         <div className="grid">
           <label htmlFor="title">Title</label>
