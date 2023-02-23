@@ -10,16 +10,7 @@ interface Props {
   seo: Seo
 }
 
-export const getStaticProps: GetStaticProps = async () => {
-  const seo = {
-    title: 'Admin Dashboard',
-    description: 'Admin dashboard',
-  }
-  return {
-    props: { seo },
-  }
-}
-const AdminPage: NextPage<Props> = ({ seo }) => {
+const AdminPage: NextPage<Props> = () => {
   const [formData, setFormData] = useState({
     seoTitle: '',
     seoDescription: '',
@@ -93,7 +84,7 @@ const AdminPage: NextPage<Props> = ({ seo }) => {
   }
   return (
     <>
-      <SeoComponent seo={seo} />
+      <SeoComponent seo={{ title: 'Admin Dashboard', description: 'Admin dashboard' }} />
       <header className="top-header lateral-space">
         <h1 className="main-title">AdminPage</h1>
         <form className="mt-10" onSubmit={handleSubmit}>
