@@ -30,7 +30,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       const { title, seo, slug, description, coverImage, published } = req.body
 
       // Validate request body against the WorkModel schema
-      if (!title || !seo.title || !seo.description || !slug || !description || !coverImage || !published) {
+      if (!title || !seo.title || !seo.description || !slug || !description || !coverImage) {
         return res.status(400).json({ success: false, message: 'Missing required fields in the request body' })
       }
       if (await WorkModel.findOne({ slug: slug })) {
