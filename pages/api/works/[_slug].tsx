@@ -1,9 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-// import dbConnect from '@/utils/mongodb/db-connect'
 import { dbConnect } from '@/utils/mongodb/db-connect'
 import WorkModel from '@/utils/mongodb/work.model'
-// import Works from '@/pages/works'
-// import WorkModel from '@/models/work.model'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const {
