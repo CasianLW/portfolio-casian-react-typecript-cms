@@ -5,6 +5,7 @@
 // Source : https://gist.github.com/rashidmya/2c075330e636134f00ebe85fbb88fed8
 
 import type { NextApiRequest, NextApiResponse } from 'next'
+var slugify = require('slugify')
 
 // import { dbConnect, WorkModel } from '@/utils/mongodb'
 // import WorkModel from '@/models/work.model'
@@ -28,12 +29,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
     try {
       await dbConnect()
-      const { title, seo, slug, description, coverImage, published } = req.body
+      var { title, seo, slug, description, coverImage, published } = req.body
 
       // Validate request body against the WorkModel schema
       if (!title || !seo.title || !seo.description || !slug || !description || !coverImage) {
         return res.status(400).json({ success: false, message: 'Missing required fields in the request body' })
       }
+      var slug = slugify(slug)
+
       if (await WorkModel.findOne({ slug: slug })) {
         return res.status(400).json({ success: false, message: 'Ce slug est deja pris, essayez avec un autre' })
       }
