@@ -17,6 +17,7 @@ const AddWorkComponent: FC = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
+    setSubmitStatus('submitting')
     const response = await fetch('/api/works/', {
       method: 'POST',
       headers: {
