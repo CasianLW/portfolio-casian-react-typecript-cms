@@ -27,6 +27,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   //   }
   if (req.method === 'POST') {
     try {
+      await dbConnect()
       const { title, seo, slug, description, coverImage, published } = req.body
 
       // Validate request body against the WorkModel schema
