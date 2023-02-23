@@ -27,10 +27,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   //   }
   if (req.method === 'POST') {
     try {
-      const { title, seo, slug, description, coverImage } = req.body
+      const { title, seo, slug, description, coverImage, published } = req.body
 
       // Validate request body against the WorkModel schema
-      if (!title || !seo.title || !seo.description || !slug || !description || !coverImage) {
+      if (!title || !seo.title || !seo.description || !slug || !description || !coverImage || !published) {
         return res.status(400).json({ success: false, message: 'Missing required fields in the request body' })
       }
       if (await WorkModel.findOne({ slug: slug })) {
@@ -40,7 +40,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         return res.status(400).json({ success: false, message: 'Ce titre est deja pris, essayez un autre' })
       }
 
-      const work = await WorkModel.create({ title, seo, slug, description, coverImage })
+      const work = await WorkModel.create({ title, seo, slug, description, coverImage, published })
       res.status(201).json({ success: true, data: work })
     } catch (error) {
       console.error(error)
