@@ -1,8 +1,10 @@
 {
   "title": "Nom du projet",
+  "shortDescription": "desc projet",
   "description": "Desription du projet",
   "primaryImg": "/formation-anglais_b1sflx.jpg",
   "secondaryImg": "/Image_6_vuloum.png",
+  "tertiaryImg": "/Image_6_vuloum.png",
   "order": 1,
   "methods": [
     {
@@ -14,13 +16,28 @@
   ],
   "liens": [
     {
-      "website": "www.casian.fr"
+      "website": {
+        "linkTitle": "Website",
+        "linkHref": "www.casian.fr"
+      }
     },
     {
-      "figma": "www.casian.fr"
+      "figma": {
+        "linkTitle": "Figma",
+        "linkHref": "www.casian.fr"
+      }
     },
     {
-      "autre": "www.casian.fr"
+      "git": {
+        "linkTitle": "Git link",
+        "linkHref": "www.casian.fr"
+      }
+    },
+    {
+      "autre": {
+        "linkTitle": "Autre link",
+        "linkHref": "www.casian.fr"
+      }
     }
   ],
 
