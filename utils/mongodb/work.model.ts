@@ -27,6 +27,10 @@ const WorkSchema: Schema = new Schema({
     type: String,
     required: true,
   },
+  published: {
+    type: Boolean,
+    default: false,
+  },
 })
 
 const WorkModel = models.Work || model('Work', WorkSchema)
