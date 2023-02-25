@@ -26,8 +26,6 @@ export const getPathFromNavLink: (navLink: AdminNavLinkEnum) => string = (navLin
       return '/admin/general/'
     case AdminNavLinkEnum.Homepage:
       return '/admin/homepage/'
-    case AdminNavLinkEnum.General:
-      return '/admin/general/'
   }
 }
 
@@ -36,10 +34,10 @@ const AdminNavComponent: FC = () => {
   const navRef = useRef<HTMLDetailsElement>(null)
 
   const [linksAreVisible, setLinksAreVisible] = useState(true)
+  const [isLargeScreen, setIsLargeScreen] = useState(false)
 
   useEffect(() => {
     const mediaQuery = 'screen and (min-width: 1024px)'
-
     const handleMatchMedia = () => {
       setNavIsClosed(true)
 
@@ -60,10 +58,16 @@ const AdminNavComponent: FC = () => {
     const nav = navRef.current
 
     let timeOut
+    function handleResize() {
+      setIsLargeScreen(window.innerWidth > 1000)
+    }
+    handleResize()
+    // Add event listener to resize
+    window.addEventListener('resize', handleResize)
 
     if (navIsClosed && !closing) {
       timeOut = window.setTimeout(() => {
-        nav.style.height = '80px'
+        nav.style.height = isLargeScreen ? '50vh' : '80px'
       }, 800)
     }
 
@@ -71,12 +75,12 @@ const AdminNavComponent: FC = () => {
       nav.style.height = 'auto'
       window.clearTimeout(timeOut)
     }
-  }, [closing, navIsClosed])
+  }, [closing, navIsClosed, isLargeScreen])
 
   return (
     <nav
       className={
-        'overflow-x-clip   z-50 grid content-start justify-items-start gap-4 px-[5vw] py-6  before:bg-cas-black-400 before:transition-all lg:bottom-[initial] lg:block lg:gap-10 lg:py-8 lg:before:hidden ' +
+        'lg:border-r lg:h-[50vh]  overflow-x-clip  z-50 inline-grid content-start justify-items-start gap-4  py-6  before:bg-cas-black-400 before:transition-all lg:bottom-[initial] lg:gap-10 lg:pr-14 lg:mr-14 lg:before:hidden ' +
         `${navIsClosed ? '  before:translate-x-full before:delay-[500ms] before:rounded-l-[48%]' : ' '}`
       }
       ref={navRef}
@@ -85,7 +89,7 @@ const AdminNavComponent: FC = () => {
         img={'Admin CMS'}
         href={'/admin'}
         navLink={AdminNavLinkEnum.Dashboard}
-        supplentaryClasses={' block w-[50px] lg:static lg:my-auto lg:mr-auto lg:w-[64px]'}
+        supplentaryClasses={'before:content-[""] block  lg:static lg:my-auto lg:mr-auto lg:w-[200%]'}
       />
 
       <BurgerComponent />
@@ -141,9 +145,9 @@ const AdminNavLinkComponent: FC<AdminNavLinkComponentProp> = ({ href, supplentar
     <Link
       href={href}
       className={
-        'z-0 text-[20px] font-semibold no-underline transition-all lg:translate-x-0 lg:text-[20px] lg:font-normal' +
+        "z-0 text-[20px] before:content-['⚙'] w-full font-semibold no-underline transition-all lg:translate-x-0 lg:text-[20px] lg:font-normal" +
         ` ${supplentaryClasses} ${navIsClosed && !img ? 'translate-x-[100vw] ' : 'translate-x-0'} ${
-          img ? 'w-[70%] lg:!w-[30%] lg:text-[32px] text-[32px] font-bold' : ''
+          img ? '  lg:text-[32px] text-[32px] font-bold' : ''
         } 
                     ${activeNavLink === navLink && 'link-active'}`
       }
