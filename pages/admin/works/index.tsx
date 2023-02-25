@@ -1,4 +1,5 @@
 import { Seo } from '@/cas-types'
+import AddWorkComponent from '@/components/admin/works/addWorkComponent'
 import AdminNavComponent, { AdminNavLinkEnum } from '@/components/nav/admin'
 import SeoComponent from '@/components/shared/seo-component'
 import { useAdminNavSettingsContext } from '@/context/admin-nav-settings-context'
@@ -20,10 +21,17 @@ const WorksCMS: NextPage<Props> = () => {
     <AdminLayoutComponent>
       <>
         <SeoComponent seo={{ title: 'Works CMS', description: 'Works: Ajouter, modifier et supprimer' }} />
-        <header className="top-header-admin lateral-space">
+        <header>
           <h1 className="main-title">WorksCMS Page</h1>
         </header>
-        <section className="admin-content"></section>
+        <main className="admin-content">
+          <section className="grid grid-cols-1 md:grid-cols-2">
+            <div className="col-span-1">list of projects</div>
+            <div className="col-span-1">
+              <AddWorkComponent />
+            </div>
+          </section>
+        </main>
       </>
     </AdminLayoutComponent>
   )

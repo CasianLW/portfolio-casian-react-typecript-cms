@@ -17,13 +17,13 @@
     /* background-color: #f1f1f1; */
   }
   .top-header {
-    @apply mt-16;
+    @apply mt-20;
   }
   .top-header-admin {
     @apply mt-32;
   }
   .admin-content {
-    @apply mt-8;
+    @apply mt-14;
   }
 
   .lateral-space {
