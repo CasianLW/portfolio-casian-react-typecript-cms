@@ -22,10 +22,10 @@ const WorksCMS: NextPage<Props> = () => {
       <>
         <SeoComponent seo={{ title: 'Works CMS', description: 'Works: Ajouter, modifier et supprimer' }} />
         <header>
-          <h1 className="main-title">WorksCMS Page</h1>
+          <h1 className="main-title">WorksCMS</h1>
         </header>
         <main className="admin-content">
-          <section className="grid grid-cols-1 md:grid-cols-2">
+          <section className="grid gap-4 grid-cols-1 md:grid-cols-2">
             <div className="col-span-1">list of projects</div>
             <div className="col-span-1">
               <AddWorkComponent />
