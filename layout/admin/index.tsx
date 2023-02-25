@@ -12,7 +12,7 @@ const AdminLayoutComponent: FC<Props> = ({ children }) => {
     <>
       <div className="block lg:flex top-header lateral-space ">
         <AdminNavSettingsProvider>
-          <div className="w-full md:w-[20%]">
+          <div className="w-fit mx-auto">
             <AdminNavComponent />
           </div>
           <div className="w-full">{children}</div>
