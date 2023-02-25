@@ -80,7 +80,7 @@ const AdminNavComponent: FC = () => {
   return (
     <nav
       className={
-        'lg:border-r lg:h-[50vh]  overflow-x-clip  z-50 inline-grid content-start justify-items-start gap-4  py-6  before:bg-cas-black-400 before:transition-all lg:bottom-[initial] lg:gap-10 lg:pr-14 lg:mr-14 lg:before:hidden ' +
+        'lg:border-r lg:h-[50vh] mb-20 overflow-x-clip  z-50 inline-grid content-start justify-items-start gap-4   before:bg-cas-black-400 before:transition-all lg:bottom-[initial] lg:gap-10 lg:pr-14 lg:mr-14 lg:before:hidden ' +
         `${navIsClosed ? '  before:translate-x-full before:delay-[500ms] before:rounded-l-[48%]' : ' '}`
       }
       ref={navRef}
@@ -89,7 +89,7 @@ const AdminNavComponent: FC = () => {
         img={'Admin CMS'}
         href={'/admin'}
         navLink={AdminNavLinkEnum.Dashboard}
-        supplentaryClasses={'before:content-[""] block  lg:static lg:my-auto lg:mr-auto lg:w-[200%]'}
+        supplentaryClasses={'before:!content-[""] block  lg:static lg:my-auto lg:mr-auto lg:w-[200%]'}
       />
 
       <BurgerComponent />
