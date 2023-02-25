@@ -87,9 +87,9 @@ const AddWorkComponent: FC = () => {
   }
   return (
     <>
-      <h1 className="main-title">AdminPage</h1>
+      <h2>Works</h2>
       <form className="mt-10 " onSubmit={handleSubmit}>
-        <h2>Ajouter un projet</h2>
+        <h3>Ajouter un projet</h3>
         <div className="grid">
           <label htmlFor="title">Title</label>
           <input required type="text" name="title" value={formData.title} onChange={handleInputChange} />
