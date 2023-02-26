@@ -1,6 +1,4 @@
 import { FC, useState } from 'react'
-import { Seo } from '@/cas-types'
-import SeoComponent from '@/components/shared/seo-component'
 
 const AddWorkComponent: FC = () => {
   const [formData, setFormData] = useState({
@@ -87,7 +85,7 @@ const AddWorkComponent: FC = () => {
   }
   return (
     <>
-      <h2>Works</h2>
+      <h2 className="secondary-title">Add new Work</h2>
       <form className="mt-10 " onSubmit={handleSubmit}>
         <h3>Ajouter un projet</h3>
         <div className="grid">
