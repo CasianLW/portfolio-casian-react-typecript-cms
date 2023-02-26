@@ -19,7 +19,7 @@ const ListWorkComponent: FC = () => {
       if (response.ok) {
         // Handle success
         setSubmitStatus('success')
-        setWorksList(data.works)
+        setWorksList(data.works.reverse())
         setMessageText(data.message)
         setTimeout(() => {
           setSubmitStatus('idle')
