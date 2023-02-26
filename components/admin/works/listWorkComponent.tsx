@@ -8,39 +8,37 @@ const ListWorkComponent: FC = () => {
   const [worksList, setWorksList] = useState([])
   const [submitStatus, setSubmitStatus] = useState<'submitting' | 'success' | 'error' | 'idle'>('idle')
   const [messageText, setMessageText] = useState()
-
-  useEffect(() => {
-    const getWorksList = async () => {
-      try {
-        setSubmitStatus('submitting')
-        const response = await fetch('/api/works/', {
-          method: 'GET',
-        })
-        const data = await response.json()
-        console.log(data)
-        if (response.ok) {
-          // Handle success
-          setSubmitStatus('success')
-          setWorksList(data.works)
-          setMessageText(data.message)
-          setTimeout(() => {
-            setSubmitStatus('idle')
-          }, 4000)
-        }
-      } catch (error: any) {
-        // Handle error
-        // console.log(data.message)
-        setSubmitStatus('error')
-        setMessageText(error)
+  const getWorksList = async () => {
+    try {
+      setSubmitStatus('submitting')
+      const response = await fetch('/api/works/', {
+        method: 'GET',
+      })
+      const data = await response.json()
+      console.log(data)
+      if (response.ok) {
+        // Handle success
+        setSubmitStatus('success')
+        setWorksList(data.works)
+        setMessageText(data.message)
         setTimeout(() => {
           setSubmitStatus('idle')
         }, 4000)
       }
+    } catch (error: any) {
+      // Handle error
+      // console.log(data.message)
+      setSubmitStatus('error')
+      setMessageText(error)
+      setTimeout(() => {
+        setSubmitStatus('idle')
+      }, 4000)
     }
-
+  }
+  useEffect(() => {
     getWorksList()
     // console.log(worksList)
-  }, [setSubmitStatus, setMessageText, setWorksList])
+  }, [setSubmitStatus, setMessageText])
 
   const alertComponent = () => {
     switch (submitStatus) {
@@ -65,7 +63,16 @@ const ListWorkComponent: FC = () => {
           worksList.map((work: any, i) => {
             // const { navLink, supplementaryClasses } = link
             // const href = getPathFromNavLink(navLink)
-            return <WorkItem key={i} checkboxValue={work.published} title={work.title} id={work._id} slug={work.slug} />
+            return (
+              <WorkItem
+                key={i}
+                checkboxValue={work.published}
+                title={work.title}
+                id={work._id}
+                slug={work.slug}
+                getWorksList={() => getWorksList()}
+              />
+            )
           })}
       </div>
 
@@ -81,8 +88,9 @@ interface WorkItemInterface {
   title: string
   id: number
   slug: string
+  getWorksList: () => void
 }
-const WorkItem: FC<WorkItemInterface> = ({ checkboxValue, title, id, slug }) => {
+const WorkItem: FC<WorkItemInterface> = ({ getWorksList, checkboxValue, title, id, slug }) => {
   const [aciveDelete, setAciveDelete] = useState(false)
   // const { navIsClosed, setNavIsClosed, activeNavLink } = useAdminNavSettingsContext()
   function editWork(slugEdit: string) {
@@ -94,8 +102,34 @@ const WorkItem: FC<WorkItemInterface> = ({ checkboxValue, title, id, slug }) => 
   function cancelDelete() {
     setAciveDelete(false)
   }
-  function deleteConfirm(slugDelete: string) {
-    console.log(slugDelete)
+
+  const deleteConfirm = async (slug: string) => {
+    try {
+      const response = await fetch(`/api/works/${slug}`, {
+        method: 'DELETE',
+      })
+      // const data = await response.json()
+      // console.log(data)
+      if (response.ok) {
+        getWorksList()
+        setAciveDelete(false)
+
+        // Handle success
+        // setWorksList(data.works)
+        // setMessageText(data.message)
+        // setTimeout(() => {
+        //   setSubmitStatus('idle')
+        // }, 4000)
+      }
+    } catch (error: any) {
+      // Handle error
+      console.log(error)
+      // setSubmitStatus('error')
+      // setMessageText(error)
+      // setTimeout(() => {
+      //   setSubmitStatus('idle')
+      // }, 4000)
+    }
   }
 
   return (
