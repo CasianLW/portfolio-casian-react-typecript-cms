@@ -1,5 +1,6 @@
 import { Seo } from '@/cas-types'
 import AddWorkComponent from '@/components/admin/works/addWorkComponent'
+import ListWorkComponent from '@/components/admin/works/listWorkComponent'
 import AdminNavComponent, { AdminNavLinkEnum } from '@/components/nav/admin'
 import SeoComponent from '@/components/shared/seo-component'
 import { useAdminNavSettingsContext } from '@/context/admin-nav-settings-context'
@@ -26,7 +27,9 @@ const WorksCMS: NextPage<Props> = () => {
         </header>
         <main className="admin-content">
           <section className="grid gap-4 grid-cols-1 md:grid-cols-2">
-            <div className="col-span-1">list of projects</div>
+            <div className="col-span-1">
+              <ListWorkComponent />
+            </div>
             <div className="col-span-1">
               <AddWorkComponent />
             </div>
