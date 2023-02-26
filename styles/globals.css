@@ -78,6 +78,9 @@
 }
 
 @layer utilities {
+  .stack-item {
+    grid-area: 1 / 1 / 2 / 2;
+  }
   .btn-filter-on {
     @apply text-cas-gradient-purple;
   }
