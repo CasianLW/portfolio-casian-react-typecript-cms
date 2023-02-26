@@ -89,7 +89,7 @@ const WorksCMS: NextPage<Props> = () => {
                 <ListWorkComponent getWorksList={() => getWorksList()} worksList={worksList} />
               </div>
               <div className="col-span-1">
-                <AddWorkComponent />
+                <AddWorkComponent getWorksList={() => getWorksList()} />
               </div>
             </section>
           )}
