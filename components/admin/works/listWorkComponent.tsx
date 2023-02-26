@@ -4,60 +4,72 @@ import { FC, MouseEvent, useEffect, useState } from 'react'
 import { text } from 'stream/consumers'
 import DeleteConfirmComponent from '../shared/deleteConfirmComponent'
 
-const ListWorkComponent: FC = () => {
-  const [worksList, setWorksList] = useState([])
-  const [submitStatus, setSubmitStatus] = useState<'submitting' | 'success' | 'error' | 'idle'>('idle')
-  const [messageText, setMessageText] = useState()
-  const getWorksList = async () => {
-    try {
-      setSubmitStatus('submitting')
-      const response = await fetch('/api/works/', {
-        method: 'GET',
-      })
-      const data = await response.json()
-      console.log(data)
-      if (response.ok) {
-        // Handle success
-        setSubmitStatus('success')
-        setWorksList(data.works.reverse())
-        setMessageText(data.message)
-        setTimeout(() => {
-          setSubmitStatus('idle')
-        }, 4000)
-      }
-    } catch (error: any) {
-      // Handle error
-      // console.log(data.message)
-      setSubmitStatus('error')
-      setMessageText(error)
-      setTimeout(() => {
-        setSubmitStatus('idle')
-      }, 4000)
-    }
-  }
-  useEffect(() => {
-    getWorksList()
-    // console.log(worksList)
-  }, [setSubmitStatus, setMessageText])
+interface ListWorkInterface {
+  getWorksList: () => void
+  worksList: never[] | []
+}
+const ListWorkComponent: FC<ListWorkInterface> = ({ getWorksList, worksList }) => {
+  // const [worksList, setWorksList] = useState([])
+  // const [submitStatus, setSubmitStatus] = useState<'submitting' | 'success' | 'error' | 'idle'>('idle')
+  // const [messageText, setMessageText] = useState()
+  // const getWorksList = async () => {
+  //   try {
+  //     setSubmitStatus('submitting')
+  //     const response = await fetch('/api/works/', {
+  //       method: 'GET',
+  //     })
+  //     const data = await response.json()
+  //     console.log(data)
+  //     if (response.ok) {
+  //       // Handle success
+  //       setSubmitStatus('success')
+  //       setWorksList(data.works.reverse())
+  //       setMessageText(data.message)
+  //       setTimeout(() => {
+  //         setSubmitStatus('idle')
+  //       }, 4000)
+  //     }
+  //   } catch (error: any) {
+  //     // Handle error
+  //     // console.log(data.message)
+  //     setSubmitStatus('error')
+  //     setMessageText(error)
+  //     setTimeout(() => {
+  //       setSubmitStatus('idle')
+  //     }, 4000)
+  //   }
+  // }
+  // useEffect(() => {
+  //   getWorksList()
+  //   // console.log(worksList)
+  // }, [setSubmitStatus, setMessageText])
 
-  const alertComponent = () => {
-    switch (submitStatus) {
-      case 'submitting':
-        return <div className="alert alert-info text-cas-white-100">Loading works ...</div>
-      case 'success':
-        return <div className="alert alert-success text-cas-white-100">Work list successfully imported!</div>
-      case 'error':
-        return <div className="alert alert-danger text-cas-white-100">{messageText}</div>
-      case 'idle':
-        return <div className="alert alert-danger text-cas-white-100"></div>
-      default:
-        return null
-    }
+  // const alertComponent = () => {
+  //   switch (submitStatus) {
+  //     case 'submitting':
+  //       return <div className="alert alert-info text-cas-white-100">Loading works ...</div>
+  //     case 'success':
+  //       return <div className="alert alert-success text-cas-white-100">Work list successfully imported!</div>
+  //     case 'error':
+  //       return <div className="alert alert-danger text-cas-white-100">{messageText}</div>
+  //     case 'idle':
+  //       return <div className="alert alert-danger text-cas-white-100"></div>
+  //     default:
+  //       return null
+  //   }
+  // }
+
+  function getWorkPass() {
+    console.log('test reload')
+    getWorksList()
   }
 
   return (
     <>
       <h2 className="secondary-title">Works List</h2>
+
+      <button onClick={() => getWorkPass()}> test</button>
+
       <div className="mt-10">
         {Array.isArray(worksList) &&
           worksList.map((work: any, i) => {
@@ -70,13 +82,14 @@ const ListWorkComponent: FC = () => {
                 title={work.title}
                 id={work._id}
                 slug={work.slug}
-                getWorksList={() => getWorksList()}
+                // getWorksList={() => getWorksList()}
+                getWorksList={getWorksList}
               />
             )
           })}
       </div>
 
-      {alertComponent()}
+      {/* {alertComponent()} */}
     </>
   )
 }
@@ -91,16 +104,16 @@ interface WorkItemInterface {
   getWorksList: () => void
 }
 const WorkItem: FC<WorkItemInterface> = ({ getWorksList, checkboxValue, title, id, slug }) => {
-  const [aciveDelete, setAciveDelete] = useState(false)
+  const [activeDelete, setActiveDelete] = useState(false)
   // const { navIsClosed, setNavIsClosed, activeNavLink } = useAdminNavSettingsContext()
   function editWork(slugEdit: string) {
     console.log(slugEdit)
   }
   function deleteWork() {
-    setAciveDelete(true)
+    setActiveDelete(true)
   }
   function cancelDelete() {
-    setAciveDelete(false)
+    setActiveDelete(false)
   }
 
   const deleteConfirm = async (slug: string) => {
@@ -112,7 +125,7 @@ const WorkItem: FC<WorkItemInterface> = ({ getWorksList, checkboxValue, title, i
       // console.log(data)
       if (response.ok) {
         getWorksList()
-        setAciveDelete(false)
+        setActiveDelete(false)
 
         // Handle success
         // setWorksList(data.works)
@@ -148,7 +161,7 @@ const WorkItem: FC<WorkItemInterface> = ({ getWorksList, checkboxValue, title, i
         <button onClick={() => deleteWork()}>Delete</button>
       </div>
       <DeleteConfirmComponent
-        active={aciveDelete}
+        active={activeDelete}
         deleteFunction={() => deleteConfirm(slug)}
         cancelDelete={() => cancelDelete()}
         itemName={title}
