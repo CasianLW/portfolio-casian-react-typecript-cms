@@ -1,7 +1,8 @@
 import { AdminNavLinkEnum } from '@/components/nav/admin'
 import Link from 'next/link'
-import { FC, useEffect, useState } from 'react'
+import { FC, MouseEvent, useEffect, useState } from 'react'
 import { text } from 'stream/consumers'
+import DeleteConfirmComponent from '../shared/deleteConfirmComponent'
 
 const ListWorkComponent: FC = () => {
   const [worksList, setWorksList] = useState([])
@@ -82,18 +83,25 @@ interface WorkItemInterface {
   slug: string
 }
 const WorkItem: FC<WorkItemInterface> = ({ checkboxValue, title, id, slug }) => {
+  const [aciveDelete, setAciveDelete] = useState(false)
   // const { navIsClosed, setNavIsClosed, activeNavLink } = useAdminNavSettingsContext()
   function editWork(slugEdit: string) {
     console.log(slugEdit)
   }
-  function deleteWork(slugDelete: string) {
+  function deleteWork() {
+    setAciveDelete(true)
+  }
+  function cancelDelete() {
+    setAciveDelete(false)
+  }
+  function deleteConfirm(slugDelete: string) {
     console.log(slugDelete)
   }
 
   return (
     <div className="flex w-full max-w-md justify-between pr-3">
       <label htmlFor="">
-        <input type="checkbox" checked={checkboxValue} onChange={() => deleteWork(slug)} />
+        <input type="checkbox" checked={checkboxValue} onChange={() => deleteWork()} />
         <span>{checkboxValue ? 'Public' : 'Private'}</span>
       </label>
       <p>
@@ -103,8 +111,14 @@ const WorkItem: FC<WorkItemInterface> = ({ checkboxValue, title, id, slug }) => 
         <Link href={AdminNavLinkEnum.Works} className={'text-green-300'} onClick={() => editWork(slug)}>
           Edit
         </Link>
-        <button onClick={() => deleteWork(slug)}>Delete</button>
+        <button onClick={() => deleteWork()}>Delete</button>
       </div>
+      <DeleteConfirmComponent
+        active={aciveDelete}
+        deleteFunction={() => deleteConfirm(slug)}
+        cancelDelete={() => cancelDelete()}
+        itemName={title}
+      />
     </div>
   )
 }
