@@ -32,6 +32,9 @@
   .main-title {
     @apply text-5xl font-bold;
   }
+  .secondary-title {
+    @apply text-2xl font-bold;
+  }
   .link-active {
     @apply text-cas-gradient-purple;
   }
