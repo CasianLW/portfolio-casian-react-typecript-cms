@@ -1,6 +1,9 @@
 import { FC, useState } from 'react'
 
-const AddWorkComponent: FC = () => {
+interface AddWorkInterface {
+  getWorksList: () => void
+}
+const AddWorkComponent: FC<AddWorkInterface> = ({ getWorksList }) => {
   const [formData, setFormData] = useState({
     seoTitle: '',
     seoDescription: '',
@@ -39,6 +42,7 @@ const AddWorkComponent: FC = () => {
       // Handle success
       setSubmitStatus('success')
       setMessageText(data.message)
+      getWorksList()
       setFormData({
         seoTitle: '',
         seoDescription: '',
