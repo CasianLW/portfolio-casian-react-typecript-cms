@@ -30,6 +30,14 @@ const ServiceSchema: Schema = new Schema({
     required: true,
     default: 99,
   },
+  priceDetails: {
+    type: String,
+    default: 'Contact me',
+  },
+  showPrice: {
+    type: Boolean,
+    default: false,
+  },
   published: {
     type: Boolean,
     default: true,
