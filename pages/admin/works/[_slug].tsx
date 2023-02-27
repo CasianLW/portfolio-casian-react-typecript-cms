@@ -19,9 +19,10 @@ import WorkModel from '@/utils/mongodb/work.model'
 import { IWork } from '@/@types/work'
 import AdminLayoutComponent from '@/layout/admin'
 import SeoComponent from '@/components/shared/seo-component'
+import handler from '@/pages/api/works'
 
 interface Props {
-  formation: IWork
+  work: IWork
 }
 
 interface Params extends ParsedUrlQuery {
@@ -30,41 +31,67 @@ interface Params extends ParsedUrlQuery {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const { slug } = context.params as Params
+  const getWorkInfoBySlug = async (slug: string) => {
+    console.log('test du transfer')
+    try {
+      const response = await fetch(`/api/works/${slug}`, {
+        method: 'GET',
+      })
+      const data = await response.json()
+      console.log(data)
+      if (response.ok) {
+        // Handle success
+        // console.log(Array.isArray(worksList) + 'ies it is')
+      }
+    } catch (error: any) {
+      // Handle error
+      // console.log(data.message)
+    }
+  }
 
-  const formation = getFormationByFileName(`${slug}.json`)
+  //   const formation = getFormationByFileName(`${slug}.json`)
+  const work = getWorkInfoBySlug(slug)
 
-  formation.slug = slug
+  //   work.slug = slug
 
   return {
     props: {
-      formation,
+      work,
     },
   }
 }
 
-// export const getStaticPaths: GetStaticPaths = () => {
-//   //only get the slug from works
-//   const formationsSlugs = getFormationsSlugs()
+export const getStaticPaths: GetStaticPaths = () => {
+  //only get the slug from works
+  //   getWorkInfoBySlug(slug)
+  //   const workSlug = getWorkInfoBySlug(slug)
 
-//   // map through to return work paths
-//   const paths = formationsSlugs.map((slug) => ({
-//     params: {
-//       slug,
-//     },
-//   }))
+  // map through to return work paths
+  //   const paths = workSlug.map((slug) => ({
+  //     params: {
+  //       slug,
+  //     },
+  //   }))
 
-//   return {
-//     paths,
-//     fallback: false,
-//   }
-// }
-
-const FormationPage: NextPage<Props> = ({ formation }) => {
+  //   return {
+  //     paths,
+  //     fallback: false,
+  //   }
+  return {
+    params: {
+      slug: 'dzadzadzaazdaz',
+    },
+    fallback: false,
+  }
+}
+const WorkInfoPage: NextPage<Props> = ({ work }) => {
   const [loading, setLoading] = useState(true)
 
   function alertComponent() {
     throw new Error('Function not implemented.')
   }
+
+  console.log(work)
 
   return (
     <>
@@ -90,7 +117,7 @@ const FormationPage: NextPage<Props> = ({ formation }) => {
   )
 }
 
-export default FormationPage
+export default WorkInfoPage
 
 interface ModifyWorkFormInterface {
   title: string
@@ -111,3 +138,6 @@ const ModifyWorkForm: FC<ModifyWorkFormInterface> = ({ title, children, textSpec
     </div>
   </article>
 )
+function getWorkInfoBySlug(slug: any) {
+  throw new Error('Function not implemented.')
+}
