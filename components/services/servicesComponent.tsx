@@ -28,14 +28,21 @@ const ServicesComponent: FC<ServicesProps> = ({ title, description, pointList, p
         </div>
       </div>
       <h2 className="text-center py-4 text-xl font-semibold">{title}</h2>
-      <p className="py-4 ">{description}</p>
+      <p className="py-4 px-6 ">{description}</p>
 
-      <div className="border-t border-cas-black-600 py-4">
+      <div className="border-t border-cas-black-600 py-4 px-6">
         {pointList.map((point, i) => (
           <li key={i}>{point}</li>
         ))}
       </div>
-      {activePrice ? <h3 className="text-center font-semibold text-3xl ">{price}</h3> : ''}
+      {activePrice ? (
+        <h3 className="text-center font-semibold text-3xl  ">
+          <span className="text-xl font-medium">Dés </span>
+          {price}
+        </h3>
+      ) : (
+        ''
+      )}
       <motion.button
         data-activeIndex={activeIndex}
         initial={{ opacity: 0 }}
