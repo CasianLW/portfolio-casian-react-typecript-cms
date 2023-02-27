@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion'
-import { FC } from 'react'
+import { FC, useEffect, useState } from 'react'
 import ServicesComponent from './servicesComponent'
 
 interface PanelProps {
@@ -10,6 +10,22 @@ interface PanelProps {
 }
 
 const PanelComponent: FC<PanelProps> = ({ index, activeIndex, tabCategory, serviceList }) => {
+  const [categoryFiltred, setCategoryFiltred] = useState([])
+
+  // setCategoryFiltred(serviceList.filter((service: any) => (service.category = tabCategory)))
+  // console.log(categoryFiltred)
+
+  useEffect(() => {
+    // if (serviceList) {
+    //   setFiltred(projects)
+    //   return
+    // }
+    // const filtred = serviceList.filter((service: any) => service.category.includes('autre'))
+    const filtred = serviceList.filter((service: any) => (service.category = tabCategory))
+    setCategoryFiltred(filtred)
+    // console.log(categoryFiltred)
+  }, [serviceList, tabCategory])
+
   return (
     <motion.div
       layout
@@ -23,8 +39,8 @@ const PanelComponent: FC<PanelProps> = ({ index, activeIndex, tabCategory, servi
     >
       {/* <div>{serviceList}</div> */}
       <div className="mt-10">
-        {Array.isArray(serviceList) &&
-          serviceList.map((service: any, i) => {
+        {Array.isArray(categoryFiltred) &&
+          categoryFiltred.map((service: any, i) => {
             // const { navLink, supplementaryClasses } = link
             // const href = getPathFromNavLink(navLink)
             return (
@@ -36,6 +52,7 @@ const PanelComponent: FC<PanelProps> = ({ index, activeIndex, tabCategory, servi
                 {service.title} <br />
                 {service._id} <br />
                 {service.description} <br />
+                {service.category} <br />
               </div>
             )
           })}
