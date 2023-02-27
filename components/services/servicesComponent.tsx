@@ -6,8 +6,12 @@ import Image from 'next/image'
 interface ServicesProps {
   title: string
   description: string
+  activePrice: boolean
+  coverImage: string
+  price: string
+  pointList: Array<string>
 }
-const ServicesComponent: FC<ServicesProps> = ({ title, description }) => {
+const ServicesComponent: FC<ServicesProps> = ({ title, description, pointList, price, activePrice, coverImage }) => {
   const [activeIndex, setActiveIndex] = useState(false)
 
   const handleClick = () => {
@@ -15,57 +19,34 @@ const ServicesComponent: FC<ServicesProps> = ({ title, description }) => {
     console.log(activeIndex)
   }
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      layout
-      data-activeIndex={activeIndex}
-      className="custom-gradient-primary p-1 rounded-3xl h-fit mx-auto w-full md:w-1/3"
-    >
-      <motion.div
-        layout
-        data-activeIndex={activeIndex}
-        className="text-center mt-2 font-bold text-cas-white-100 text-lg"
-      >
-        {title}
-      </motion.div>
-      <motion.div
-        layout
-        data-activeIndex={activeIndex}
-        className="p-5 m-5 bg-cas-white-100 text-cas-black-600 rounded-3xl"
-      >
-        <motion.p layout data-activeIndex={activeIndex}>
-          {description}
-        </motion.p>
+    <div className="bg-cas-white-100 text-cas-black-600 p-2 rounded-[32px] h-fit mx-auto w-full md:w-1/3">
+      <div className="grid rounded-3xl overflow-clip h-40">
+        <Image width={300} height={40} className="stack-item w-full" src={coverImage} alt={title}></Image>
+        <div className="stack-item pt-20 pl-3 font-semibold leading-8 text-[44px] capitalize text-white">
+          # <br />
+          {title}
+        </div>
+      </div>
+      <h2 className="text-center py-4 text-xl font-semibold">{title}</h2>
+      <p className="py-4 ">{description}</p>
 
-        <motion.ol className={`${activeIndex === true ? 'block' : 'hidden'}`}>
-          <motion.li data-activeIndex={activeIndex}>Point</motion.li>
-          <motion.li data-activeIndex={activeIndex}>Point</motion.li>
-          <motion.li data-activeIndex={activeIndex}>Point</motion.li>
-          <motion.li data-activeIndex={activeIndex}>Point</motion.li>
-          <motion.li data-activeIndex={activeIndex}>Point</motion.li>
-        </motion.ol>
-        <motion.button layout data-activeIndex={activeIndex} onClick={() => handleClick()} className="w-full ">
-          {activeIndex === true ? 'Voir Moins' : 'Voir Plus'}
-          <motion.div
-            initial={{ rotate: 0 }}
-            animate={{ rotate: activeIndex ? 180 : 0 }}
-            data-activeIndex={activeIndex}
-            // className={`${activeIndex === true ? 'rotate-90' : ''} `}
-          >
-            <Image
-              src={showMoreArrows}
-              className={`max-w-[50%] m-auto animate-view-more-bellow py-2`}
-              alt="Casian Ciorba Image UX UI Designer et Fullstack Mobile Developer"
-              width={24}
-              height={24}
-            />
-          </motion.div>
-          {/* {showMoreArrows} */}
-        </motion.button>
-      </motion.div>
-    </motion.div>
+      <div className="border-t border-cas-black-600 py-4">
+        {pointList.map((point, i) => (
+          <li key={i}>{point}</li>
+        ))}
+      </div>
+      {activePrice ? <h3 className="text-center font-semibold text-3xl ">{price}</h3> : ''}
+      <motion.button
+        data-activeIndex={activeIndex}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ delay: 1 }}
+        className="w-full bg-cas-black-600 bg-opacity-20 hover:bg-opacity-100 text-cas-black-600 hover:text-cas-white-100 p-3 mt-4 rounded-3xl"
+      >
+        Contact me
+      </motion.button>
+    </div>
   )
 }
 export default ServicesComponent
