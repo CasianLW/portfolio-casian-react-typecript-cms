@@ -9,7 +9,11 @@ export interface IWork {
 
   coverImage: string
 
+  secondaryImage: string
+
   description: string
+
+  category: { dev: Boolean; uxui: Boolean; graphic: Boolean; all: Boolean }
 
   published: boolean
 }

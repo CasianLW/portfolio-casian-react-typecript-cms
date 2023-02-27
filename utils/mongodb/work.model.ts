@@ -27,6 +27,16 @@ const WorkSchema: Schema = new Schema({
     type: String,
     required: true,
   },
+  secondaryImage: {
+    type: String,
+    required: true,
+  },
+  category: {
+    dev: { type: Boolean, required: true, default: false },
+    uxui: { type: Boolean, required: true, default: false },
+    graphic: { type: Boolean, required: true, default: false },
+    all: { type: Boolean, default: true },
+  },
   published: {
     type: Boolean,
     default: false,
