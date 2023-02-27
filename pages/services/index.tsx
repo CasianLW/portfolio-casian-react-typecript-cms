@@ -22,6 +22,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
 const Services: NextPage<Props> = ({ seo }) => {
   const [activeIndex, setActiveIndex] = useState(0)
+  const [servicesList, setServicesList] = useState([])
 
   const handleClick = (index: number) => {
     setActiveIndex(index)
@@ -31,7 +32,29 @@ const Services: NextPage<Props> = ({ seo }) => {
 
   useEffect(() => {
     setActiveNavLink(NavLinkEnum.Services)
+    getServicesList()
   }, [setActiveNavLink])
+
+  const getServicesList = async () => {
+    try {
+      const response = await fetch('/api/services/', {
+        method: 'GET',
+      })
+      const data = await response.json()
+      // console.log(data)
+      if (response.ok) {
+        // Handle success
+        setServicesList(data.services)
+        console.log(data.services)
+        // setServicesList(data.works.reverse())
+        // console.log(Array.isArray(worksList) + 'ies it is')
+      }
+    } catch (error: any) {
+      // Handle error
+      // console.log(data.message)
+      console.log(error)
+    }
+  }
 
   return (
     <>
@@ -70,11 +93,11 @@ const Services: NextPage<Props> = ({ seo }) => {
             </Tab>
           </div>
           <motion.div layout className="tab-content mt-12 w-4/5 m-auto">
-            <PanelComponent index={0} activeIndex={activeIndex} tabCategory={'packs'} />
+            <PanelComponent index={0} activeIndex={activeIndex} tabCategory={'complets'} serviceList={servicesList} />
 
-            <PanelComponent index={1} activeIndex={activeIndex} tabCategory={'specific'} />
+            <PanelComponent index={1} activeIndex={activeIndex} tabCategory={'specifics'} serviceList={servicesList} />
 
-            <PanelComponent index={2} activeIndex={activeIndex} tabCategory={'autres'} />
+            <PanelComponent index={2} activeIndex={activeIndex} tabCategory={'autre'} serviceList={servicesList} />
           </motion.div>
         </div>
       </div>
