@@ -29,10 +29,19 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
     try {
       await dbConnect()
-      var { title, seo, slug, description, coverImage, published } = req.body
+      var { title, seo, slug, description, coverImage, secondaryImage, category, published } = req.body
 
       // Validate request body against the WorkModel schema
-      if (!title || !seo.title || !seo.description || !slug || !description || !coverImage) {
+      if (
+        !title ||
+        !seo.title ||
+        !seo.description ||
+        !slug ||
+        !description ||
+        !coverImage ||
+        !secondaryImage ||
+        !category
+      ) {
         return res.status(400).json({ success: false, message: 'Missing required fields in the request body' })
       }
       var slug = slugify(slug)
@@ -44,7 +53,16 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         return res.status(400).json({ success: false, message: 'Ce titre est deja pris, essayez un autre' })
       }
 
-      const work = await WorkModel.create({ title, seo, slug, description, coverImage, published })
+      const work = await WorkModel.create({
+        title,
+        seo,
+        slug,
+        description,
+        coverImage,
+        secondaryImage,
+        category,
+        published,
+      })
       res.status(201).json({ success: true, data: work })
     } catch (error) {
       console.error(error)
