@@ -155,7 +155,7 @@ const WorkItem: FC<WorkItemInterface> = ({ getWorksList, checkboxValue, title, i
         {title} <br /> <span className="text-cas-white-300 text-xs">id:{id}</span>
       </p>
       <div>
-        <Link href={AdminNavLinkEnum.Works} className={'text-green-300'} onClick={() => editWork(slug)}>
+        <Link href={`${AdminNavLinkEnum.Works}/${slug}`} className={'text-green-300'} onClick={() => editWork(slug)}>
           Edit
         </Link>
         <button onClick={() => deleteWork()}>Delete</button>
