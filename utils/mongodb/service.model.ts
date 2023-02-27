@@ -15,6 +15,10 @@ const ServiceSchema: Schema = new Schema({
     type: String,
     required: true,
   },
+  points: {
+    type: Array,
+    default: [''],
+  },
 
   coverImage: {
     type: String,
