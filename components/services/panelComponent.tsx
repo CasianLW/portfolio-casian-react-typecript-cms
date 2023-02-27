@@ -6,9 +6,10 @@ interface PanelProps {
   index: number
   activeIndex: number
   tabCategory: string
+  serviceList: never[] | []
 }
 
-const PanelComponent: FC<PanelProps> = ({ index, activeIndex, tabCategory }) => {
+const PanelComponent: FC<PanelProps> = ({ index, activeIndex, tabCategory, serviceList }) => {
   return (
     <motion.div
       layout
@@ -20,7 +21,27 @@ const PanelComponent: FC<PanelProps> = ({ index, activeIndex, tabCategory }) => 
       id={`panel-${index + 1}`}
       className={`${index === activeIndex ? 'block' : 'hidden'} opacity-100 tab-panel transition duration-300`}
     >
-      {tabCategory === 'packs' ? (
+      {/* <div>{serviceList}</div> */}
+      <div className="mt-10">
+        {Array.isArray(serviceList) &&
+          serviceList.map((service: any, i) => {
+            // const { navLink, supplementaryClasses } = link
+            // const href = getPathFromNavLink(navLink)
+            return (
+              <div
+                key={i}
+                // getWorksList={getWorksList}
+              >
+                {service.published} <br />
+                {service.title} <br />
+                {service._id} <br />
+                {service.description} <br />
+              </div>
+            )
+          })}
+      </div>
+
+      {tabCategory === 'complets' ? (
         <motion.div
           layout
           data-activeIndex={activeIndex}
@@ -31,7 +52,7 @@ const PanelComponent: FC<PanelProps> = ({ index, activeIndex, tabCategory }) => 
           className="flex gap-3 flex-wrap"
         >
           <ServicesComponent
-            title={tabCategory}
+            title={'Service freelance'}
             description={'teafazfaf'}
             coverImage={
               'https://images.unsplash.com/photo-1597423244036-ef5020e83f3c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80'
@@ -41,7 +62,7 @@ const PanelComponent: FC<PanelProps> = ({ index, activeIndex, tabCategory }) => 
             pointList={['bulletOne', 'bullettwo', 'bulletthree']}
           />
         </motion.div>
-      ) : tabCategory === 'specific' ? (
+      ) : tabCategory === 'specifics' ? (
         <motion.div
           layout
           data-activeIndex={activeIndex}
@@ -52,7 +73,7 @@ const PanelComponent: FC<PanelProps> = ({ index, activeIndex, tabCategory }) => 
         >
           {/* <ServicesComponent title={tabCategory} description={'teafazfaf'} /> */}
         </motion.div>
-      ) : tabCategory === 'autres' ? (
+      ) : tabCategory === 'autre' ? (
         <motion.div
           layout
           data-activeIndex={activeIndex}
