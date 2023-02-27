@@ -13,6 +13,11 @@ interface ServicesProps {
 }
 const ServicesComponent: FC<ServicesProps> = ({ title, description, pointList, price, activePrice, coverImage }) => {
   const [activeIndex, setActiveIndex] = useState(false)
+  const wordList = title.split(' ')
+  const designWork = wordList[0]
+  {
+    /* const words = titleString.split(" ") */
+  }
 
   const handleClick = () => {
     setActiveIndex(!activeIndex)
@@ -24,7 +29,7 @@ const ServicesComponent: FC<ServicesProps> = ({ title, description, pointList, p
         <Image width={300} height={40} className="stack-item w-full" src={coverImage} alt={title}></Image>
         <div className="stack-item pt-20 pl-3 font-semibold leading-8 text-[44px] capitalize text-white">
           # <br />
-          {title}
+          {designWork}
         </div>
       </div>
       <h2 className="text-center py-4 text-xl font-semibold">{title}</h2>
