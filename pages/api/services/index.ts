@@ -7,7 +7,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
     try {
       await dbConnect()
-      var { title, description, coverImage, category, order, priceDetails, showPrice, published } = req.body
+      var { title, description, coverImage, category, order, priceDetails, showPrice, published, points } = req.body
 
       // Validate request body against the ServiceModel schema
       if (!title || !description || !coverImage || !category) {
@@ -33,6 +33,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         priceDetails,
         showPrice,
         published,
+        points,
       })
       res.status(201).json({ success: true, data: service })
     } catch (error) {
