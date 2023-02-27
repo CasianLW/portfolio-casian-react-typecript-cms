@@ -7,7 +7,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
     try {
       await dbConnect()
-      var { title, description, coverImage, category, order, published } = req.body
+      var { title, description, coverImage, category, order, priceDetails, showPrice, published } = req.body
 
       // Validate request body against the ServiceModel schema
       if (!title || !description || !coverImage || !category) {
@@ -24,18 +24,20 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         return res.status(400).json({ success: false, message: 'Ce titre est deja pris, essayez un autre' })
       }
 
-      const work = await ServiceModel.create({
+      const service = await ServiceModel.create({
         title,
         description,
         coverImage,
         order,
         category,
+        priceDetails,
+        showPrice,
         published,
       })
-      res.status(201).json({ success: true, data: work })
+      res.status(201).json({ success: true, data: service })
     } catch (error) {
       console.error(error)
-      res.status(400).json({ success: false, message: 'Error creating new work item' })
+      res.status(400).json({ success: false, message: 'Error creating new service item' })
     }
   }
 
