@@ -111,11 +111,11 @@ export default AdminNavComponent
 
 const navLinks = [
   {
-    navLink: AdminNavLinkEnum.General,
+    navLink: AdminNavLinkEnum.Dashboard,
     supplementaryClasses: 'lg:ml-auto delay-[100ms]',
   },
   {
-    navLink: AdminNavLinkEnum.Homepage,
+    navLink: AdminNavLinkEnum.General,
     supplementaryClasses: 'delay-[200ms]',
   },
   {
@@ -127,7 +127,7 @@ const navLinks = [
     supplementaryClasses: 'delay-[400ms]',
   },
   {
-    navLink: AdminNavLinkEnum.Dashboard,
+    navLink: AdminNavLinkEnum.Homepage,
     supplementaryClasses: 'lg:ml-auto delay-[500ms]',
   },
 ]
