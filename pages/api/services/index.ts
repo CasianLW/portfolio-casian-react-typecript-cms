@@ -14,7 +14,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         return res.status(400).json({ success: false, message: 'Missing required fields in the request body' })
       }
 
-      if (category != ('complets' || 'specifics' || 'autre')) {
+      if (category != 'complets' && category != 'specifics' && category != 'autre') {
         return res
           .status(400)
           .json({ success: false, message: 'Les services peuvent être que: complets, specifics ou autre.' })
