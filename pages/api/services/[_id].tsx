@@ -26,6 +26,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     case 'PUT' /* Edit a service item by its id */:
       try {
+        const { category } = req.body
+        if (category != 'complets' && category != 'specifics' && category != 'autre') {
+          return res
+            .status(400)
+            .json({ success: false, message: 'Les services peuvent être que: complets, specifics ou autre.' })
+        }
+
         const service = await ServiceModel.findOneAndUpdate({ _id: _id }, req.body, {
           new: true,
           runValidators: true,
