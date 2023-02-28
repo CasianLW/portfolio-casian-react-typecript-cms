@@ -1,17 +1,39 @@
 import { FC, useState } from 'react'
 
-interface AddWorkInterface {
-  getWorksList: () => void
+interface AddServiceInterface {
+  getServicesList: () => void
+  // seoTitle: string
+  // title: string
+  // priceDetails: string
+  // description: string
+  // imgLink: string
+  // published: boolean
+  // showPrice: boolean
+  // pointText: string
+  // pointList: string[]
 }
-const AddWorkComponent: FC<AddWorkInterface> = ({ getWorksList }) => {
-  const [formData, setFormData] = useState({
-    seoTitle: '',
-    seoDescription: '',
+const AddServiceComponent: FC<AddServiceInterface> = ({ getServicesList }) => {
+  interface FormDataType {
+    title: string
+    priceDetails: string
+    description: string
+    imgLink: string
+    published: boolean
+    showPrice: boolean
+    category: string
+    pointText: string
+    pointList: string[]
+  }
+  const [formData, setFormData] = useState<FormDataType>({
     title: '',
-    slug: '',
+    priceDetails: '',
     description: '',
     imgLink: '',
     published: false,
+    showPrice: false,
+    category: '',
+    pointText: '',
+    pointList: [],
   })
   const [submitStatus, setSubmitStatus] = useState<'submitting' | 'success' | 'error' | 'idle'>('idle')
   const [messageText, setMessageText] = useState()
@@ -19,21 +41,20 @@ const AddWorkComponent: FC<AddWorkInterface> = ({ getWorksList }) => {
     event.preventDefault()
 
     setSubmitStatus('submitting')
-    const response = await fetch('/api/works/', {
+    const response = await fetch('/api/services/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        seo: {
-          title: formData.seoTitle,
-          description: formData.seoDescription,
-        },
         title: formData.title,
-        slug: formData.slug,
+        priceDetails: formData.priceDetails,
         description: formData.description,
         coverImage: formData.imgLink,
         published: formData.published,
+        showPrice: formData.showPrice,
+        category: formData.category,
+        points: formData.pointList,
       }),
     })
     const data = await response.json()
@@ -42,15 +63,17 @@ const AddWorkComponent: FC<AddWorkInterface> = ({ getWorksList }) => {
       // Handle success
       setSubmitStatus('success')
       setMessageText(data.message)
-      getWorksList()
+      getServicesList()
       setFormData({
-        seoTitle: '',
-        seoDescription: '',
         title: '',
-        slug: '',
+        priceDetails: '',
         description: '',
         imgLink: '',
         published: false,
+        showPrice: false,
+        pointText: '',
+        category: '',
+        pointList: [],
       })
       setTimeout(() => {
         setSubmitStatus('idle')
@@ -73,6 +96,25 @@ const AddWorkComponent: FC<AddWorkInterface> = ({ getWorksList }) => {
       [event.target.name]: event.target.value,
     })
   }
+  const addPointToList = (event: any) => {
+    // console.log(
+    //   JSON.stringify({
+    //     title: formData.title,
+    //     priceDetails: formData.priceDetails,
+    //     description: formData.description,
+    //     coverImage: formData.imgLink,
+    //     published: formData.published,
+    //     showPrice: formData.showPrice,
+    //     points: formData.pointList,
+    //   })
+    // )
+    event.preventDefault()
+    setFormData({
+      ...formData,
+      pointText: '',
+      pointList: [...formData.pointList, formData.pointText],
+    })
+  }
   const alertComponent = () => {
     switch (submitStatus) {
       case 'submitting':
@@ -89,7 +131,7 @@ const AddWorkComponent: FC<AddWorkInterface> = ({ getWorksList }) => {
   }
   return (
     <>
-      <h2 className="secondary-title">Add new Work</h2>
+      <h2 className="secondary-title">Add new Service</h2>
       <form className="mt-10 " onSubmit={handleSubmit}>
         <h3>Ajouter un projet</h3>
         <div className="grid">
@@ -97,8 +139,25 @@ const AddWorkComponent: FC<AddWorkInterface> = ({ getWorksList }) => {
           <input required type="text" name="title" value={formData.title} onChange={handleInputChange} />
         </div>
         <div className="grid">
-          <label htmlFor="slug">Slug</label>
-          <input required type="text" name="slug" value={formData.slug} onChange={handleInputChange} />
+          <label htmlFor="priceDetails">Price details</label>
+          <input required type="text" name="priceDetails" value={formData.priceDetails} onChange={handleInputChange} />
+        </div>
+        <div className="grid">
+          <label htmlFor="showPrice">Show price:</label>
+          <div>
+            <input
+              type={'checkbox'}
+              name="showPrice"
+              checked={formData.showPrice}
+              onChange={(event) =>
+                setFormData({
+                  ...formData,
+                  showPrice: event.target.checked,
+                })
+              }
+            />
+            <span className="text-cas-white-100">{formData.showPrice ? 'Yes' : 'No'}</span>
+          </div>
         </div>
         <div className="grid">
           <label htmlFor="description">Description</label>
@@ -114,16 +173,43 @@ const AddWorkComponent: FC<AddWorkInterface> = ({ getWorksList }) => {
           <label htmlFor="imgLink">Lien image</label>
           <input required name="imgLink" value={formData.imgLink} onChange={handleInputChange} />
         </div>
+        <div className="grid">
+          <label htmlFor="category">Category:</label>
+          <div>
+            <input
+              type="radio"
+              id="complets"
+              name="category"
+              value="complets"
+              checked={formData.category === 'complets'}
+              onChange={handleInputChange}
+            />
+            <label htmlFor="complets">Complets</label>
+          </div>
+          <div>
+            <input
+              type="radio"
+              id="specifics"
+              name="category"
+              value="specifics"
+              checked={formData.category === 'specifics'}
+              onChange={handleInputChange}
+            />
+            <label htmlFor="specifics">Specifics</label>
+          </div>
+          <div>
+            <input
+              type="radio"
+              id="autre"
+              name="category"
+              value="autre"
+              checked={formData.category === 'autre'}
+              onChange={handleInputChange}
+            />
+            <label htmlFor="autre">Autre</label>
+          </div>
+        </div>
         <div className="my-10">
-          <h3>Seo settings:</h3>
-          <div className="grid">
-            <label htmlFor="seoTitle">Titre seo</label>
-            <input required name="seoTitle" value={formData.seoTitle} onChange={handleInputChange} />
-          </div>
-          <div className="grid">
-            <label htmlFor="seoDescription">Description seo</label>
-            <input required name="seoDescription" value={formData.seoDescription} onChange={handleInputChange} />
-          </div>
           <div className="grid">
             <label htmlFor="published">Published:</label>
             <div>
@@ -142,8 +228,24 @@ const AddWorkComponent: FC<AddWorkInterface> = ({ getWorksList }) => {
             </div>
           </div>
         </div>
+        <div className="mt-10">
+          <h3>Point List:</h3>
+          <div className="grid">
+            <label htmlFor="pointText">Point text:</label>
+            <input name="pointText" value={formData.pointText} onChange={handleInputChange} />
+            <button onClick={addPointToList}>Add point to list</button>
+          </div>
+          <div>
+            <p>Point List:</p>
+            <ul>
+              {formData.pointList.map((point, index) => (
+                <li key={index}>{point}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
         <button className="text-cas-white-100" type="submit">
-          Enregistrer projet
+          Enregistrer service
         </button>
       </form>
       {alertComponent()}
@@ -151,4 +253,4 @@ const AddWorkComponent: FC<AddWorkInterface> = ({ getWorksList }) => {
   )
 }
 
-export default AddWorkComponent
+export default AddServiceComponent
