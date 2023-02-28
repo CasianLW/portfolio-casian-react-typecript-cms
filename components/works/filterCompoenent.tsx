@@ -15,7 +15,7 @@ export const FilterComponent: FC<filterProps> = ({ projects, setFiltred, activeC
     }
     const filtred = projects.filter((project: any) => project.category_ids.includes(activeCategory))
     setFiltred(filtred)
-  }, [activeCategory])
+  }, [activeCategory, projects, setFiltred])
   return (
     // <displayProject.Provider value={{ displayProject, setDisplayProject }}>
     <div className="filter-selector mt-10 w-4/5 m-auto flex justify-between flex-wrap">

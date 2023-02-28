@@ -32,7 +32,7 @@ const Works: NextPage<Props> = ({ seo }) => {
   // filter
   const [projects, setProjects] = useState([])
   const [filtred, setFiltred] = useState([])
-  const [activeCategory, setActiveCategory] = useState('')
+  const [activeCategory, setActiveCategory] = useState('PC-10')
 
   useEffect(() => {
     fetchPopular()
