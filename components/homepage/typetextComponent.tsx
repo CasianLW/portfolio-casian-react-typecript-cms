@@ -8,7 +8,7 @@ const TypingTextComponent: FC = () => {
   const [text, setText] = useState('')
 
   return (
-    <h3 className="text-2xl mt-5">
+    <h2 className="text-2xl mt-5">
       <Typewriter
         options={{
           autoStart: true,
@@ -48,7 +48,7 @@ const TypingTextComponent: FC = () => {
             .start()
         }}
       />
-    </h3>
+    </h2>
   )
 }
 
