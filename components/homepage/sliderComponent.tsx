@@ -1,9 +1,6 @@
-import { FC, useEffect, WheelEvent, TouchEvent, useRef, useState } from 'react'
+import { FC } from 'react'
 import Link from 'next/link'
 
-import { useNavSettingsContext } from '@/context/nav-settings-context'
-
-import { logoCasianBlanc } from '@/assets/shared'
 import Image from 'next/image'
 import { getPathFromNavLink, NavLinkEnum } from '../nav'
 import { homepageMobileApps } from '@/assets/homepage'

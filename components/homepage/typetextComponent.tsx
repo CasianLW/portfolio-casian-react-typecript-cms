@@ -1,7 +1,5 @@
 import { FC, useState } from 'react'
-import Link from 'next/link'
 
-import Image from 'next/image'
 import Typewriter from 'typewriter-effect'
 
 const TypingTextComponent: FC = () => {
