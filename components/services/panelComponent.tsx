@@ -29,7 +29,6 @@ const PanelComponent: FC<PanelProps> = ({ index, activeIndex, tabCategory, servi
   return (
     <motion.div
       layout
-      data-activeIndex={activeIndex}
       initial={{ opacity: 0, x: '100%', y: '100%', scale: 1 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -39,7 +38,6 @@ const PanelComponent: FC<PanelProps> = ({ index, activeIndex, tabCategory, servi
     >
       <motion.div
         layout
-        data-activeIndex={activeIndex}
         initial={{ opacity: 0, x: '100%', y: '100%', scale: 1 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
@@ -68,31 +66,3 @@ const PanelComponent: FC<PanelProps> = ({ index, activeIndex, tabCategory, servi
 }
 
 export default PanelComponent
-
-/*
-{tabCategory === 'complets' ? (
-  <div></div>
-) : tabCategory === 'specifics' ? (
-  <motion.div
-    layout
-    data-activeIndex={activeIndex}
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    exit={{ opacity: 0 }}
-    className="flex gap-3 flex-wrap"
-  >
-  </motion.div>
-) : tabCategory === 'autre' ? (
-  <motion.div
-    layout
-    data-activeIndex={activeIndex}
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    exit={{ opacity: 0 }}
-    className="flex gap-3 flex-wrap"
-  >
-  </motion.div>
-) : (
-  ''
-)}
-*/

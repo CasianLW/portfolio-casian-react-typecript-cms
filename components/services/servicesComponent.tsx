@@ -49,7 +49,6 @@ const ServicesComponent: FC<ServicesProps> = ({ title, description, pointList, p
         ''
       )}
       <motion.button
-        data-activeIndex={activeIndex}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
