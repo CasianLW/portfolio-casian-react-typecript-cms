@@ -1,4 +1,6 @@
 import { Seo } from '@/cas-types'
+import AddServiceComponent from '@/components/admin/services/addServiceComponent'
+import ListServiceComponent from '@/components/admin/services/listServiceComponent'
 import AddWorkComponent from '@/components/admin/works/addWorkComponent'
 import ListWorkComponent from '@/components/admin/works/listWorkComponent'
 import AdminNavComponent, { AdminNavLinkEnum } from '@/components/nav/admin'
@@ -86,10 +88,10 @@ const ServicesCMS: NextPage<Props> = () => {
           ) : (
             <section className="grid gap-4 grid-cols-1 md:grid-cols-2">
               <div className="col-span-1">
-                <ListWorkComponent getWorksList={() => getServicesList()} worksList={servicesList} />
+                <ListServiceComponent getServicesList={() => getServicesList()} servicesList={servicesList} />
               </div>
               <div className="col-span-1">
-                <AddWorkComponent getWorksList={() => getServicesList()} />
+                <AddServiceComponent getServicesList={() => getServicesList()} />
               </div>
             </section>
           )}
