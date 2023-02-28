@@ -44,7 +44,7 @@ const PanelComponent: FC<PanelProps> = ({ index, activeIndex, tabCategory, servi
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ delay: 1 }}
-        className="flex gap-3 flex-wrap"
+        className="flex gap-3 md:gap-y-20 flex-wrap justify-between"
       >
         {Array.isArray(categoryFiltred) &&
           categoryFiltred.map((service: any, i) => {
