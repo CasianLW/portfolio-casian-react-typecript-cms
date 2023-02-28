@@ -44,7 +44,7 @@ const Services: NextPage<Props> = ({ seo }) => {
       if (response.ok) {
         // Handle success
         setServicesList(data.services)
-        console.log(data.services)
+        // console.log(data.services)
         // setServicesList(data.works.reverse())
       }
     } catch (error: any) {
