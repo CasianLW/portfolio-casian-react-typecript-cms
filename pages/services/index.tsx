@@ -1,11 +1,10 @@
-// import ContectComponent from '@/components/contact-components/formComponent'
 import { Seo } from '@/cas-types'
 import { NavLinkEnum } from '@/components/nav'
 import PanelComponent from '@/components/services/panelComponent'
 import SeoComponent from '@/components/shared/seo-component'
 import { useNavSettingsContext } from '@/context/nav-settings-context'
 import { getPageSeoBySlug } from '@/utils/content-api'
-import { AnimatePresence, motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { GetStaticProps, NextPage } from 'next'
 import { FC, useEffect, useState } from 'react'
 
@@ -47,11 +46,9 @@ const Services: NextPage<Props> = ({ seo }) => {
         setServicesList(data.services)
         console.log(data.services)
         // setServicesList(data.works.reverse())
-        // console.log(Array.isArray(worksList) + 'ies it is')
       }
     } catch (error: any) {
       // Handle error
-      // console.log(data.message)
       console.log(error)
     }
   }
