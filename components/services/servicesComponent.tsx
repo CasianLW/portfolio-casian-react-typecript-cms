@@ -24,7 +24,7 @@ const ServicesComponent: FC<ServicesProps> = ({ title, description, pointList, p
     console.log(activeIndex)
   }
   return (
-    <div className="bg-cas-white-100 text-cas-black-600 p-2 rounded-[32px] h-fit mx-auto w-full md:w-1/3">
+    <div className="bg-cas-white-100 text-cas-black-600 p-2 rounded-[32px] h-fit w-full md:w-[30%] ">
       <div className="grid rounded-3xl overflow-clip h-40">
         <Image width={300} height={40} className="stack-item w-full" src={coverImage} alt={title}></Image>
         <div className="stack-item pt-20 pl-3 font-semibold leading-8 text-[44px] capitalize text-white">
@@ -35,7 +35,7 @@ const ServicesComponent: FC<ServicesProps> = ({ title, description, pointList, p
       <h2 className="text-center py-4 text-xl font-semibold">{title}</h2>
       <p className="py-4 px-6 ">{description}</p>
 
-      <div className="border-t border-cas-black-600 py-4 px-6">
+      <div className="border-t border-cas-black-600 py-4 mx-6">
         {pointList.map((point, i) => (
           <li key={i}>{point}</li>
         ))}
