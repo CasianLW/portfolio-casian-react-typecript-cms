@@ -35,7 +35,12 @@ const SliderItemComponent: FC = () => {
       <div className="relative left-[1%] top-[2.5%] w-[98%] h-[95%] flex">
         <Link className="w-fit" href={getPathFromNavLink(NavLinkEnum.Works)}>
           {/* <a className="md:order-1">About</a> */}
-          <Image className="w-[80vw]" src={homepageMobileApps} alt="image applications mobiles casian.fr"></Image>
+          <Image
+            priority={true}
+            className="w-[80vw]"
+            src={homepageMobileApps}
+            alt="image applications mobiles casian.fr"
+          ></Image>
         </Link>
       </div>
     </div>
