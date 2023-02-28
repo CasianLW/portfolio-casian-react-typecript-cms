@@ -72,11 +72,11 @@ const Services: NextPage<Props> = ({ seo }) => {
           >
             <motion.div
               layout
-              className={`absolute w-1/3 m-2  top-0 bottom-0 rounded-full bg-white shadow-md ${
+              className={`absolute w-1/3 md:w-1/3 m-2  top-0 bottom-0 rounded-full bg-white shadow-md ${
                 activeIndex === 0
                   ? 'left-0 w-[29%]'
                   : activeIndex === 1
-                  ? 'left-[31%]'
+                  ? 'left-[31%] md:left-[32.5%]'
                   : activeIndex === 2
                   ? 'right-0 w-[28%]'
                   : ''
