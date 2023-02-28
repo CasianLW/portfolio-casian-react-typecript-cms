@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { FC, useEffect, useState } from 'react'
 import ServicesComponent from './servicesComponent'
 
@@ -12,18 +12,9 @@ interface PanelProps {
 const PanelComponent: FC<PanelProps> = ({ index, activeIndex, tabCategory, serviceList }) => {
   const [categoryFiltred, setCategoryFiltred] = useState([])
 
-  // setCategoryFiltred(serviceList.filter((service: any) => (service.category = tabCategory)))
-  // console.log(categoryFiltred)
-
   useEffect(() => {
-    // if (serviceList) {
-    //   setFiltred(projects)
-    //   return
-    // }
-    // const filtred = serviceList.filter((service: any) => service.category.includes('autre'))
     const filtred = serviceList.filter((service: any) => service.category == tabCategory)
     setCategoryFiltred(filtred)
-    // console.log(categoryFiltred)
   }, [serviceList, tabCategory])
 
   return (
@@ -46,8 +37,6 @@ const PanelComponent: FC<PanelProps> = ({ index, activeIndex, tabCategory, servi
       >
         {Array.isArray(categoryFiltred) &&
           categoryFiltred.map((service: any, i) => {
-            // const { navLink, supplementaryClasses } = link
-            // const href = getPathFromNavLink(navLink)
             return (
               <ServicesComponent
                 key={i}
