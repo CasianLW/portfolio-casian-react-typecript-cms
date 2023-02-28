@@ -28,7 +28,6 @@ const ListServiceComponent: FC<ListServiceInterface> = ({ getServicesList, servi
                 checkboxValue={service.published}
                 title={service.title}
                 id={service._id}
-                slug={service.slug}
                 getServicesList={getServicesList}
               />
             )
@@ -44,12 +43,11 @@ interface ServiceItemInterface {
   checkboxValue: boolean
   title: string
   id: number
-  slug: string
   getServicesList: () => void
 }
-const ServiceItem: FC<ServiceItemInterface> = ({ getServicesList, checkboxValue, title, id, slug }) => {
+const ServiceItem: FC<ServiceItemInterface> = ({ getServicesList, checkboxValue, title, id }) => {
   const [activeDelete, setActiveDelete] = useState(false)
-  function editService(slugEdit: string) {
+  function editService(slugEdit: number) {
     console.log(slugEdit)
   }
   function deleteService() {
@@ -59,9 +57,9 @@ const ServiceItem: FC<ServiceItemInterface> = ({ getServicesList, checkboxValue,
     setActiveDelete(false)
   }
 
-  const deleteConfirm = async (slug: string) => {
+  const deleteConfirm = async (id: number) => {
     try {
-      const response = await fetch(`/api/services/${slug}`, {
+      const response = await fetch(`/api/services/${id}`, {
         method: 'DELETE',
       })
 
@@ -84,18 +82,14 @@ const ServiceItem: FC<ServiceItemInterface> = ({ getServicesList, checkboxValue,
         {title} <br /> <span className="text-cas-white-300 text-xs">id:{id}</span>
       </p>
       <div>
-        <Link
-          href={`${AdminNavLinkEnum.Services}/${slug}`}
-          className={'text-green-300'}
-          onClick={() => editService(slug)}
-        >
+        <Link href={`${AdminNavLinkEnum.Services}/`} className={'text-green-300'} onClick={() => editService(id)}>
           Edit
         </Link>
         <button onClick={() => deleteService()}>Delete</button>
       </div>
       <DeleteConfirmComponent
         active={activeDelete}
-        deleteFunction={() => deleteConfirm(slug)}
+        deleteFunction={() => deleteConfirm(id)}
         cancelDelete={() => cancelDelete()}
         itemName={title}
       />
