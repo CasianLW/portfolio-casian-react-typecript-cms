@@ -38,11 +38,11 @@ const ServicesComponent: FC<ServicesProps> = ({ title, description, pointList, p
       <h2 className="text-center py-4 text-xl font-semibold">{title}</h2>
       <p className="py-4 px-6 ">{description}</p>
 
-      <div className="border-t border-cas-black-600 py-4 mx-6">
+      <ul className="border-t border-cas-black-600 py-4 mx-6">
         {pointList.map((point, i) => (
           <li key={i}>{point}</li>
         ))}
-      </div>
+      </ul>
       {activePrice ? (
         <h3 className="text-center font-semibold text-3xl  ">
           <span className="text-xl font-medium">Dés </span>
