@@ -64,7 +64,7 @@ const Services: NextPage<Props> = ({ seo }) => {
       </header>
 
       <div className="mx-auto px-8 sm:px-0">
-        <div className="">
+        <div className="mt-10">
           <div
             role="tablist"
             aria-label="tabs"
@@ -92,7 +92,7 @@ const Services: NextPage<Props> = ({ seo }) => {
               Autres
             </Tab>
           </div>
-          <motion.div layout className="tab-content mt-12 w-11/12 m-auto">
+          <motion.div layout className="tab-content mt-12 w-11/12 md:w-10/12 m-auto">
             <PanelComponent index={0} activeIndex={activeIndex} tabCategory={'complets'} serviceList={servicesList} />
 
             <PanelComponent index={1} activeIndex={activeIndex} tabCategory={'specifics'} serviceList={servicesList} />
