@@ -1,10 +1,12 @@
 import { Seo } from '@/cas-types'
+import AddWorkComponent from '@/components/admin/works/addWorkComponent'
+import ListWorkComponent from '@/components/admin/works/listWorkComponent'
 import AdminNavComponent, { AdminNavLinkEnum } from '@/components/nav/admin'
 import SeoComponent from '@/components/shared/seo-component'
 import { useAdminNavSettingsContext } from '@/context/admin-nav-settings-context'
 import AdminLayoutComponent from '@/layout/admin'
 import { NextPage } from 'next'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 interface Props {
   seo: Seo
@@ -16,14 +18,82 @@ const ServicesCMS: NextPage<Props> = () => {
     setActiveNavLink(AdminNavLinkEnum.Services)
   }, [setActiveNavLink])
 
+  const [loading, setLoading] = useState(true)
+  const [servicesList, setServicesList] = useState([])
+  const [submitStatus, setSubmitStatus] = useState<'submitting' | 'success' | 'error' | 'idle'>('idle')
+  const [messageText, setMessageText] = useState()
+  const getServicesList = async () => {
+    console.log('test du transfer')
+    try {
+      setSubmitStatus('submitting')
+      const response = await fetch('/api/services/', {
+        method: 'GET',
+      })
+      const data = await response.json()
+      console.log(data)
+      if (response.ok) {
+        // Handle success
+        setSubmitStatus('success')
+        setServicesList(data.services.reverse())
+        setLoading(false)
+        // console.log(Array.isArray(worksList) + 'ies it is')
+
+        setMessageText(data.message)
+        setTimeout(() => {
+          setSubmitStatus('idle')
+        }, 4000)
+      }
+    } catch (error: any) {
+      // Handle error
+      // console.log(data.message)
+      setSubmitStatus('error')
+      setMessageText(error)
+      setTimeout(() => {
+        setSubmitStatus('idle')
+      }, 4000)
+    }
+  }
+  useEffect(() => {
+    getServicesList()
+  }, [setSubmitStatus, setMessageText, setServicesList])
+
+  const alertComponent = () => {
+    switch (submitStatus) {
+      case 'submitting':
+        return <div className="alert alert-info text-cas-white-100">Loading services ...</div>
+      case 'success':
+        return <div className="alert alert-success text-cas-white-100">Service list successfully imported!</div>
+      case 'error':
+        return <div className="alert alert-danger text-cas-white-100">{messageText}</div>
+      case 'idle':
+        return <div className="alert alert-danger text-cas-white-100"></div>
+      default:
+        return null
+    }
+  }
+
   return (
     <AdminLayoutComponent>
       <>
-        <SeoComponent seo={{ title: 'Services CMS', description: 'Services: add, modify and delete' }} />
-        <header className="top-header-admin lateral-space">
-          <h1 className="main-title">ServicesCMS Page</h1>
+        <SeoComponent seo={{ title: 'Service CMS', description: 'Service: Ajouter, modifier et supprimer' }} />
+        <header>
+          <h1 className="main-title">ServicesCMS</h1>
         </header>
-        <section className="admin-content"></section>
+        {alertComponent()}
+        <main className="admin-content">
+          {loading ? ( // Conditional rendering based on the loading state
+            <div>Loading Services ...</div>
+          ) : (
+            <section className="grid gap-4 grid-cols-1 md:grid-cols-2">
+              <div className="col-span-1">
+                <ListWorkComponent getWorksList={() => getServicesList()} worksList={servicesList} />
+              </div>
+              <div className="col-span-1">
+                <AddWorkComponent getWorksList={() => getServicesList()} />
+              </div>
+            </section>
+          )}
+        </main>
       </>
     </AdminLayoutComponent>
   )
