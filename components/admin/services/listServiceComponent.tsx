@@ -1,36 +1,35 @@
 import { AdminNavLinkEnum } from '@/components/nav/admin'
 import Link from 'next/link'
 import { FC, MouseEvent, useEffect, useState } from 'react'
-import { text } from 'stream/consumers'
 import DeleteConfirmComponent from '../shared/deleteConfirmComponent'
 
-interface ListWorkInterface {
-  getWorksList: () => void
-  worksList: never[] | []
+interface ListServiceInterface {
+  getServicesList: () => void
+  servicesList: never[] | []
 }
-const ListWorkComponent: FC<ListWorkInterface> = ({ getWorksList, worksList }) => {
-  function getWorkPass() {
+const ListServiceComponent: FC<ListServiceInterface> = ({ getServicesList, servicesList }) => {
+  function getServicePass() {
     console.log('test reload')
-    getWorksList()
+    getServicesList()
   }
 
   return (
     <>
-      <h2 className="secondary-title">Works List</h2>
+      <h2 className="secondary-title">Services List</h2>
 
-      <button onClick={() => getWorkPass()}> test</button>
+      <button onClick={() => getServicePass()}> test</button>
 
       <div className="mt-10">
-        {Array.isArray(worksList) &&
-          worksList.map((work: any, i) => {
+        {Array.isArray(servicesList) &&
+          servicesList.map((service: any, i) => {
             return (
-              <WorkItem
+              <ServiceItem
                 key={i}
-                checkboxValue={work.published}
-                title={work.title}
-                id={work._id}
-                slug={work.slug}
-                getWorksList={getWorksList}
+                checkboxValue={service.published}
+                title={service.title}
+                id={service._id}
+                slug={service.slug}
+                getServicesList={getServicesList}
               />
             )
           })}
@@ -39,21 +38,21 @@ const ListWorkComponent: FC<ListWorkInterface> = ({ getWorksList, worksList }) =
   )
 }
 
-export default ListWorkComponent
+export default ListServiceComponent
 
-interface WorkItemInterface {
+interface ServiceItemInterface {
   checkboxValue: boolean
   title: string
   id: number
   slug: string
-  getWorksList: () => void
+  getServicesList: () => void
 }
-const WorkItem: FC<WorkItemInterface> = ({ getWorksList, checkboxValue, title, id, slug }) => {
+const ServiceItem: FC<ServiceItemInterface> = ({ getServicesList, checkboxValue, title, id, slug }) => {
   const [activeDelete, setActiveDelete] = useState(false)
-  function editWork(slugEdit: string) {
+  function editService(slugEdit: string) {
     console.log(slugEdit)
   }
-  function deleteWork() {
+  function deleteService() {
     setActiveDelete(true)
   }
   function cancelDelete() {
@@ -62,12 +61,12 @@ const WorkItem: FC<WorkItemInterface> = ({ getWorksList, checkboxValue, title, i
 
   const deleteConfirm = async (slug: string) => {
     try {
-      const response = await fetch(`/api/works/${slug}`, {
+      const response = await fetch(`/api/services/${slug}`, {
         method: 'DELETE',
       })
 
       if (response.ok) {
-        getWorksList()
+        getServicesList()
         setActiveDelete(false)
       }
     } catch (error: any) {
@@ -78,17 +77,21 @@ const WorkItem: FC<WorkItemInterface> = ({ getWorksList, checkboxValue, title, i
   return (
     <div className="flex w-full max-w-md justify-between pr-3">
       <label htmlFor="">
-        <input type="checkbox" checked={checkboxValue} onChange={() => deleteWork()} />
+        <input type="checkbox" checked={checkboxValue} onChange={() => deleteService()} />
         <span>{checkboxValue ? 'Public' : 'Private'}</span>
       </label>
       <p>
         {title} <br /> <span className="text-cas-white-300 text-xs">id:{id}</span>
       </p>
       <div>
-        <Link href={`${AdminNavLinkEnum.Works}/${slug}`} className={'text-green-300'} onClick={() => editWork(slug)}>
+        <Link
+          href={`${AdminNavLinkEnum.Services}/${slug}`}
+          className={'text-green-300'}
+          onClick={() => editService(slug)}
+        >
           Edit
         </Link>
-        <button onClick={() => deleteWork()}>Delete</button>
+        <button onClick={() => deleteService()}>Delete</button>
       </div>
       <DeleteConfirmComponent
         active={activeDelete}
