@@ -34,7 +34,7 @@ const AdminPage: NextPage<Props> = () => {
             </div>
             <div className="col-span-1">
               <div className="w-full h-[200px] rounded-2xl bg-cas-gradient-rose">
-                Other stats: <br /> Works number : <br /> Services number:
+                Other stats: <br /> Works number : <br /> Services number: <br /> Build status/remaining/counter
               </div>
             </div>
             <div className="col-span-1">how to use Works</div>
