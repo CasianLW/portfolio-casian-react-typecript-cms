@@ -15,10 +15,6 @@ const ServicesComponent: FC<ServicesProps> = ({ title, description, pointList, p
   const wordList = title.split(' ')
   const designWork = wordList[0]
 
-  const handleClick = () => {
-    setActiveIndex(!activeIndex)
-    console.log(activeIndex)
-  }
   return (
     <div className="bg-cas-white-100 text-cas-black-600 p-2 rounded-[32px] h-fit w-full md:w-[30%] ">
       <div className="grid rounded-3xl overflow-clip h-40">
