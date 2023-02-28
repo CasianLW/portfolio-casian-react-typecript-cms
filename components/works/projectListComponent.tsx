@@ -35,7 +35,14 @@ const ProjectComponent: FC<ProjectProps> = ({
           <h2 className="text-4xl font-semibold line-clamp-1">{title}</h2>
           <h3 className="text-xs md:text-lg line-clamp-1">{titleSecondary}</h3>
         </div>
-        <Image width={500} height={500} className="w-[80vw]" src={imageRef} alt={title}></Image>
+        <Image
+          priority={true}
+          width={500}
+          height={500}
+          className="w-[80vw]"
+          src={imageRef}
+          alt={`${title} art work`}
+        ></Image>
       </Link>
     </motion.div>
   )
