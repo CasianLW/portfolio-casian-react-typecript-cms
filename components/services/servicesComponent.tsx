@@ -1,6 +1,5 @@
-import { logoCasianBlanc, showMoreArrows } from '@/assets/shared'
 import { motion } from 'framer-motion'
-import { FC, useEffect, useState } from 'react'
+import { FC, useState } from 'react'
 import Image from 'next/image'
 
 interface ServicesProps {
@@ -15,9 +14,6 @@ const ServicesComponent: FC<ServicesProps> = ({ title, description, pointList, p
   const [activeIndex, setActiveIndex] = useState(false)
   const wordList = title.split(' ')
   const designWork = wordList[0]
-  {
-    /* const words = titleString.split(" ") */
-  }
 
   const handleClick = () => {
     setActiveIndex(!activeIndex)
@@ -26,7 +22,14 @@ const ServicesComponent: FC<ServicesProps> = ({ title, description, pointList, p
   return (
     <div className="bg-cas-white-100 text-cas-black-600 p-2 rounded-[32px] h-fit w-full md:w-[30%] ">
       <div className="grid rounded-3xl overflow-clip h-40">
-        <Image width={300} height={40} className="stack-item w-full" src={coverImage} alt={title}></Image>
+        <Image
+          priority={true}
+          width={300}
+          height={225}
+          className="stack-item w-full"
+          src={coverImage}
+          alt={title}
+        ></Image>
         <div className="stack-item pt-20 pl-3 font-semibold leading-8 text-[44px] capitalize text-white">
           # <br />
           {designWork}
