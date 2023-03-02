@@ -14,6 +14,7 @@ interface Props {
 
 const WorksCMS: NextPage<Props> = () => {
   const { setActiveNavLink } = useAdminNavSettingsContext()
+
   useEffect(() => {
     setActiveNavLink(AdminNavLinkEnum.Works)
   }, [setActiveNavLink])
@@ -23,7 +24,7 @@ const WorksCMS: NextPage<Props> = () => {
   const [submitStatus, setSubmitStatus] = useState<'submitting' | 'success' | 'error' | 'idle'>('idle')
   const [messageText, setMessageText] = useState()
   const getWorksList = async () => {
-    console.log('test du transfer')
+    // console.log('test du transfer')
     try {
       setSubmitStatus('submitting')
       const response = await fetch('/api/works/', {
