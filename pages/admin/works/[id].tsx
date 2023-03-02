@@ -52,20 +52,18 @@ export interface IWorkInfo {
   published: boolean
 }
 const WorkInfoPage: NextPage<Props> = () => {
-  const [loading, setLoading] = useState(true)
+  // const [loading, setLoading] = useState(true)
 
-  const [workInfos, setWorkInfos] = useState<IWorkInfo>()
+  const [workInfos, setWorkInfos] = useState<IWorkInfo | undefined>(undefined)
   const [submitStatus, setSubmitStatus] = useState<'submitting' | 'success' | 'error' | 'idle'>('idle')
 
   const router = useRouter()
   const { id } = router.query
 
-  console.log('Infos: ' + id)
+  // console.log('Infos: ' + id)
   const getWorkInfos = async () => {
-    // console.log('test du transfer')
     try {
       setSubmitStatus('submitting')
-      // const res = await fetch(`http://localhost:3000/api/works/${id}`)
 
       const response = await fetch(`/api/works/${id}`, {
         method: 'GET',
@@ -76,7 +74,7 @@ const WorkInfoPage: NextPage<Props> = () => {
         // Handle success
         setSubmitStatus('success')
         setWorkInfos(data.data)
-        setLoading(false)
+        // setLoading(false)
         // setMessageText(data.message)
         setTimeout(() => {
           setSubmitStatus('idle')
@@ -101,8 +99,6 @@ const WorkInfoPage: NextPage<Props> = () => {
     }
   }, [router.query.id])
 
-  // console.log(workInfos)
-
   return (
     <>
       <AdminLayoutComponent>
@@ -113,9 +109,7 @@ const WorkInfoPage: NextPage<Props> = () => {
           </header>
           {/* {alertComponent()} */}
           <main className="admin-content">
-            {loading ? ( // Conditional rendering based on the loading state
-              <div>Loading work page ...</div>
-            ) : (
+            {workInfos ? (
               <section className="grid gap-4 grid-cols-1 md:grid-cols-1">
                 <h1>{workInfos.title}</h1>
                 <h1>{workInfos.description}</h1>
@@ -123,6 +117,8 @@ const WorkInfoPage: NextPage<Props> = () => {
 
                 <EditWorkComponent dataWork={workInfos} editWorkMethod={() => getWorkInfos()} />
               </section>
+            ) : (
+              <div>Loading work page ...</div>
             )}
           </main>
         </>
@@ -132,23 +128,3 @@ const WorkInfoPage: NextPage<Props> = () => {
 }
 
 export default WorkInfoPage
-
-// interface ModifyWorkFormInterface {
-//   title: string
-//   children: string
-//   picto: string
-//   alt: string
-//   textSpecial?: string
-// }
-// const ModifyWorkForm: FC<ModifyWorkFormInterface> = ({ title, children, textSpecial, picto, alt }) => (
-//   <article className="card grid h-full content-start gap-6 bg-cwr-blue-800 ">
-//     <Image className="h-[40px] md:h-[50px]" src={picto} alt={alt} />
-//     <div className="block">
-//       <h1 className=" mb-2 w-[60%] font-semibold md:mb-6 md:text-xl lg:w-[70%]">{title}</h1>
-//       <p className="w-11/12 md:text-xl ">
-//         {children} <br />
-//         <span className="text-cwr-turquoise-300">{textSpecial}</span>
-//       </p>
-//     </div>
-//   </article>
-// )
