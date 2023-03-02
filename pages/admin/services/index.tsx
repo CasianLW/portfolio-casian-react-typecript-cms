@@ -79,7 +79,6 @@ const ServicesCMS: NextPage<Props> = () => {
         <header>
           <h1 className="main-title">ServicesCMS</h1>
         </header>
-        {alertComponent()}
         <main className="admin-content">
           {loading ? ( // Conditional rendering based on the loading state
             <div>Loading Services ...</div>
@@ -93,6 +92,7 @@ const ServicesCMS: NextPage<Props> = () => {
               </div>
             </section>
           )}
+          {alertComponent()}
         </main>
       </>
     </AdminLayoutComponent>
