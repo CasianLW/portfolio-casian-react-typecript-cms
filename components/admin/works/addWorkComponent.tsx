@@ -143,15 +143,45 @@ const AddWorkComponent: FC<AddWorkInterface> = ({ getWorksList }) => {
           <label>Category</label>
           <div>
             <label>
-              <input type="checkbox" name="dev" checked={formData.category.dev} onChange={handleInputChange} />
+              <input
+                type="checkbox"
+                name="dev"
+                checked={formData.category.dev}
+                onChange={() =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    category: { ...prev.category, dev: !prev.category.dev },
+                  }))
+                }
+              />
               Dev
             </label>
             <label>
-              <input type="checkbox" name="uxui" checked={formData.category.uxui} onChange={handleInputChange} />
+              <input
+                type="checkbox"
+                name="uxui"
+                checked={formData.category.uxui}
+                onChange={() =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    category: { ...prev.category, uxui: !prev.category.uxui },
+                  }))
+                }
+              />
               UX/UI
             </label>
             <label>
-              <input type="checkbox" name="graphic" checked={formData.category.graphic} onChange={handleInputChange} />
+              <input
+                type="checkbox"
+                name="graphic"
+                checked={formData.category.graphic}
+                onChange={() =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    category: { ...prev.category, graphic: !prev.category.graphic },
+                  }))
+                }
+              />
               Graphic
             </label>
           </div>
