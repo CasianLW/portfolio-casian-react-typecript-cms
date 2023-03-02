@@ -23,14 +23,14 @@ const ServicesCMS: NextPage<Props> = () => {
   const [submitStatus, setSubmitStatus] = useState<'submitting' | 'success' | 'error' | 'idle'>('idle')
   const [messageText, setMessageText] = useState()
   const getServicesList = async () => {
-    console.log('test du transfer')
+    // console.log('test du transfer')
     try {
       setSubmitStatus('submitting')
       const response = await fetch('/api/services/', {
         method: 'GET',
       })
       const data = await response.json()
-      console.log(data)
+      // console.log(data)
       if (response.ok) {
         // Handle success
         setSubmitStatus('success')

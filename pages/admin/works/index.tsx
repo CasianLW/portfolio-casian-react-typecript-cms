@@ -30,7 +30,7 @@ const WorksCMS: NextPage<Props> = () => {
         method: 'GET',
       })
       const data = await response.json()
-      console.log(data)
+      // console.log(data)
       if (response.ok) {
         // Handle success
         setSubmitStatus('success')
