@@ -68,7 +68,7 @@ const ListWorkComponent: FC<ListWorkInterface> = ({ getWorksList, worksList }) =
     <>
       <h2 className="secondary-title">Works List</h2>
 
-      <button onClick={() => getWorkPass()}> test</button>
+      {/* <button onClick={() => getWorkPass()}> refresh works (testing)</button> */}
 
       <div className="mt-10">
         {Array.isArray(worksList) &&

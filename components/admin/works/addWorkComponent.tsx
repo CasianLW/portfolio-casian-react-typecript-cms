@@ -11,6 +11,12 @@ const AddWorkComponent: FC<AddWorkInterface> = ({ getWorksList }) => {
     slug: '',
     description: '',
     imgLink: '',
+    secondaryImage: '',
+    category: {
+      dev: false,
+      uxui: false,
+      graphic: false,
+    },
     published: false,
   })
   const [submitStatus, setSubmitStatus] = useState<'submitting' | 'success' | 'error' | 'idle'>('idle')
@@ -33,6 +39,13 @@ const AddWorkComponent: FC<AddWorkInterface> = ({ getWorksList }) => {
         slug: formData.slug,
         description: formData.description,
         coverImage: formData.imgLink,
+        category: {
+          dev: formData.category.dev,
+          uxui: formData.category.uxui,
+          graphic: formData.category.graphic,
+        },
+
+        secondaryImage: formData.secondaryImage,
         published: formData.published,
       }),
     })
@@ -50,6 +63,12 @@ const AddWorkComponent: FC<AddWorkInterface> = ({ getWorksList }) => {
         slug: '',
         description: '',
         imgLink: '',
+        secondaryImage: '',
+        category: {
+          dev: false,
+          uxui: false,
+          graphic: false,
+        },
         published: false,
       })
       setTimeout(() => {
@@ -114,6 +133,30 @@ const AddWorkComponent: FC<AddWorkInterface> = ({ getWorksList }) => {
           <label htmlFor="imgLink">Lien image</label>
           <input required name="imgLink" value={formData.imgLink} onChange={handleInputChange} />
         </div>
+
+        <div className="grid">
+          <label htmlFor="secondaryImage">Secondary Image</label>
+          <input required name="secondaryImage" value={formData.secondaryImage} onChange={handleInputChange} />
+        </div>
+
+        <div className="grid">
+          <label>Category</label>
+          <div>
+            <label>
+              <input type="checkbox" name="dev" checked={formData.category.dev} onChange={handleInputChange} />
+              Dev
+            </label>
+            <label>
+              <input type="checkbox" name="uxui" checked={formData.category.uxui} onChange={handleInputChange} />
+              UX/UI
+            </label>
+            <label>
+              <input type="checkbox" name="graphic" checked={formData.category.graphic} onChange={handleInputChange} />
+              Graphic
+            </label>
+          </div>
+        </div>
+
         <div className="my-10">
           <h3>Seo settings:</h3>
           <div className="grid">

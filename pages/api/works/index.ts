@@ -49,6 +49,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       if (await WorkModel.findOne({ slug: slug })) {
         return res.status(400).json({ success: false, message: 'Ce slug est deja pris, essayez avec un autre' })
       }
+      if (typeof slug === 'number') {
+        return res.status(400).json({ success: false, message: 'Le slug ne peu pas être un nombre' })
+      }
       if (await WorkModel.findOne({ title: title })) {
         return res.status(400).json({ success: false, message: 'Ce titre est deja pris, essayez un autre' })
       }
