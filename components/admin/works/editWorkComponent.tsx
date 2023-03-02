@@ -110,9 +110,9 @@ const EditWorkComponent: FC<EditWorkInterface> = ({ dataWork, editWorkMethod }) 
   }
   return (
     <>
-      <h2 className="secondary-title">Add new Work</h2>
+      {/* <h2 className="secondary-title">Edit Work</h2> */}
       <form className="mt-10 " onSubmit={handleSubmit}>
-        <h3>Ajouter un projet</h3>
+        {/* <h3>Ajouter un projet</h3> */}
         <div className="grid">
           <label htmlFor="title">Title</label>
           <input required type="text" name="title" value={formData.title} onChange={handleInputChange} />
@@ -218,7 +218,7 @@ const EditWorkComponent: FC<EditWorkInterface> = ({ dataWork, editWorkMethod }) 
           </div>
         </div>
         <button className="text-cas-white-100" type="submit">
-          Enregistrer projet
+          Update project
         </button>
       </form>
       {alertComponent()}
