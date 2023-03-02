@@ -1,5 +1,4 @@
 import { IServiceInfo } from '@/pages/admin/services/[id]'
-import { IWorkInfo } from '@/pages/admin/works/[id]'
 import { FC, useState } from 'react'
 
 interface EditServiceInterface {
@@ -8,19 +7,15 @@ interface EditServiceInterface {
 }
 const EditServiceComponent: FC<EditServiceInterface> = ({ dataService, editServiceMethod }) => {
   const [formData, setFormData] = useState({
-    seoTitle: dataService.seo.title,
-    seoDescription: dataService.seo.description,
     title: dataService.title,
-    slug: dataService.slug,
+    priceDetails: dataService.priceDetails,
+    showPrice: dataService.showPrice,
+    category: dataService.category,
+    pointList: dataService.points,
     description: dataService.description,
     imgLink: dataService.coverImage,
-    secondaryImage: dataService.secondaryImage,
-    category: {
-      dev: dataService.category.dev,
-      uxui: dataService.category.uxui,
-      graphic: dataService.category.graphic,
-    },
     published: dataService.published,
+    pointText: '',
   })
   const [submitStatus, setSubmitStatus] = useState<'submitting' | 'success' | 'error' | 'idle' | 'changed'>('idle')
   const [messageText, setMessageText] = useState()
@@ -34,22 +29,14 @@ const EditServiceComponent: FC<EditServiceInterface> = ({ dataService, editServi
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        seo: {
-          title: formData.seoTitle,
-          description: formData.seoDescription,
-        },
         title: formData.title,
-        slug: formData.slug,
+        priceDetails: formData.priceDetails,
         description: formData.description,
         coverImage: formData.imgLink,
-        category: {
-          dev: formData.category.dev,
-          uxui: formData.category.uxui,
-          graphic: formData.category.graphic,
-        },
-
-        secondaryImage: formData.secondaryImage,
         published: formData.published,
+        showPrice: formData.showPrice,
+        category: formData.category,
+        points: formData.pointList,
       }),
     })
     const data = await response.json()
@@ -59,21 +46,6 @@ const EditServiceComponent: FC<EditServiceInterface> = ({ dataService, editServi
       setSubmitStatus('success')
       setMessageText(data.message)
       editServiceMethod()
-      // setFormData({
-      //   seoTitle: '',
-      //   seoDescription: '',
-      //   title: '',
-      //   slug: '',
-      //   description: '',
-      //   imgLink: '',
-      //   secondaryImage: '',
-      //   category: {
-      //     dev: false,
-      //     uxui: false,
-      //     graphic: false,
-      //   },
-      //   published: false,
-      // })
       setTimeout(() => {
         setSubmitStatus('idle')
       }, 4000)
@@ -96,6 +68,20 @@ const EditServiceComponent: FC<EditServiceInterface> = ({ dataService, editServi
       ...formData,
       [event.target.name]: event.target.value,
     })
+  }
+
+  const addPointToList = (event: any) => {
+    event.preventDefault()
+    setFormData({
+      ...formData,
+      pointText: '',
+      pointList: [...formData.pointList, formData.pointText],
+    })
+  }
+  const deletePoint = (index: number) => {
+    const newPoints = [...formData.pointList]
+    newPoints.splice(index, 1)
+    setFormData({ ...formData, pointList: newPoints })
   }
   const alertComponent = () => {
     switch (submitStatus) {
@@ -126,8 +112,25 @@ const EditServiceComponent: FC<EditServiceInterface> = ({ dataService, editServi
           <input required type="text" name="title" value={formData.title} onChange={handleInputChange} />
         </div>
         <div className="grid">
-          <label htmlFor="slug">Slug</label>
-          <input required type="text" name="slug" value={formData.slug} onChange={handleInputChange} />
+          <label htmlFor="priceDetails">Price details</label>
+          <input required type="text" name="priceDetails" value={formData.priceDetails} onChange={handleInputChange} />
+        </div>
+        <div className="grid">
+          <label htmlFor="showPrice">Show price:</label>
+          <div>
+            <input
+              type={'checkbox'}
+              name="showPrice"
+              checked={formData.showPrice}
+              onChange={(event) =>
+                setFormData({
+                  ...formData,
+                  showPrice: event.target.checked,
+                })
+              }
+            />
+            <span className="text-cas-white-100">{formData.showPrice ? 'Yes' : 'No'}</span>
+          </div>
         </div>
         <div className="grid">
           <label htmlFor="description">Description</label>
@@ -143,70 +146,43 @@ const EditServiceComponent: FC<EditServiceInterface> = ({ dataService, editServi
           <label htmlFor="imgLink">Lien image</label>
           <input required name="imgLink" value={formData.imgLink} onChange={handleInputChange} />
         </div>
-
         <div className="grid">
-          <label htmlFor="secondaryImage">Secondary Image</label>
-          <input required name="secondaryImage" value={formData.secondaryImage} onChange={handleInputChange} />
-        </div>
-
-        <div className="grid">
-          <label>Category</label>
+          <label htmlFor="category">Category:</label>
           <div>
-            <label>
-              <input
-                type="checkbox"
-                name="dev"
-                checked={formData.category.dev}
-                onChange={() =>
-                  setFormData((prev) => ({
-                    ...prev,
-                    category: { ...prev.category, dev: !prev.category.dev },
-                  }))
-                }
-              />
-              Dev
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                name="uxui"
-                checked={formData.category.uxui}
-                onChange={() =>
-                  setFormData((prev) => ({
-                    ...prev,
-                    category: { ...prev.category, uxui: !prev.category.uxui },
-                  }))
-                }
-              />
-              UX/UI
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                name="graphic"
-                checked={formData.category.graphic}
-                onChange={() =>
-                  setFormData((prev) => ({
-                    ...prev,
-                    category: { ...prev.category, graphic: !prev.category.graphic },
-                  }))
-                }
-              />
-              Graphic
-            </label>
+            <input
+              type="radio"
+              id="complets"
+              name="category"
+              value="complets"
+              checked={formData.category === 'complets'}
+              onChange={handleInputChange}
+            />
+            <label htmlFor="complets">Complets</label>
+          </div>
+          <div>
+            <input
+              type="radio"
+              id="specifics"
+              name="category"
+              value="specifics"
+              checked={formData.category === 'specifics'}
+              onChange={handleInputChange}
+            />
+            <label htmlFor="specifics">Specifics</label>
+          </div>
+          <div>
+            <input
+              type="radio"
+              id="autre"
+              name="category"
+              value="autre"
+              checked={formData.category === 'autre'}
+              onChange={handleInputChange}
+            />
+            <label htmlFor="autre">Autre</label>
           </div>
         </div>
-
         <div className="my-10">
-          <h3>Seo settings:</h3>
-          <div className="grid">
-            <label htmlFor="seoTitle">Titre seo</label>
-            <input required name="seoTitle" value={formData.seoTitle} onChange={handleInputChange} />
-          </div>
-          <div className="grid">
-            <label htmlFor="seoDescription">Description seo</label>
-            <input required name="seoDescription" value={formData.seoDescription} onChange={handleInputChange} />
-          </div>
           <div className="grid">
             <label htmlFor="published">Published:</label>
             <div>
@@ -225,6 +201,27 @@ const EditServiceComponent: FC<EditServiceInterface> = ({ dataService, editServi
             </div>
           </div>
         </div>
+        <div className="mt-10">
+          <h3>Point List:</h3>
+          <div className="grid">
+            <label htmlFor="pointText">Point text:</label>
+            <input name="pointText" value={formData.pointText} onChange={handleInputChange} />
+            <button onClick={addPointToList}>Add point to list</button>
+          </div>
+          <div>
+            <p>Point List:</p>
+            <ul>
+              {formData.pointList.map((point, index) => (
+                <li className="flex justify-between" key={index}>
+                  <p>{point}</p>{' '}
+                  <button className="deleteBtn" onClick={() => deletePoint(index)}>
+                    Delete
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
         <button
           className={
             'text-cas-white-100 ' + submitStatus === 'idle'
@@ -240,6 +237,7 @@ const EditServiceComponent: FC<EditServiceInterface> = ({ dataService, editServi
           Update project
         </button>
       </form>
+
       {alertComponent()}
     </>
   )
