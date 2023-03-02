@@ -1,3 +1,4 @@
+import { IServiceInfo } from '@/pages/admin/services/[id]'
 import { IWorkInfo } from '@/pages/admin/works/[id]'
 import { FC, useState } from 'react'
 
