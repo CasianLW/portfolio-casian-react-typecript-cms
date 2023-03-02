@@ -115,6 +115,11 @@ const AddServiceComponent: FC<AddServiceInterface> = ({ getServicesList }) => {
       pointList: [...formData.pointList, formData.pointText],
     })
   }
+  const deletePoint = (index: number) => {
+    const newPoints = [...formData.pointList]
+    newPoints.splice(index, 1)
+    setFormData({ ...formData, pointList: newPoints })
+  }
   const alertComponent = () => {
     switch (submitStatus) {
       case 'submitting':
@@ -239,7 +244,12 @@ const AddServiceComponent: FC<AddServiceInterface> = ({ getServicesList }) => {
             <p>Point List:</p>
             <ul>
               {formData.pointList.map((point, index) => (
-                <li key={index}>{point}</li>
+                <li className="flex justify-between" key={index}>
+                  <p>{point}</p>{' '}
+                  <button className="deleteBtn" onClick={() => deletePoint(index)}>
+                    Delete
+                  </button>
+                </li>
               ))}
             </ul>
           </div>
