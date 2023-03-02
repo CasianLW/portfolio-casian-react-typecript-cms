@@ -112,7 +112,12 @@ const EditWorkComponent: FC<EditWorkInterface> = ({ dataWork, editWorkMethod }) 
   }
   return (
     <>
-      {/* <h2 className="secondary-title">Edit Work</h2> */}
+      {/* <style>{`
+        form input, form textarea {
+          background-color: red;
+        }
+      `}</style> */}
+      <h2 className="secondary-title">Edit Work</h2>
       <form className="mt-10 " onSubmit={handleSubmit}>
         {/* <h3>Ajouter un projet</h3> */}
         <div className="grid">
