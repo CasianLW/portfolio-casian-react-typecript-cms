@@ -12,22 +12,14 @@ interface Props {
   seo: Seo
 }
 export interface IServiceInfo {
-  seo: {
-    title: string
-    description: string
-  }
-  category: {
-    dev: boolean
-    uxui: boolean
-    graphic: boolean
-    all: boolean
-  }
-  _id: string
   title: string
-  slug: string
   description: string
   coverImage: string
-  secondaryImage: string
+  category: string
+  order: number
+  priceDetails: string
+  showPrice: boolean
+  points: string[]
   published: boolean
 }
 const ServiceInfoPage: NextPage<Props> = () => {
