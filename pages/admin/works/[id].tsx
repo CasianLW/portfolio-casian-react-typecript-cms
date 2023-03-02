@@ -32,11 +32,29 @@ import EditWorkComponent from '@/components/admin/works/editWorkComponent'
 interface Props {
   seo: Seo
 }
-
+export interface IWorkInfo {
+  seo: {
+    title: string
+    description: string
+  }
+  category: {
+    dev: boolean
+    uxui: boolean
+    graphic: boolean
+    all: boolean
+  }
+  _id: string
+  title: string
+  slug: string
+  description: string
+  coverImage: string
+  secondaryImage: string
+  published: boolean
+}
 const WorkInfoPage: NextPage<Props> = () => {
   const [loading, setLoading] = useState(true)
 
-  const [workInfos, setWorkInfos] = useState([])
+  const [workInfos, setWorkInfos] = useState<IWorkInfo>()
   const [submitStatus, setSubmitStatus] = useState<'submitting' | 'success' | 'error' | 'idle'>('idle')
 
   const router = useRouter()
@@ -103,12 +121,7 @@ const WorkInfoPage: NextPage<Props> = () => {
                 <h1>{workInfos.description}</h1>
                 <div className="col-span-1">modify form</div>
 
-                <EditWorkComponent
-                  id={id}
-                  editWorkMethod={function (): void {
-                    throw new Error('Function not implemented.')
-                  }}
-                />
+                <EditWorkComponent dataWork={workInfos} editWorkMethod={() => getWorkInfos()} />
               </section>
             )}
           </main>
