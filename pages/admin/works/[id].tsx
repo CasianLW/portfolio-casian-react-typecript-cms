@@ -12,6 +12,7 @@ import SeoComponent from '@/components/shared/seo-component'
 import handler from '@/pages/api/works'
 import { useRouter } from 'next/router'
 import { Seo } from '@/cas-types'
+import EditWorkComponent from '@/components/admin/works/editWorkComponent'
 
 // interface Props {
 //   work: IWork
@@ -101,6 +102,13 @@ const WorkInfoPage: NextPage<Props> = () => {
                 <h1>{workInfos.title}</h1>
                 <h1>{workInfos.description}</h1>
                 <div className="col-span-1">modify form</div>
+
+                <EditWorkComponent
+                  id={id}
+                  editWorkMethod={function (): void {
+                    throw new Error('Function not implemented.')
+                  }}
+                />
               </section>
             )}
           </main>
