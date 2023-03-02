@@ -81,16 +81,16 @@ const WorkInfoPage: NextPage<Props> = () => {
         <>
           <SeoComponent seo={{ title: 'Works CMS', description: 'Works: Ajouter, modifier et supprimer' }} />
           <header>
-            <h1 className="main-title">WorksCMS</h1>
+            <h1 className="main-title">
+              WorksCMS /
+              <span className="text-xl custom-gradient-primary bg-clip-text text-transparent">{workInfos?.title}</span>
+            </h1>
           </header>
           {/* {alertComponent()} */}
           <main className="admin-content">
             {workInfos ? (
               <section className="grid gap-4 grid-cols-1 md:grid-cols-1">
-                <h1>{workInfos.title}</h1>
-                <h1>{workInfos.description}</h1>
-                <div className="col-span-1">modify form</div>
-
+                {/* <h1>{workInfos.description}</h1> */}
                 <EditWorkComponent dataWork={workInfos} editWorkMethod={() => getWorkInfos()} />
               </section>
             ) : (
