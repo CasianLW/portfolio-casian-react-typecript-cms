@@ -2,8 +2,9 @@ import { FC, useState } from 'react'
 
 interface EditWorkInterface {
   editWorkMethod: () => void
+  id: string
 }
-const EditWorkComponent: FC<EditWorkInterface> = ({ editWorkMethod }) => {
+const EditWorkComponent: FC<EditWorkInterface> = ({ id, editWorkMethod }) => {
   const [formData, setFormData] = useState({
     seoTitle: '',
     seoDescription: '',
@@ -25,8 +26,8 @@ const EditWorkComponent: FC<EditWorkInterface> = ({ editWorkMethod }) => {
     event.preventDefault()
 
     setSubmitStatus('submitting')
-    const response = await fetch('/api/works/', {
-      method: 'POST',
+    const response = await fetch(`/api/works/${id}`, {
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
