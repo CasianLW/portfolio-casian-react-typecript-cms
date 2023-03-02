@@ -1,8 +1,6 @@
 import { Seo } from '@/cas-types'
 import AddServiceComponent from '@/components/admin/services/addServiceComponent'
 import ListServiceComponent from '@/components/admin/services/listServiceComponent'
-import AddWorkComponent from '@/components/admin/works/addWorkComponent'
-import ListWorkComponent from '@/components/admin/works/listWorkComponent'
 import AdminNavComponent, { AdminNavLinkEnum } from '@/components/nav/admin'
 import SeoComponent from '@/components/shared/seo-component'
 import { useAdminNavSettingsContext } from '@/context/admin-nav-settings-context'
