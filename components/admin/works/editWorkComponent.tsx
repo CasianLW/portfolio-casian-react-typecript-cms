@@ -21,7 +21,7 @@ const EditWorkComponent: FC<EditWorkInterface> = ({ dataWork, editWorkMethod }) 
     },
     published: dataWork.published,
   })
-  const [submitStatus, setSubmitStatus] = useState<'submitting' | 'success' | 'error' | 'idle'>('idle')
+  const [submitStatus, setSubmitStatus] = useState<'submitting' | 'success' | 'error' | 'idle' | 'changed'>('idle')
   const [messageText, setMessageText] = useState()
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -58,21 +58,21 @@ const EditWorkComponent: FC<EditWorkInterface> = ({ dataWork, editWorkMethod }) 
       setSubmitStatus('success')
       setMessageText(data.message)
       editWorkMethod()
-      setFormData({
-        seoTitle: '',
-        seoDescription: '',
-        title: '',
-        slug: '',
-        description: '',
-        imgLink: '',
-        secondaryImage: '',
-        category: {
-          dev: false,
-          uxui: false,
-          graphic: false,
-        },
-        published: false,
-      })
+      // setFormData({
+      //   seoTitle: '',
+      //   seoDescription: '',
+      //   title: '',
+      //   slug: '',
+      //   description: '',
+      //   imgLink: '',
+      //   secondaryImage: '',
+      //   category: {
+      //     dev: false,
+      //     uxui: false,
+      //     graphic: false,
+      //   },
+      //   published: false,
+      // })
       setTimeout(() => {
         setSubmitStatus('idle')
       }, 4000)
@@ -89,6 +89,8 @@ const EditWorkComponent: FC<EditWorkInterface> = ({ dataWork, editWorkMethod }) 
   }
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setSubmitStatus('changed')
+
     setFormData({
       ...formData,
       [event.target.name]: event.target.value,
@@ -217,7 +219,18 @@ const EditWorkComponent: FC<EditWorkInterface> = ({ dataWork, editWorkMethod }) 
             </div>
           </div>
         </div>
-        <button className="text-cas-white-100" type="submit">
+        <button
+          className={
+            'text-cas-white-100 ' + submitStatus === 'idle'
+              ? ' bg-opacity-50'
+              : submitStatus === 'submitting'
+              ? ' bg-opacity-100 bg-cas-gradient-purple'
+              : submitStatus === 'changed'
+              ? ' bg-opacity-100 bg-cas-white-100'
+              : ''
+          }
+          type="submit"
+        >
           Update project
         </button>
       </form>
