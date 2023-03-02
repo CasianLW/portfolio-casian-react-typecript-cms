@@ -8,21 +8,6 @@ import { useRouter } from 'next/router'
 import { Seo } from '@/cas-types'
 import EditWorkComponent from '@/components/admin/works/editWorkComponent'
 
-// interface Props {
-//   work: IWork
-// }
-
-// type Work = {
-//   _id: string
-//   title: string
-//   slug: string
-//   coverImage: string
-//   description: string
-// }
-
-// type WorkProps = {
-//   work: Work
-// }
 interface Props {
   seo: Seo
 }
@@ -84,9 +69,6 @@ const WorkInfoPage: NextPage<Props> = () => {
     }
   }
 
-  // function alertComponent() {
-  //   throw new Error('Function not implemented.')
-  // }
   useEffect(() => {
     if (router.query.id) {
       getWorkInfos()
