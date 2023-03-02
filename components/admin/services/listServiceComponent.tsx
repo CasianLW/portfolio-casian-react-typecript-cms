@@ -9,7 +9,7 @@ interface ListServiceInterface {
 }
 const ListServiceComponent: FC<ListServiceInterface> = ({ getServicesList, servicesList }) => {
   function getServicePass() {
-    console.log('test reload')
+    // console.log('test reload')
     getServicesList()
   }
 
@@ -82,7 +82,7 @@ const ServiceItem: FC<ServiceItemInterface> = ({ getServicesList, checkboxValue,
         {title} <br /> <span className="text-cas-white-300 text-xs">id:{id}</span>
       </p>
       <div>
-        <Link href={`${AdminNavLinkEnum.Services}/`} className={'text-green-300'} onClick={() => editService(id)}>
+        <Link href={`services/${id}`} className={'text-green-300'}>
           Edit
         </Link>
         <button onClick={() => deleteService()}>Delete</button>
