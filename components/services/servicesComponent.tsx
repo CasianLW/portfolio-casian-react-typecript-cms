@@ -1,6 +1,9 @@
 import { motion } from 'framer-motion'
 import { FC, useState } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
+import Contact from '@/pages/contact'
+import { getPathFromNavLink, NavLinkEnum } from '../nav'
 
 interface ServicesProps {
   title: string
@@ -54,7 +57,9 @@ const ServicesComponent: FC<ServicesProps> = ({ title, description, pointList, p
         transition={{ delay: 1 }}
         className="w-full bg-cas-black-600 bg-opacity-20 hover:bg-opacity-100 text-cas-black-600 hover:text-cas-white-100 p-3 mt-4 rounded-3xl"
       >
-        Contact me
+        <Link className="mr-auto" href={getPathFromNavLink(NavLinkEnum.Contact)}>
+          Contact me
+        </Link>
       </motion.button>
     </div>
   )
