@@ -1,6 +1,6 @@
 import { AdminNavLinkEnum } from '@/components/nav/admin'
 import Link from 'next/link'
-import { FC, MouseEvent, useEffect, useState } from 'react'
+import { FC, useState } from 'react'
 import DeleteConfirmComponent from '../shared/deleteConfirmComponent'
 
 interface ListServiceInterface {
@@ -17,7 +17,7 @@ const ListServiceComponent: FC<ListServiceInterface> = ({ getServicesList, servi
     <>
       <h2 className="secondary-title">Services List</h2>
 
-      <button onClick={() => getServicePass()}> test</button>
+      {/* <button onClick={() => getServicePass()}> test</button> */}
 
       <div className="mt-10">
         {Array.isArray(servicesList) &&
