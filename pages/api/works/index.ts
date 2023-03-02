@@ -44,8 +44,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       ) {
         return res.status(400).json({ success: false, message: 'Missing required fields in the request body' })
       }
-      if (!isNaN(slug)) {
-        return res.status(400).json({ success: false, message: 'Le slug ne peu pas être un nombre' })
+
+      if (slug && typeof slug === 'string' && slug.length === 24 && /^[a-f0-9]{24}$/i.test(slug)) {
+        return res.status(400).json({ success: false, message: 'Slug invalide, format non accepté' })
       }
       var slug = slugify(slug)
       if (await WorkModel.findOne({ slug: slug })) {
