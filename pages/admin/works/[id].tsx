@@ -112,13 +112,13 @@ const WorkInfoPage: NextPage<Props> = () => {
 
 export default WorkInfoPage
 
-interface ModifyWorkFormInterface {
-  title: string
-  children: string
-  picto: string
-  alt: string
-  textSpecial?: string
-}
+// interface ModifyWorkFormInterface {
+//   title: string
+//   children: string
+//   picto: string
+//   alt: string
+//   textSpecial?: string
+// }
 // const ModifyWorkForm: FC<ModifyWorkFormInterface> = ({ title, children, textSpecial, picto, alt }) => (
 //   <article className="card grid h-full content-start gap-6 bg-cwr-blue-800 ">
 //     <Image className="h-[40px] md:h-[50px]" src={picto} alt={alt} />
