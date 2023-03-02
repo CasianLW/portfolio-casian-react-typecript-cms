@@ -93,6 +93,9 @@
   .btn-filter-on {
     @apply link-active;
   }
+  .deleteBtn {
+    color: #fb4140;
+  }
   .custom-gradient-primary {
     background-image: linear-gradient(45deg, rgb(168, 197, 222) 0%, rgb(199, 157, 222) 100%);
   }
