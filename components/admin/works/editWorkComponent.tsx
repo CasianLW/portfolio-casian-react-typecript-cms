@@ -1,24 +1,25 @@
+import { IWorkInfo } from '@/pages/admin/works/[id]'
 import { FC, useState } from 'react'
 
 interface EditWorkInterface {
   editWorkMethod: () => void
-  id: string
+  dataWork: IWorkInfo
 }
-const EditWorkComponent: FC<EditWorkInterface> = ({ id, editWorkMethod }) => {
+const EditWorkComponent: FC<EditWorkInterface> = ({ dataWork, editWorkMethod }) => {
   const [formData, setFormData] = useState({
-    seoTitle: '',
-    seoDescription: '',
-    title: '',
-    slug: '',
-    description: '',
-    imgLink: '',
-    secondaryImage: '',
+    seoTitle: dataWork.seo.title,
+    seoDescription: dataWork.seo.description,
+    title: dataWork.title,
+    slug: dataWork.slug,
+    description: dataWork.description,
+    imgLink: dataWork.coverImage,
+    secondaryImage: dataWork.secondaryImage,
     category: {
-      dev: false,
-      uxui: false,
-      graphic: false,
+      dev: dataWork.category.dev,
+      uxui: dataWork.category.uxui,
+      graphic: dataWork.category.graphic,
     },
-    published: false,
+    published: dataWork.published,
   })
   const [submitStatus, setSubmitStatus] = useState<'submitting' | 'success' | 'error' | 'idle'>('idle')
   const [messageText, setMessageText] = useState()
@@ -26,7 +27,7 @@ const EditWorkComponent: FC<EditWorkInterface> = ({ id, editWorkMethod }) => {
     event.preventDefault()
 
     setSubmitStatus('submitting')
-    const response = await fetch(`/api/works/${id}`, {
+    const response = await fetch(`/api/works/${dataWork._id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
