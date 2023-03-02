@@ -101,7 +101,7 @@ const AddWorkComponent: FC<AddWorkInterface> = ({ getWorksList }) => {
       case 'error':
         return <div className="alert alert-danger text-cas-white-100">{messageText}</div>
       case 'idle':
-        return <div className="alert alert-danger text-cas-white-100">No error here</div>
+        return <div className="alert alert-danger text-cas-white-100"></div>
       default:
         return null
     }
