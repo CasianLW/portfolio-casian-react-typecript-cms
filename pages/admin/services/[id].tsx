@@ -21,6 +21,7 @@ export interface IServiceInfo {
   showPrice: boolean
   points: string[]
   published: boolean
+  _id: number
 }
 const ServiceInfoPage: NextPage<Props> = () => {
   // const [loading, setLoading] = useState(true)
