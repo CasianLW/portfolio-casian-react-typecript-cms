@@ -79,7 +79,6 @@ const WorksCMS: NextPage<Props> = () => {
         <header>
           <h1 className="main-title">WorksCMS</h1>
         </header>
-        {alertComponent()}
         <main className="admin-content">
           {loading ? ( // Conditional rendering based on the loading state
             <div>Loading works ...</div>
@@ -93,6 +92,7 @@ const WorksCMS: NextPage<Props> = () => {
               </div>
             </section>
           )}
+          {alertComponent()}
 
           {/* <section className="grid gap-4 grid-cols-1 md:grid-cols-2">
             <div className="col-span-1">
