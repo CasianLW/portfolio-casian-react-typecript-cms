@@ -1,15 +1,9 @@
-import type { NextPage, GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next'
-import Link from 'next/link'
-import Image from 'next/image'
+import type { NextPage } from 'next'
 
-import { FC, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
-import { ParsedUrlQuery } from 'querystring'
-import WorkModel from '@/utils/mongodb/work.model'
-import { IWork } from '@/@types/work'
 import AdminLayoutComponent from '@/layout/admin'
 import SeoComponent from '@/components/shared/seo-component'
-import handler from '@/pages/api/works'
 import { useRouter } from 'next/router'
 import { Seo } from '@/cas-types'
 import EditWorkComponent from '@/components/admin/works/editWorkComponent'
