@@ -42,6 +42,8 @@ const ProjectComponent: FC<ProjectProps> = ({
           className="w-[80vw]"
           src={imageRef}
           alt={`${title} art work`}
+          // loading="lazy"
+          sizes="(max-width: 640px) 340px,(min-width: 640px) 340px, (min-width: 1024px) 64px, (min-width: 1289px) 746px, (min-width: 1744px) 896px"
         ></Image>
       </Link>
     </motion.div>
