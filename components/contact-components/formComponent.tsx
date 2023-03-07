@@ -24,6 +24,16 @@ const ContactComponent: FC = () => {
     const { name, value } = event.target
     setFormValues({ ...formValues, [name]: value })
   }
+  const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    const { name, checked } = event.target
+    let selectedValues = formValues.sujet.split(' / ')
+    if (checked) {
+      selectedValues.push(name)
+    } else {
+      selectedValues = selectedValues.filter((value) => value !== name)
+    }
+    setFormValues({ ...formValues, sujet: selectedValues.join(' / ') })
+  }
 
   const resetMessage = () => {
     setMessage('')
@@ -90,14 +100,35 @@ const ContactComponent: FC = () => {
         />
       </fieldset>
       <fieldset>
-        <input
-          required
-          type="text"
-          placeholder="Sujet*"
-          name="sujet"
-          value={formValues.sujet}
-          onChange={handleInputChange}
-        />
+        <div>Comment puis-je vous aider?</div>
+
+        <div className="flex flex-wrap w-fit  py-2 gap-y-4 gap-x-6">
+          <Checkbox
+            name={'UX/UI Design'}
+            checked={formValues.sujet.split(' / ').includes('UX/UI Design')}
+            onChange={handleCheckboxChange}
+          />
+          <Checkbox
+            name={'Fullstack Dev'}
+            checked={formValues.sujet.split(' / ').includes('Fullstack Dev')}
+            onChange={handleCheckboxChange}
+          />
+          <Checkbox
+            name={'Création site internet'}
+            checked={formValues.sujet.split(' / ').includes('Création site internet')}
+            onChange={handleCheckboxChange}
+          />
+          <Checkbox
+            name={'Strategy & consulting'}
+            checked={formValues.sujet.split(' / ').includes('Strategy & consulting')}
+            onChange={handleCheckboxChange}
+          />
+          <Checkbox
+            name={'Autre'}
+            checked={formValues.sujet.split(' / ').includes('Autre')}
+            onChange={handleCheckboxChange}
+          />
+        </div>
       </fieldset>
       <fieldset>
         <textarea
@@ -122,3 +153,28 @@ const ContactComponent: FC = () => {
 }
 
 export default ContactComponent
+
+interface CheckboxProps {
+  name: string
+  checked: boolean
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void
+}
+
+const Checkbox: FC<CheckboxProps> = ({ name, checked, onChange }) => {
+  return (
+    <label
+      className={`w-fit custom-checkbox-shadow font-semibold text-sm sm:text-base cursor-pointer ${
+        checked ? ' underline underline-offset-2' : ''
+      }`}
+    >
+      <input
+        className="px-2  mr-2 pt-1 pb-1 border-2 rounded-md cursor-pointer border-cas-black-600"
+        type="checkbox"
+        name={name}
+        checked={checked}
+        onChange={onChange}
+      />
+      {name}
+    </label>
+  )
+}
