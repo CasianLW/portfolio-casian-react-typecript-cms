@@ -28,10 +28,11 @@ const Contact: NextPage<Props> = ({ seo }) => {
   return (
     <>
       <SeoComponent seo={seo} />
-      <header className="top-header lateral-space">
-        <h1 className="main-title">CONTACT</h1>
-        <p>Hésitez pas a nous contacter pour toute question, notre formulaire est la pour ca !</p>
-        <section className=" grid md:grid-cols-2">
+      <header className="top-header lateral-space grid sm:grid-cols-2">
+        <section>
+          <h1 className="main-title">CONTACT</h1>
+          <p className="w-2/3">Hésitez pas a nous contacter pour toute question, notre formulaire est la pour ca !</p>
+
           <div>
             <div className="grid">
               <a href="tel:+">
@@ -41,9 +42,6 @@ const Contact: NextPage<Props> = ({ seo }) => {
                 <u>contact@casian.fr</u>
               </a>
             </div>
-            <ContectComponent />
-          </div>
-          <div>
             <Image
               src={profilePicture}
               className="max-w-[50%] m-auto"
@@ -53,6 +51,15 @@ const Contact: NextPage<Props> = ({ seo }) => {
               // blurDataURL="data:..." automatically provided
               placeholder="blur" // Optional blur-up while loading
             />
+          </div>
+        </section>
+        <section className=" -mt-20 sm:mt-12 bg-cas-white-100 text-cas-black-600 p-10 rounded-[32px]">
+          <div>
+            <h2 className="text-xl sm:text-3xl font-bold mb-5">
+              Vous avez des idées, un projet? J&apos;ai les compétences, travaillons ensemble.
+            </h2>
+
+            <ContectComponent />
           </div>
         </section>
       </header>
