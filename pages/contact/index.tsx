@@ -1,4 +1,4 @@
-import { profilePicture } from '@/assets/shared'
+import { githubLogo, linkedinLogo, profilePicture } from '@/assets/shared'
 import { Seo } from '@/cas-types'
 import ContectComponent from '@/components/contact-components/formComponent'
 import NavComponent, { NavLinkEnum } from '@/components/nav'
@@ -7,6 +7,7 @@ import { useNavSettingsContext } from '@/context/nav-settings-context'
 import { getPageSeoBySlug } from '@/utils/content-api'
 import { GetStaticProps, NextPage } from 'next'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useEffect } from 'react'
 
 interface Props {
@@ -31,29 +32,61 @@ const Contact: NextPage<Props> = ({ seo }) => {
       <header className="top-header lateral-space grid sm:grid-cols-2">
         <section>
           <h1 className="main-title">CONTACT</h1>
-          <p className="w-2/3">Hésitez pas a nous contacter pour toute question, notre formulaire est la pour ca !</p>
+          <p className="sm:w-2/3 my-5">
+            Hésitez pas a nous contacter pour toute question, notre formulaire est la pour ca !
+          </p>
 
-          <div>
-            <div className="grid">
-              <a href="tel:+">
-                <u>Tel.+33 (0)7 83 41 57 55</u>
-              </a>
-              <a href="mailto:">
-                <u>contact@casian.fr</u>
-              </a>
+          {typeof window !== 'undefined' && window.innerWidth > 640 && (
+            <div>
+              <div className="grid grid-cols-2 sm:grid-cols-1">
+                <div className="grid">
+                  <a className="py-3" href="tel:+">
+                    <u>Tel.+33 (0)7 83 41 57 55</u>
+                  </a>
+                  <a className="py-3" href="mailto:">
+                    <u>contact@casian.fr</u>
+                  </a>
+                </div>
+                <div className="flex my-auto gap-8 justify-center sm:justify-start">
+                  <Link className="w-fit" target="_blank" href={'https://www.linkedin.com/in/casianc/'}>
+                    <Image
+                      src={linkedinLogo}
+                      className=" m-auto"
+                      alt="Logo linkedIn"
+                      width={44}
+                      height={44}
+                      // blurDataURL="data:..." automatically provided
+                    />
+                    <p className="text-sm">LinkedIn</p>
+                  </Link>
+                  <Link className="w-fit" target="_blank" href={'https://github.com/CasianLW'}>
+                    <div className="w-11 h-11 rounded-xl bg-cas-white-100 flex justify-center">
+                      <Image
+                        src={githubLogo}
+                        className="m-auto "
+                        alt="Logo linkedIn"
+                        width={36}
+                        height={36}
+                        // blurDataURL="data:..." automatically provided
+                      />
+                    </div>
+                    <p className="text-sm">GitHub</p>
+                  </Link>
+                </div>
+              </div>
+              <Image
+                src={profilePicture}
+                className="max-w-[50%] m-auto mt-10"
+                alt="Casian Ciorba Image UX UI Designer et Fullstack Mobile Developer"
+                width={500}
+                height={500}
+                // blurDataURL="data:..." automatically provided
+                placeholder="blur" // Optional blur-up while loading
+              />
             </div>
-            <Image
-              src={profilePicture}
-              className="max-w-[50%] m-auto"
-              alt="Casian Ciorba Image UX UI Designer et Fullstack Mobile Developer"
-              width={500}
-              height={500}
-              // blurDataURL="data:..." automatically provided
-              placeholder="blur" // Optional blur-up while loading
-            />
-          </div>
+          )}
         </section>
-        <section className=" -mt-20 sm:mt-12 bg-cas-white-100 text-cas-black-600 p-10 rounded-[32px]">
+        <section className=" mx-[-5vw] sm:mx-0 -mt-20 sm:mt-12 bg-cas-white-100 text-cas-black-600 p-10 rounded-[32px]">
           <div>
             <h2 className="text-xl sm:text-3xl font-bold mb-5">
               Vous avez des idées, un projet? J&apos;ai les compétences, travaillons ensemble.
