@@ -80,6 +80,7 @@ const ContactComponent: FC = () => {
     <form id="contact" onSubmit={sendEmail}>
       <fieldset>
         <input
+          className="form-typespaces"
           required
           type="text"
           placeholder="Nom* "
@@ -91,6 +92,7 @@ const ContactComponent: FC = () => {
       </fieldset>
       <fieldset>
         <input
+          className="form-typespaces"
           required
           type="email"
           placeholder="Adresse mail*"
@@ -99,8 +101,8 @@ const ContactComponent: FC = () => {
           onChange={handleInputChange}
         />
       </fieldset>
-      <fieldset>
-        <div>Comment puis-je vous aider?</div>
+      <fieldset className="my-5">
+        <h3 className="font-bold">Comment puis-je vous aider?</h3>
 
         <div className="flex flex-wrap w-fit  py-2 gap-y-4 gap-x-6">
           <Checkbox
@@ -131,7 +133,10 @@ const ContactComponent: FC = () => {
         </div>
       </fieldset>
       <fieldset>
+        <h3 className="font-bold mt-2">Parlez moi de votre projet:</h3>
+
         <textarea
+          className="form-typespaces h-24 "
           required
           placeholder="Message..."
           name="message"
@@ -143,7 +148,12 @@ const ContactComponent: FC = () => {
         {/* <button type="submit" id="contact-submit">
           Envoyer
         </button> */}
-        <button type="submit" id="contact-submit" disabled={!isFormComplete || isLoading}>
+        <button
+          className={`primary-btn-black disabled:!cursor-not-allowed disabled:bg-cas-white-300 disabled:hover:bg-none `}
+          type="submit"
+          id="contact-submit"
+          disabled={!isFormComplete || isLoading}
+        >
           {isLoading ? 'En cours...' : 'Envoyer'}
         </button>
       </fieldset>
