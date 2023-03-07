@@ -102,4 +102,16 @@
   .custom-gradient-secondary {
     background-image: linear-gradient(45deg, rgb(245, 216, 164) 0%, rgb(176, 134, 118) 100%);
   }
+  .custom-checkbox-shadow input {
+    box-shadow: 2px 2px;
+    -webkit-appearance: none;
+    line-height: 1;
+  }
+  .custom-checkbox-shadow input::after {
+    content: 'X';
+    opacity: 0;
+  }
+  .custom-checkbox-shadow input:checked::after {
+    opacity: 1;
+  }
 } ;
