@@ -95,7 +95,7 @@ const Contact: NextPage<Props> = ({ seo }) => {
             />
           </div>
         </section>
-        <section className="mb-10 sm:mb-0 mx-[-5vw] sm:mx-0 -mt-20 sm:mt-12 bg-cas-white-100 text-cas-black-600 p-10 rounded-[32px]">
+        <section className="mb-10 h-fit sm:mb-0 mx-[-5vw] sm:mx-0 -mt-20 sm:mt-12 bg-cas-white-100 text-cas-black-600 p-10 rounded-[32px]">
           <div>
             <h2 className="text-xl sm:text-3xl font-bold mb-5">
               Vous avez des idées, un projet? J&apos;ai les compétences, travaillons ensemble.
