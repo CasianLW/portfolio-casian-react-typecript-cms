@@ -1,4 +1,6 @@
+import ServicesComponent from '@/components/services/servicesComponent'
 import { IServiceInfo } from '@/pages/admin/services/[id]'
+import { CldImage } from 'next-cloudinary'
 import { FC, useState } from 'react'
 
 interface EditServiceInterface {
@@ -105,138 +107,156 @@ const EditServiceComponent: FC<EditServiceInterface> = ({ dataService, editServi
         }
       `}</style> */}
       <h2 className="secondary-title">Edit Service</h2>
-      <form className="mt-10 " onSubmit={handleSubmit}>
-        {/* <h3>Ajouter un projet</h3> */}
-        <div className="grid">
-          <label htmlFor="title">Title</label>
-          <input required type="text" name="title" value={formData.title} onChange={handleInputChange} />
-        </div>
-        <div className="grid">
-          <label htmlFor="priceDetails">Price details</label>
-          <input required type="text" name="priceDetails" value={formData.priceDetails} onChange={handleInputChange} />
-        </div>
-        <div className="grid">
-          <label htmlFor="showPrice">Show price:</label>
-          <div>
-            <input
-              type={'checkbox'}
-              name="showPrice"
-              checked={formData.showPrice}
-              onChange={(event) =>
-                setFormData({
-                  ...formData,
-                  showPrice: event.target.checked,
-                })
-              }
-            />
-            <span className="text-cas-white-100">{formData.showPrice ? 'Yes' : 'No'}</span>
-          </div>
-        </div>
-        <div className="grid">
-          <label htmlFor="description">Description</label>
-          <textarea
-            className="text-cas-black-600"
-            required
-            name="description"
-            value={formData.description}
-            onChange={handleInputChange}
+      <section className="grid sm:grid-cols-2">
+        <div className="w-[200%]">
+          <ServicesComponent
+            title={formData.title}
+            description={formData.description}
+            activePrice={formData.showPrice}
+            coverImage={formData.imgLink}
+            price={formData.priceDetails}
+            pointList={formData.pointList}
           />
         </div>
-        <div className="grid">
-          <label htmlFor="imgLink">Lien image</label>
-          <input required name="imgLink" value={formData.imgLink} onChange={handleInputChange} />
-        </div>
-        <div className="grid">
-          <label htmlFor="category">Category:</label>
-          <div>
-            <input
-              type="radio"
-              id="complets"
-              name="category"
-              value="complets"
-              checked={formData.category === 'complets'}
-              onChange={handleInputChange}
-            />
-            <label htmlFor="complets">Complets</label>
-          </div>
-          <div>
-            <input
-              type="radio"
-              id="specifics"
-              name="category"
-              value="specifics"
-              checked={formData.category === 'specifics'}
-              onChange={handleInputChange}
-            />
-            <label htmlFor="specifics">Specifics</label>
-          </div>
-          <div>
-            <input
-              type="radio"
-              id="autre"
-              name="category"
-              value="autre"
-              checked={formData.category === 'autre'}
-              onChange={handleInputChange}
-            />
-            <label htmlFor="autre">Autre</label>
-          </div>
-        </div>
-        <div className="my-10">
+        <form className="mt-10 " onSubmit={handleSubmit}>
+          {/* <h3>Ajouter un projet</h3> */}
           <div className="grid">
-            <label htmlFor="published">Published:</label>
+            <label htmlFor="title">Title</label>
+            <input required type="text" name="title" value={formData.title} onChange={handleInputChange} />
+          </div>
+          <div className="grid">
+            <label htmlFor="priceDetails">Price details</label>
+            <input
+              required
+              type="text"
+              name="priceDetails"
+              value={formData.priceDetails}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="grid">
+            <label htmlFor="showPrice">Show price:</label>
             <div>
               <input
                 type={'checkbox'}
-                name="published"
-                checked={formData.published}
+                name="showPrice"
+                checked={formData.showPrice}
                 onChange={(event) =>
                   setFormData({
                     ...formData,
-                    published: event.target.checked,
+                    showPrice: event.target.checked,
                   })
                 }
               />
-              <span className="text-cas-white-100">{formData.published ? 'Yes' : 'No'}</span>
+              <span className="text-cas-white-100">{formData.showPrice ? 'Yes' : 'No'}</span>
             </div>
           </div>
-        </div>
-        <div className="mt-10">
-          <h3>Point List:</h3>
           <div className="grid">
-            <label htmlFor="pointText">Point text:</label>
-            <input name="pointText" value={formData.pointText} onChange={handleInputChange} />
-            <button onClick={addPointToList}>Add point to list</button>
+            <label htmlFor="description">Description</label>
+            <textarea
+              className="text-cas-black-600"
+              required
+              name="description"
+              value={formData.description}
+              onChange={handleInputChange}
+            />
           </div>
-          <div>
-            <p>Point List:</p>
-            <ul>
-              {formData.pointList.map((point, index) => (
-                <li className="flex justify-between" key={index}>
-                  <p>{point}</p>{' '}
-                  <button className="deleteBtn" onClick={() => deletePoint(index)}>
-                    Delete
-                  </button>
-                </li>
-              ))}
-            </ul>
+          <div className="grid">
+            <label htmlFor="imgLink">Lien image</label>
+            <input required name="imgLink" value={formData.imgLink} onChange={handleInputChange} />
           </div>
-        </div>
-        <button
-          className={
-            'text-cas-white-100 ' + submitStatus === 'idle'
-              ? ' bg-opacity-50'
-              : submitStatus === 'submitting'
-              ? ' bg-opacity-100 bg-cas-gradient-purple'
-              : submitStatus === 'changed'
-              ? ' bg-opacity-100 bg-cas-white-100'
-              : ''
-          }
-          type="submit"
-        >
-          Update project
-        </button>
-      </form>
+          <div className="my-10 grid grid-cols-2">
+            <div className="grid">
+              <label htmlFor="category">Category:</label>
+              <div>
+                <input
+                  type="radio"
+                  id="complets"
+                  name="category"
+                  value="complets"
+                  checked={formData.category === 'complets'}
+                  onChange={handleInputChange}
+                />
+                <label htmlFor="complets">Complets</label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  id="specifics"
+                  name="category"
+                  value="specifics"
+                  checked={formData.category === 'specifics'}
+                  onChange={handleInputChange}
+                />
+                <label htmlFor="specifics">Specifics</label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  id="autre"
+                  name="category"
+                  value="autre"
+                  checked={formData.category === 'autre'}
+                  onChange={handleInputChange}
+                />
+                <label htmlFor="autre">Autre</label>
+              </div>
+            </div>
+            <div className="grid">
+              <label htmlFor="published">Published:</label>
+              <div>
+                <input
+                  type={'checkbox'}
+                  name="published"
+                  checked={formData.published}
+                  onChange={(event) =>
+                    setFormData({
+                      ...formData,
+                      published: event.target.checked,
+                    })
+                  }
+                />
+                <span className="text-cas-white-100">{formData.published ? 'Yes' : 'No'}</span>
+              </div>
+            </div>
+          </div>
+          <div className="mt-10">
+            <h3>Point List:</h3>
+            <div className="grid">
+              <label htmlFor="pointText">Point text:</label>
+              <input name="pointText" value={formData.pointText} onChange={handleInputChange} />
+              <button onClick={addPointToList}>Add point to list</button>
+            </div>
+            <div>
+              <p>Point List:</p>
+              <ul>
+                {formData.pointList.map((point, index) => (
+                  <li className="flex justify-between" key={index}>
+                    <p>{point}</p>{' '}
+                    <button className="deleteBtn" onClick={() => deletePoint(index)}>
+                      Delete
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+          <button
+            className={
+              'text-cas-white-100 ' + submitStatus === 'idle'
+                ? ' bg-opacity-50'
+                : submitStatus === 'submitting'
+                ? ' bg-opacity-100 bg-cas-gradient-purple'
+                : submitStatus === 'changed'
+                ? ' bg-opacity-100 bg-cas-white-100'
+                : ''
+            }
+            type="submit"
+          >
+            Update project
+          </button>
+        </form>
+      </section>
 
       {alertComponent()}
     </>
