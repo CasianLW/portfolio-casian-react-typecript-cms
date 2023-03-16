@@ -1,11 +1,22 @@
 import { IWorkInfo } from '@/pages/admin/works/[id]'
 import { FC, useState } from 'react'
+import { CldImage, CldUploadButton } from 'next-cloudinary'
 
 interface EditWorkInterface {
   editWorkMethod: () => void
   dataWork: IWorkInfo
 }
 const EditWorkComponent: FC<EditWorkInterface> = ({ dataWork, editWorkMethod }) => {
+  interface ICloudinaryUploadResult {
+    event: boolean
+    info: {
+      public_id: string
+    }
+  }
+  interface ICloudinaryWidget {
+    close: () => void
+  }
+
   const [formData, setFormData] = useState({
     seoTitle: dataWork.seo.title,
     seoDescription: dataWork.seo.description,
@@ -110,6 +121,27 @@ const EditWorkComponent: FC<EditWorkInterface> = ({ dataWork, editWorkMethod }) 
         return null
     }
   }
+
+  const uploadedCloudinary = (result: ICloudinaryUploadResult, widget: ICloudinaryWidget) => {
+    console.log('cloudinary working')
+    if (result.info) {
+      result.info &&
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          imgLink: result.info.public_id,
+        }))
+    }
+  }
+  const uploadedCloudinarySecondary = (result: ICloudinaryUploadResult, widget: ICloudinaryWidget) => {
+    console.log('cloudinary working')
+    if (result.info) {
+      result.info &&
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          secondaryImage: result.info.public_id,
+        }))
+    }
+  }
   return (
     <>
       {/* <style>{`
@@ -140,12 +172,42 @@ const EditWorkComponent: FC<EditWorkInterface> = ({ dataWork, editWorkMethod }) 
         </div>
         <div className="grid">
           <label htmlFor="imgLink">Lien image</label>
-          <input required name="imgLink" value={formData.imgLink} onChange={handleInputChange} />
+          {/* <input required name="imgLink" value={formData.imgLink} onChange={handleInputChange} /> */}
+          <input
+            disabled
+            placeholder="Primary Image link will display here..."
+            required
+            name="imgLink"
+            value={formData.imgLink}
+            onChange={handleInputChange}
+          />
+          {formData.imgLink && (
+            <CldImage width="600" height="600" src={formData.imgLink} alt="Description of my image" />
+          )}
+          <CldUploadButton
+            onUpload={uploadedCloudinarySecondary}
+            uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET}
+          />
         </div>
 
         <div className="grid">
           <label htmlFor="secondaryImage">Secondary Image</label>
-          <input required name="secondaryImage" value={formData.secondaryImage} onChange={handleInputChange} />
+          {/* <input required name="secondaryImage" value={formData.secondaryImage} onChange={handleInputChange} /> */}
+          <input
+            disabled
+            placeholder="Secondary Image link will display here..."
+            required
+            name="secondaryImage"
+            value={formData.secondaryImage}
+            onChange={handleInputChange}
+          />
+          {formData.secondaryImage && (
+            <CldImage priority width="600" height="600" src={formData.secondaryImage} alt="Description of my image" />
+          )}
+          <CldUploadButton
+            onUpload={uploadedCloudinarySecondary}
+            uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET}
+          />
         </div>
 
         <div className="grid">
