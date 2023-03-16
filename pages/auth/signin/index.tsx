@@ -29,7 +29,7 @@ export const SigninPage: NextPage = () => {
           const { error } = await response.json()
           throw new Error(error)
         }
-      } catch (error: string) {
+      } catch (error: string | any) {
         setError(error)
         console.log('ca marche pas :(', error)
       }
