@@ -1,3 +1,5 @@
+import { CldImage, CldUploadButton } from 'next-cloudinary'
+
 import { FC, useState } from 'react'
 
 interface AddServiceInterface {
@@ -13,6 +15,16 @@ interface AddServiceInterface {
   // pointList: string[]
 }
 const AddServiceComponent: FC<AddServiceInterface> = ({ getServicesList }) => {
+  interface ICloudinaryUploadResult {
+    event: boolean
+    info: {
+      public_id: string
+    }
+  }
+  interface ICloudinaryWidget {
+    close: () => void
+  }
+
   interface FormDataType {
     title: string
     priceDetails: string
@@ -36,7 +48,7 @@ const AddServiceComponent: FC<AddServiceInterface> = ({ getServicesList }) => {
     pointList: [],
   })
   const [submitStatus, setSubmitStatus] = useState<'submitting' | 'success' | 'error' | 'idle'>('idle')
-  const [messageText, setMessageText] = useState()
+  const [messageText, setMessageText] = useState('')
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
@@ -134,6 +146,24 @@ const AddServiceComponent: FC<AddServiceInterface> = ({ getServicesList }) => {
         return null
     }
   }
+  const uploadedCloudinary = (result: ICloudinaryUploadResult, widget: ICloudinaryWidget) => {
+    console.log('cloudinary working')
+    if (result.info) {
+      result.info &&
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          imgLink: result.info.public_id,
+        }))
+    }
+  }
+
+  // function handleUploadSuccess(
+  //   eventData: CldWidgetEvent & { info: { url: string } },
+  //   uploadResult: { public_id: string }
+  // ): void {
+  //   console.log('Image uploaded successfully:', eventData, uploadResult)
+  // }
+
   return (
     <>
       <h2 className="secondary-title">Add new Service</h2>
@@ -176,7 +206,25 @@ const AddServiceComponent: FC<AddServiceInterface> = ({ getServicesList }) => {
         </div>
         <div className="grid">
           <label htmlFor="imgLink">Lien image</label>
-          <input required name="imgLink" value={formData.imgLink} onChange={handleInputChange} />
+          <input
+            disabled
+            placeholder="Image link will display here..."
+            required
+            name="imgLink"
+            value={formData.imgLink}
+            onChange={handleInputChange}
+          />
+          {formData.imgLink && (
+            <CldImage width="600" height="600" src={formData.imgLink} alt="Description of my image" />
+          )}
+          <CldUploadButton
+            onUpload={uploadedCloudinary}
+            uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET}
+          />
+          {/* <CldUploadButton
+            // onSuccess={handleUploadSuccess}
+            uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET}
+          /> */}
         </div>
         <div className="grid">
           <label htmlFor="category">Category:</label>

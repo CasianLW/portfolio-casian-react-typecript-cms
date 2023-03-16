@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import Contact from '@/pages/contact'
 import { getPathFromNavLink, NavLinkEnum } from '../nav'
+import { CldImage } from 'next-cloudinary'
 
 interface ServicesProps {
   title: string
@@ -21,14 +22,25 @@ const ServicesComponent: FC<ServicesProps> = ({ title, description, pointList, p
   return (
     <div className="bg-cas-white-100 text-cas-black-600 p-2 rounded-[32px] h-fit w-full md:w-[30%] ">
       <div className="grid rounded-3xl overflow-clip h-40">
-        <Image
+        {/* <Image
           priority={true}
           width={300}
           height={225}
           className="stack-item w-full"
           src={coverImage}
           alt={title}
-        ></Image>
+        ></Image> */}
+        {coverImage && (
+          <CldImage
+            priority={true}
+            className="stack-item w-full"
+            width="600"
+            height="600"
+            src={coverImage}
+            alt={title}
+            sizes="(min-width: 1280px) 480px, (min-width: 1024px) 382px, (min-width: 768px) 285px, calc(100vw - 48px - 60px)"
+          />
+        )}
         <div className="stack-item pt-20 pl-3 font-semibold leading-8 text-[44px] capitalize text-white">
           # <br />
           {designWork}
