@@ -29,6 +29,7 @@ const ListServiceComponent: FC<ListServiceInterface> = ({ getServicesList, servi
                 title={service.title}
                 id={service._id}
                 getServicesList={getServicesList}
+                showPrice={service.showPrice}
               />
             )
           })}
@@ -41,25 +42,29 @@ export default ListServiceComponent
 
 interface ServiceItemInterface {
   checkboxValue: boolean
+  showPrice: boolean
   title: string
   id: number
   getServicesList: () => void
 }
-const ServiceItem: FC<ServiceItemInterface> = ({ getServicesList, checkboxValue, title, id }) => {
+const ServiceItem: FC<ServiceItemInterface> = ({ getServicesList, checkboxValue, title, id, showPrice }) => {
   const [activeDelete, setActiveDelete] = useState(false)
   const [isChecked, setIsChecked] = useState<boolean>(checkboxValue)
+  const [isPriceChecked, setIsPriceChecked] = useState<boolean>(showPrice)
 
-  const checkboxUpdate = async (id: number) => {
+  const checkboxUpdate = async (id: number, priceMethod: boolean = false) => {
     try {
+      const key = priceMethod ? 'showPrice' : 'published'
+      console.log(key)
       const response = await fetch(`/api/services/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ published: !isChecked }),
+        body: JSON.stringify({ [key]: priceMethod ? !isPriceChecked : !isChecked }),
       })
       if (response.ok) {
-        setIsChecked(!isChecked)
+        priceMethod ? setIsPriceChecked(!isPriceChecked) : setIsChecked(!isChecked)
       }
     } catch (error: any) {
       console.log(error)
@@ -89,16 +94,21 @@ const ServiceItem: FC<ServiceItemInterface> = ({ getServicesList, checkboxValue,
 
   return (
     <div className="flex w-full max-w-md justify-between pr-3">
-      <label htmlFor={`published-${id}`}>
-        <input
-          id={`published-${id}`}
-          name="published"
-          type="checkbox"
-          checked={isChecked}
-          onChange={() => checkboxUpdate(id)}
-        />
-        <span>{isChecked ? 'Public' : 'Private'}</span>
-      </label>
+      <div>
+        <label htmlFor={`published-${id}`}>
+          <input id={`published-${id}`} type="checkbox" checked={isChecked} onChange={() => checkboxUpdate(id)} />
+          <span>{isChecked ? 'Public' : 'Private'}</span>
+        </label>
+        <label htmlFor={`price-${id}`}>
+          <input
+            id={`price-${id}`}
+            type="checkbox"
+            checked={isPriceChecked}
+            onChange={() => checkboxUpdate(id, true)}
+          />
+          <span>{isPriceChecked ? 'ON' : 'OFF'}</span>
+        </label>
+      </div>
       <p>
         {title} <br /> <span className="text-cas-white-300 text-xs">id:{id}</span>
       </p>
