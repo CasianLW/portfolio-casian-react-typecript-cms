@@ -1,4 +1,5 @@
 import { AdminNavLinkEnum } from '@/components/nav/admin'
+import { limitTitle } from '@/utils/toolbox'
 import Link from 'next/link'
 import { FC, MouseEvent, useEffect, useState } from 'react'
 import { text } from 'stream/consumers'
@@ -160,19 +161,27 @@ const WorkItem: FC<WorkItemInterface> = ({ getWorksList, checkboxValue, title, i
   }
 
   return (
-    <div className="flex w-full max-w-md justify-between pr-3 cms-list-item">
-      <label htmlFor={`w-published-${id}`}>
-        <input id={`w-published-${id}`} type="checkbox" checked={isChecked} onChange={() => checkboxUpdate(slug)} />
+    <div className="flex  w-full max-w-md justify-between pr-3 cms-list-item">
+      <label className="items-center flex self-start" htmlFor={`w-published-${id}`}>
+        <input
+          className="accent-cas-gradient-purple"
+          id={`w-published-${id}`}
+          type="checkbox"
+          checked={isChecked}
+          onChange={() => checkboxUpdate(slug)}
+        />
         <span>{isChecked ? 'Public' : 'Private'}</span>
       </label>
-      <p>
-        {title} <br /> <span className="text-cas-white-300 text-xs">id:{id}</span>
+      <p className="px-1">
+        {limitTitle(title, 14)} <br /> <span className="text-cas-white-300 text-xs">id:{id}</span>
       </p>
-      <div>
-        <Link href={`works/${id}`} className={'text-green-300'}>
+      <div className="grid">
+        <Link href={`works/${id}`} className={'text-green-300 py-1'}>
           Edit
         </Link>
-        <button onClick={() => deleteWork()}>Delete</button>
+        <a className="text-red-400 py-1" onClick={() => deleteWork()}>
+          Delete
+        </a>
       </div>
       <DeleteConfirmComponent
         active={activeDelete}
