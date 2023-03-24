@@ -77,7 +77,7 @@ const WorkInfoPage: NextPage<Props> = () => {
 
   return (
     <>
-      <AdminLayoutComponent session={null}>
+      <AdminLayoutComponent>
         <>
           <SeoComponent seo={{ title: 'Works CMS', description: 'Works: Ajouter, modifier et supprimer' }} />
           <header>

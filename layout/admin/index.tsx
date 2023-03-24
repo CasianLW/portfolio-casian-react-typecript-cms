@@ -7,7 +7,7 @@ import AdminNavComponent from '@/components/nav/admin'
 
 interface Props {
   children: JSX.Element
-  session: Session | null
+  session?: Session | null
 }
 
 const AdminLayoutComponent: FC<Props> = ({ children, session }) => {
