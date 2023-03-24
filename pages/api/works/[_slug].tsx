@@ -2,8 +2,8 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { dbConnect } from '@/utils/mongodb/db-connect'
 import WorkModel from '@/utils/mongodb/work.model'
 import { authOptions } from '@/pages/api/auth/[...nextauth]'
-
 import { getServerSession } from 'next-auth/next'
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const session = await getServerSession(req, res, authOptions)
   if (req.method === 'POST' || req.method === 'PUT' || req.method === 'DELETE') {
