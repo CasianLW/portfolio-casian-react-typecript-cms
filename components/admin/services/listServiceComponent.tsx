@@ -47,8 +47,23 @@ interface ServiceItemInterface {
 }
 const ServiceItem: FC<ServiceItemInterface> = ({ getServicesList, checkboxValue, title, id }) => {
   const [activeDelete, setActiveDelete] = useState(false)
-  function editService(slugEdit: number) {
-    console.log(slugEdit)
+  const [isChecked, setIsChecked] = useState<boolean>(checkboxValue)
+
+  const checkboxUpdate = async (id: number) => {
+    try {
+      const response = await fetch(`/api/services/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ published: !isChecked }),
+      })
+      if (response.ok) {
+        setIsChecked(!isChecked)
+      }
+    } catch (error: any) {
+      console.log(error)
+    }
   }
   function deleteService() {
     setActiveDelete(true)
@@ -74,9 +89,15 @@ const ServiceItem: FC<ServiceItemInterface> = ({ getServicesList, checkboxValue,
 
   return (
     <div className="flex w-full max-w-md justify-between pr-3">
-      <label htmlFor="">
-        <input type="checkbox" checked={checkboxValue} onChange={() => deleteService()} />
-        <span>{checkboxValue ? 'Public' : 'Private'}</span>
+      <label htmlFor={`published-${id}`}>
+        <input
+          id={`published-${id}`}
+          name="published"
+          type="checkbox"
+          checked={isChecked}
+          onChange={() => checkboxUpdate(id)}
+        />
+        <span>{isChecked ? 'Public' : 'Private'}</span>
       </label>
       <p>
         {title} <br /> <span className="text-cas-white-300 text-xs">id:{id}</span>
