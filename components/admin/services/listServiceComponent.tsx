@@ -95,12 +95,19 @@ const ServiceItem: FC<ServiceItemInterface> = ({ getServicesList, checkboxValue,
   return (
     <div className="flex w-full max-w-md justify-between pr-3 cms-list-item">
       <div className="grid">
-        <label htmlFor={`s-published-${id}`}>
-          <input id={`s-published-${id}`} type="checkbox" checked={isChecked} onChange={() => checkboxUpdate(id)} />
+        <label className="items-center flex self-start" htmlFor={`s-published-${id}`}>
+          <input
+            className="accent-cas-gradient-purple"
+            id={`s-published-${id}`}
+            type="checkbox"
+            checked={isChecked}
+            onChange={() => checkboxUpdate(id)}
+          />
           <span>{isChecked ? 'Public' : 'Private'}</span>
         </label>
-        <label htmlFor={`price-${id}`}>
+        <label className="items-center flex self-start" htmlFor={`price-${id}`}>
           <input
+            className="accent-cas-gradient-purple"
             id={`price-${id}`}
             type="checkbox"
             checked={isPriceChecked}
@@ -109,14 +116,16 @@ const ServiceItem: FC<ServiceItemInterface> = ({ getServicesList, checkboxValue,
           <span>{isPriceChecked ? 'ON' : 'OFF'}</span>
         </label>
       </div>
-      <p>
+      <p className="px-1">
         {title} <br /> <span className="text-cas-white-300 text-xs">id:{id}</span>
       </p>
-      <div>
-        <Link href={`services/${id}`} className={'text-green-300'}>
+      <div className="grid">
+        <Link href={`services/${id}`} className={'text-green-300 py-1'}>
           Edit
         </Link>
-        <button onClick={() => deleteService()}>Delete</button>
+        <a className="text-red-400 py-1" onClick={() => deleteService()}>
+          Delete
+        </a>
       </div>
       <DeleteConfirmComponent
         active={activeDelete}
