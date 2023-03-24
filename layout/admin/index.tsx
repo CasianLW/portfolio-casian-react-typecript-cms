@@ -29,7 +29,7 @@ const AdminLayoutContent: FC<Props> = ({ children }) => {
         <div className="w-fit mx-auto block  ">
           <AdminNavComponent />
           {sessionData?.user && (
-            <div className="w-auto mx-auto -mt-10 mb-5">
+            <div className="w-auto mx-auto -mt-10 mb-5 text-center">
               <button onClick={() => signOut()}>Se déconnecter</button>
             </div>
           )}
