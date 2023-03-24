@@ -105,9 +105,23 @@ interface WorkItemInterface {
 }
 const WorkItem: FC<WorkItemInterface> = ({ getWorksList, checkboxValue, title, id, slug }) => {
   const [activeDelete, setActiveDelete] = useState(false)
+  const [isChecked, setIsChecked] = useState<boolean>(checkboxValue)
   // const { navIsClosed, setNavIsClosed, activeNavLink } = useAdminNavSettingsContext()
-  function editWork(slugEdit: string) {
-    console.log(slugEdit)
+  const checkboxUpdate = async (slug: string) => {
+    try {
+      const response = await fetch(`/api/works/${slug}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ published: !isChecked }),
+      })
+      if (response.ok) {
+        setIsChecked(!isChecked)
+      }
+    } catch (error: any) {
+      console.log(error)
+    }
   }
   function deleteWork() {
     setActiveDelete(true)
@@ -147,9 +161,9 @@ const WorkItem: FC<WorkItemInterface> = ({ getWorksList, checkboxValue, title, i
 
   return (
     <div className="flex w-full max-w-md justify-between pr-3">
-      <label htmlFor="">
-        <input type="checkbox" checked={checkboxValue} onChange={() => deleteWork()} />
-        <span>{checkboxValue ? 'Public' : 'Private'}</span>
+      <label htmlFor={`published-${id}`}>
+        <input id={`published-${id}`} type="checkbox" checked={isChecked} onChange={() => checkboxUpdate(slug)} />
+        <span>{isChecked ? 'Public' : 'Private'}</span>
       </label>
       <p>
         {title} <br /> <span className="text-cas-white-300 text-xs">id:{id}</span>
