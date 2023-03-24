@@ -2,8 +2,16 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 import { dbConnect } from '@/utils/mongodb/db-connect'
 import ServiceModel from '@/utils/mongodb/service.model'
+import { authOptions } from '@/pages/api/auth/[...nextauth]'
+import { getServerSession } from 'next-auth/next'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+  const session = await getServerSession(req, res, authOptions)
+  if (req.method === 'POST' || req.method === 'PUT' || req.method === 'DELETE') {
+    if (!session) {
+      return res.status(401).json({ success: false, message: "Connectez-vous en tant qu'admin ! " })
+    }
+  }
   if (req.method === 'POST') {
     try {
       await dbConnect()
