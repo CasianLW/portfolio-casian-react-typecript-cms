@@ -160,9 +160,9 @@ const WorkItem: FC<WorkItemInterface> = ({ getWorksList, checkboxValue, title, i
   }
 
   return (
-    <div className="flex w-full max-w-md justify-between pr-3">
-      <label htmlFor={`published-${id}`}>
-        <input id={`published-${id}`} type="checkbox" checked={isChecked} onChange={() => checkboxUpdate(slug)} />
+    <div className="flex w-full max-w-md justify-between pr-3 cms-list-item">
+      <label htmlFor={`w-published-${id}`}>
+        <input id={`w-published-${id}`} type="checkbox" checked={isChecked} onChange={() => checkboxUpdate(slug)} />
         <span>{isChecked ? 'Public' : 'Private'}</span>
       </label>
       <p>
