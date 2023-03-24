@@ -14,6 +14,10 @@ import { IWork } from '@/@types/work'
 import { dbConnect } from '@/utils/mongodb/db-connect'
 import WorkModel from '@/utils/mongodb/work.model'
 
+import { authOptions } from '@/pages/api/auth/[...nextauth]'
+
+import { getServerSession } from 'next-auth/next'
+
 type Data = {
   works?: IWork[]
 
@@ -23,6 +27,14 @@ type Data = {
 }
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+  // verification admin pour bloquer les routes
+  const session = await getServerSession(req, res, authOptions)
+  if (req.method === 'POST' || req.method === 'PUT' || req.method === 'DELETE') {
+    if (!session) {
+      return res.status(401).json({ success: false, message: "Connectez-vous en tant qu'admin ! " })
+    }
+  }
+
   //   if (req.method === 'POST') {
   //     return res.status(201).json({ message: 'POST' })
   //   }
