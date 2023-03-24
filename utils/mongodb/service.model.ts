@@ -28,6 +28,7 @@ const ServiceSchema: Schema = new Schema({
   category: {
     type: String,
     required: true,
+    default: 'autre',
   },
   order: {
     type: Number,
