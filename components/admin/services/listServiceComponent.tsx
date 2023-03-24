@@ -94,7 +94,7 @@ const ServiceItem: FC<ServiceItemInterface> = ({ getServicesList, checkboxValue,
 
   return (
     <div className="flex w-full max-w-md justify-between pr-3">
-      <div>
+      <div className="grid">
         <label htmlFor={`published-${id}`}>
           <input id={`published-${id}`} type="checkbox" checked={isChecked} onChange={() => checkboxUpdate(id)} />
           <span>{isChecked ? 'Public' : 'Private'}</span>
