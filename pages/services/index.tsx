@@ -3,55 +3,68 @@ import { NavLinkEnum } from '@/components/nav'
 import PanelComponent from '@/components/services/panelComponent'
 import SeoComponent from '@/components/shared/seo-component'
 import { useNavSettingsContext } from '@/context/nav-settings-context'
-import { getPageSeoBySlug } from '@/utils/content-api'
+import { getPageSeoBySlug } from '@/utils/page-seo-api'
 import { motion } from 'framer-motion'
 import { GetStaticProps, NextPage } from 'next'
 import { FC, useEffect, useState } from 'react'
 
 interface Props {
   seo: Seo
+  services: any[]
 }
 
-export const getStaticProps: GetStaticProps = async () => {
-  const seo = getPageSeoBySlug('services')
-  return {
-    props: { seo },
+const getServicesList = async (): Promise<{ props: { seo: Seo; services: any[] } }> => {
+  try {
+    const slug = 'Services'
+    const seo = await getPageSeoBySlug(slug)
+
+    const response = await fetch(`${process.env.URL}/api/services/`, {
+      method: 'GET',
+    })
+    const data = await response.json()
+
+    if (response.ok) {
+      const services = data.services
+      return {
+        props: { seo, services },
+      }
+    }
+    throw console.error()
+  } catch (error: any) {
+    console.log(error)
+    return {
+      props: {
+        seo: {
+          title: 'Projets Fullstack developer & UX / UI DESIGNER',
+          description: 'Bienvenue sur mon site',
+        },
+        services: [],
+      },
+    }
   }
 }
 
-const Services: NextPage<Props> = ({ seo }) => {
+export const getStaticProps: GetStaticProps = async () => {
+  return await getServicesList()
+}
+
+const Services: NextPage<Props> = ({ seo, services }) => {
   const [activeIndex, setActiveIndex] = useState(0)
-  const [servicesList, setServicesList] = useState([])
+  // const [servicesList, setServicesList] = useState([])
+  const [servicesList, setServicesList] = useState(services) // Initialize servicesList with services prop
 
   const handleClick = (index: number) => {
     setActiveIndex(index)
+    console.log(servicesList)
   }
 
   const { setActiveNavLink } = useNavSettingsContext()
 
   useEffect(() => {
     setActiveNavLink(NavLinkEnum.Services)
-    getServicesList()
-  }, [setActiveNavLink])
-
-  const getServicesList = async () => {
-    try {
-      const response = await fetch('/api/services/', {
-        method: 'GET',
-      })
-      const data = await response.json()
-      // console.log(data)
-      if (response.ok) {
-        // Handle success
-        setServicesList(data.services)
-        // console.log(data.services)
-        // setServicesList(data.works.reverse())
-      }
-    } catch (error: any) {
-      // Handle error
-      console.log(error)
-    }
-  }
+    // getServicesList()
+    setServicesList(services) // Update servicesList with the services prop when the component mounts
+  }, [setActiveNavLink, services])
 
   return (
     <>
