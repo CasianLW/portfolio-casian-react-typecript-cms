@@ -21,6 +21,7 @@ const EditWorkComponent: FC<EditWorkInterface> = ({ dataWork, editWorkMethod }) 
     seoTitle: dataWork.seo.title,
     seoDescription: dataWork.seo.description,
     title: dataWork.title,
+    secondaryTitle: dataWork.secondaryTitle,
     slug: dataWork.slug,
     description: dataWork.description,
     imgLink: dataWork.coverImage,
@@ -49,6 +50,7 @@ const EditWorkComponent: FC<EditWorkInterface> = ({ dataWork, editWorkMethod }) 
           description: formData.seoDescription,
         },
         title: formData.title,
+        secondaryTitle: formData.secondaryTitle,
         slug: formData.slug,
         description: formData.description,
         coverImage: formData.imgLink,
@@ -155,6 +157,16 @@ const EditWorkComponent: FC<EditWorkInterface> = ({ dataWork, editWorkMethod }) 
         <div className="grid">
           <label htmlFor="title">Title</label>
           <input required type="text" name="title" value={formData.title} onChange={handleInputChange} />
+        </div>
+        <div className="grid">
+          <label htmlFor="secondaryTitle">Secondary Title</label>
+          <input
+            required
+            type="text"
+            name="secondaryTitle"
+            value={formData.secondaryTitle}
+            onChange={handleInputChange}
+          />
         </div>
         <div className="grid">
           <label htmlFor="slug">Slug</label>
