@@ -13,6 +13,7 @@ export enum AdminNavLinkEnum {
   Services = 'Services',
   General = 'General',
   Homepage = 'Homepage',
+  Pages = 'Pages',
 }
 export const getPathFromNavLink: (navLink: AdminNavLinkEnum) => string = (navLink: AdminNavLinkEnum) => {
   switch (navLink) {
@@ -26,6 +27,8 @@ export const getPathFromNavLink: (navLink: AdminNavLinkEnum) => string = (navLin
       return '/admin/general/'
     case AdminNavLinkEnum.Homepage:
       return '/admin/homepage/'
+    case AdminNavLinkEnum.Pages:
+      return '/admin/pages/'
   }
 }
 
@@ -129,6 +132,10 @@ const navLinks = [
   {
     navLink: AdminNavLinkEnum.Homepage,
     supplementaryClasses: 'lg:ml-auto delay-[500ms]',
+  },
+  {
+    navLink: AdminNavLinkEnum.Pages,
+    supplementaryClasses: 'lg:ml-auto delay-[600ms]',
   },
 ]
 
