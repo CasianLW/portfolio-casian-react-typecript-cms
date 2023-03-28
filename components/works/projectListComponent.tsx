@@ -13,6 +13,7 @@ interface ProjectProps {
   title: string
   titleSecondary: string
   imageRef: string
+  slug: string
 }
 const ProjectComponent: FC<ProjectProps> = ({
   classCatagory,
@@ -20,6 +21,7 @@ const ProjectComponent: FC<ProjectProps> = ({
   imageRef,
   title,
   titleSecondary,
+  slug,
   //   displayCatagory,
 }) => {
   return (
@@ -30,7 +32,8 @@ const ProjectComponent: FC<ProjectProps> = ({
       className={`${classCatagory} relative w-4/5 mt-8 m-auto sm:w-1/2 sm:p-10 lg:w-1/3  `}
       // style={{ display: displayCatagory }}
     >
-      <Link className="w-fit" href={getPathFromNavLink(linkRef)}>
+      {/* <Link className="w-fit" href={getPathFromNavLink(linkRef)}> */}
+      <Link className="w-fit" href={`${NavLinkEnum.Works}/${slug}`}>
         {/* <a className="md:order-1">About</a> */}
         <div className="absolute ml-[12%] text-left -top-8 sm:-top-1">
           <h2 className="text-4xl font-semibold line-clamp-1">{title}</h2>
