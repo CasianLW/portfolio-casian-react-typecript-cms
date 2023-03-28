@@ -21,7 +21,7 @@ const ServicesCMS: NextPage<Props> = () => {
   const [loading, setLoading] = useState(true)
   const [servicesList, setServicesList] = useState([])
   const [submitStatus, setSubmitStatus] = useState<'submitting' | 'success' | 'error' | 'idle'>('idle')
-  const [messageText, setMessageText] = useState()
+  const [messageText, setMessageText] = useState(String)
   const getServicesList = async () => {
     // console.log('test du transfer')
     try {
@@ -47,7 +47,8 @@ const ServicesCMS: NextPage<Props> = () => {
       // Handle error
       // console.log(data.message)
       setSubmitStatus('error')
-      setMessageText(error)
+      setMessageText(`${error}`)
+
       setTimeout(() => {
         setSubmitStatus('idle')
       }, 4000)
