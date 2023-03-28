@@ -33,7 +33,7 @@ const ProjectComponent: FC<ProjectProps> = ({
       // style={{ display: displayCatagory }}
     >
       {/* <Link className="w-fit" href={getPathFromNavLink(linkRef)}> */}
-      <Link className="w-fit" href={`${NavLinkEnum.Works}/${slug}`}>
+      <Link className="w-fit" href={`${getPathFromNavLink(NavLinkEnum.Works)}/${slug}`}>
         {/* <a className="md:order-1">About</a> */}
         <div className="absolute ml-[12%] text-left -top-8 sm:-top-1">
           <h2 className="text-4xl font-semibold line-clamp-1">{title}</h2>
