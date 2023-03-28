@@ -1,9 +1,10 @@
 import { FC } from 'react'
 import Link from 'next/link'
 
-import Image, { StaticImageData } from 'next/image'
+// import Image, { StaticImageData } from 'next/image'
 import { getPathFromNavLink, NavLinkEnum } from '../nav'
 import { motion } from 'framer-motion'
+import { CldImage } from 'next-cloudinary'
 
 interface ProjectProps {
   classCatagory: string
@@ -11,7 +12,7 @@ interface ProjectProps {
   linkRef: NavLinkEnum
   title: string
   titleSecondary: string
-  imageRef: string | StaticImageData
+  imageRef: string
 }
 const ProjectComponent: FC<ProjectProps> = ({
   classCatagory,
@@ -35,7 +36,18 @@ const ProjectComponent: FC<ProjectProps> = ({
           <h2 className="text-4xl font-semibold line-clamp-1">{title}</h2>
           <h3 className="text-xs md:text-lg line-clamp-1">{titleSecondary}</h3>
         </div>
-        <Image
+        {imageRef && (
+          <CldImage
+            priority={true}
+            className="stack-item w-full"
+            width="600"
+            height="600"
+            src={imageRef}
+            alt={title}
+            sizes="(min-width: 1280px) 480px, (min-width: 1024px) 382px, (min-width: 768px) 285px, calc(100vw - 48px - 60px)"
+          />
+        )}
+        {/* <Image
           priority={true}
           width={500}
           height={500}
@@ -44,7 +56,7 @@ const ProjectComponent: FC<ProjectProps> = ({
           alt={`${title} art work`}
           // loading="lazy"
           sizes="(max-width: 640px) 340px,(min-width: 640px) 340px, (min-width: 1024px) 64px, (min-width: 1289px) 746px, (min-width: 1744px) 896px"
-        ></Image>
+        ></Image> */}
       </Link>
     </motion.div>
   )
