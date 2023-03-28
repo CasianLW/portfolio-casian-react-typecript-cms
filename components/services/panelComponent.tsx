@@ -6,11 +6,13 @@ interface PanelProps {
   index: number
   activeIndex: number
   tabCategory: string
-  serviceList: never[] | []
+  serviceList: any[]
+  // serviceList: never[] | []
 }
 
 const PanelComponent: FC<PanelProps> = ({ index, activeIndex, tabCategory, serviceList }) => {
-  const [categoryFiltred, setCategoryFiltred] = useState([])
+  // const [categoryFiltred, setCategoryFiltred] = useState([])
+  const [categoryFiltred, setCategoryFiltred] = useState<any[]>([])
 
   useEffect(() => {
     const filtred = serviceList.filter((service: any) => service.category == tabCategory)
