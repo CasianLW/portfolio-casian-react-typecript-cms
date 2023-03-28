@@ -109,6 +109,7 @@ const Works: NextPage<Props> = ({ seo, works }) => {
                 linkRef={NavLinkEnum.Works}
                 title={project.title}
                 titleSecondary={project.secondaryTitle}
+                slug={project.slug}
                 imageRef={project.coverImage}
                 // imageRef={`https://www.artic.edu/iiif/2/${project.image_id}/full/843,/0/default.jpg`}
               />
