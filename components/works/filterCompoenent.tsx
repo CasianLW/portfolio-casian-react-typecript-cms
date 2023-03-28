@@ -9,11 +9,26 @@ interface filterProps {
 }
 export const FilterComponent: FC<filterProps> = ({ projects, setFiltred, activeCategory, setActiveCategory }) => {
   useEffect(() => {
-    if (activeCategory === 'PC-10') {
+    if (activeCategory === 'all') {
       setFiltred(projects)
       return
     }
-    const filtred = projects.filter((project: any) => project.category_ids.includes(activeCategory))
+    // const filtred = projects.filter((project: any) => project.category_ids.includes(activeCategory))
+    const filtred = projects.filter((project: any) => {
+      const { dev, uxui, graphic, all } = project.category
+      switch (activeCategory) {
+        case 'dev':
+          return dev
+        case 'uxui':
+          return uxui
+        case 'graphic':
+          return graphic
+        case 'all':
+          return all
+        default:
+          return false
+      }
+    })
     setFiltred(filtred)
   }, [activeCategory, projects, setFiltred])
   return (
@@ -23,26 +38,26 @@ export const FilterComponent: FC<filterProps> = ({ projects, setFiltred, activeC
       <FilterBtnComponent
         activeCategory={activeCategory}
         setActiveCategory={setActiveCategory}
-        id={'PC-10'}
+        id={'all'}
         title={'Tout'}
       />
 
       <FilterBtnComponent
         activeCategory={activeCategory}
         setActiveCategory={setActiveCategory}
-        id={'PC-831'}
+        id={'dev'}
         title={'Development'}
       />
       <FilterBtnComponent
         activeCategory={activeCategory}
         setActiveCategory={setActiveCategory}
-        id={'PC-12'}
+        id={'uxui'}
         title={'UX/UI Design'}
       />
       <FilterBtnComponent
         activeCategory={activeCategory}
         setActiveCategory={setActiveCategory}
-        id={'PC-13'}
+        id={'graphic'}
         title={'Graphic Design'}
       />
     </div>
