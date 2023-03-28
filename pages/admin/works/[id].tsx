@@ -24,6 +24,7 @@ export interface IWorkInfo {
   }
   _id: string
   title: string
+  secondaryTitle: string
   slug: string
   description: string
   coverImage: string
