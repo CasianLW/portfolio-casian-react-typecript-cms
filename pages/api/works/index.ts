@@ -39,13 +39,15 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   //     return res.status(201).json({ message: 'POST' })
   //   }
   if (req.method === 'POST') {
+    console.log(req.body)
     try {
       await dbConnect()
-      var { title, seo, slug, description, coverImage, secondaryImage, category, published } = req.body
+      var { title, secondaryTitle, seo, slug, description, coverImage, secondaryImage, category, published } = req.body
 
       // Validate request body against the WorkModel schema
       if (
         !title ||
+        !secondaryTitle ||
         !seo.title ||
         !seo.description ||
         !slug ||
@@ -71,6 +73,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
       const work = await WorkModel.create({
         title,
+        secondaryTitle,
         seo,
         slug,
         description,
