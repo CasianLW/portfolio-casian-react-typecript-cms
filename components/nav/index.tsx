@@ -8,14 +8,14 @@ import Image from 'next/image'
 import BurgerComponent from './burger-component'
 
 export enum NavLinkEnum {
-  Home = 'home',
-  About = 'about',
-  Works = 'works',
-  Contact = 'contact',
-  Services = 'services',
-  Blog = 'blog',
-  MentionsLegales = 'mentions-legales',
-  DonneesPersonnelles = 'donnees-personnelles',
+  Home = 'Home',
+  About = 'About',
+  Works = 'Works',
+  Contact = 'Contact',
+  Services = 'Services',
+  Blog = 'Blog',
+  MentionsLegales = 'MentionsLegales',
+  DonneesPersonnelles = 'DonneesPersonnelles',
 }
 export const getPathFromNavLink: (navLink: NavLinkEnum) => string = (navLink: NavLinkEnum) => {
   switch (navLink) {
