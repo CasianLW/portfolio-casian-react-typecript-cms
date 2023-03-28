@@ -22,7 +22,7 @@ const WorksCMS: NextPage<Props> = () => {
   const [loading, setLoading] = useState(true)
   const [worksList, setWorksList] = useState([])
   const [submitStatus, setSubmitStatus] = useState<'submitting' | 'success' | 'error' | 'idle'>('idle')
-  const [messageText, setMessageText] = useState()
+  const [messageText, setMessageText] = useState(String)
   const getWorksList = async () => {
     // console.log('test du transfer')
     try {
@@ -48,7 +48,8 @@ const WorksCMS: NextPage<Props> = () => {
       // Handle error
       // console.log(data.message)
       setSubmitStatus('error')
-      setMessageText(error)
+      setMessageText(`${error}`)
+
       setTimeout(() => {
         setSubmitStatus('idle')
       }, 4000)
