@@ -19,6 +19,7 @@ const AddWorkComponent: FC<AddWorkInterface> = ({ getWorksList }) => {
     seoTitle: '',
     seoDescription: '',
     title: '',
+    secondaryTitle: '',
     slug: '',
     description: '',
     imgLink: '',
@@ -47,6 +48,7 @@ const AddWorkComponent: FC<AddWorkInterface> = ({ getWorksList }) => {
           description: formData.seoDescription,
         },
         title: formData.title,
+        secondaryTitle: formData.secondaryTitle,
         slug: formData.slug,
         description: formData.description,
         coverImage: formData.imgLink,
@@ -71,6 +73,7 @@ const AddWorkComponent: FC<AddWorkInterface> = ({ getWorksList }) => {
         seoTitle: '',
         seoDescription: '',
         title: '',
+        secondaryTitle: '',
         slug: '',
         description: '',
         imgLink: '',
@@ -146,6 +149,16 @@ const AddWorkComponent: FC<AddWorkInterface> = ({ getWorksList }) => {
         <div className="grid">
           <label htmlFor="title">Title</label>
           <input required type="text" name="title" value={formData.title} onChange={handleInputChange} />
+        </div>
+        <div className="grid">
+          <label htmlFor="secondaryTitle">Secondary title</label>
+          <input
+            required
+            type="text"
+            name="secondaryTitle"
+            value={formData.secondaryTitle}
+            onChange={handleInputChange}
+          />
         </div>
         <div className="grid">
           <label htmlFor="slug">Slug</label>
