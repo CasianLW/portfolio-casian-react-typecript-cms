@@ -6,47 +6,81 @@ import FilterComponent from '@/components/works/filterCompoenent'
 import ProjectComponent from '@/components/works/projectListComponent'
 import ProjectListComponent from '@/components/works/projectListComponent'
 import { useNavSettingsContext } from '@/context/nav-settings-context'
-import { getPageSeoBySlug } from '@/utils/content-api'
+import { getPageSeoBySlug } from '@/utils/page-seo-api'
 import { AnimatePresence, motion } from 'framer-motion'
 import { GetStaticProps, NextPage } from 'next'
 import { useEffect, useState } from 'react'
 
-const YOUR_ACCESS_KEY = process.env.YOUR_ACCESS_KEY
-
 interface Props {
   seo: Seo
+  works: any[]
+}
+
+const getWorksList = async (): Promise<{ props: { seo: Seo; works: any[] } }> => {
+  try {
+    const slug = 'Works'
+    const seo = await getPageSeoBySlug(slug)
+
+    const response = await fetch(`${process.env.URL}/api/works/`, {
+      method: 'GET',
+    })
+    const data = await response.json()
+
+    if (response.ok) {
+      const works = data.works
+      return {
+        props: { seo, works },
+      }
+    }
+    throw console.error()
+  } catch (error: any) {
+    console.log(error)
+    return {
+      props: {
+        seo: {
+          title: 'Projets Fullstack developer & UX / UI DESIGNER',
+          description: 'Bienvenue sur mon site',
+        },
+        works: [],
+      },
+    }
+  }
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const seo = getPageSeoBySlug('works')
-  return {
-    props: { seo },
-  }
+  return await getWorksList()
 }
-const Works: NextPage<Props> = ({ seo }) => {
+
+// export const getStaticProps: GetStaticProps = async () => {
+//   const seo = getPageSeoBySlug('works')
+//   return {
+//     props: { seo },
+//   }
+// }
+const Works: NextPage<Props> = ({ seo, works }) => {
   const { setActiveNavLink } = useNavSettingsContext()
   useEffect(() => {
     setActiveNavLink(NavLinkEnum.Works)
   }, [setActiveNavLink])
 
   // filter
-  const [projects, setProjects] = useState([])
+  const [projects, setProjects] = useState(works)
   const [filtred, setFiltred] = useState([])
-  const [activeCategory, setActiveCategory] = useState('PC-10')
+  const [activeCategory, setActiveCategory] = useState('all')
 
   useEffect(() => {
-    fetchPopular()
+    // fetchPopular()
   }, [])
 
   // artworks test
   // const data = await fetch(`https://api.artic.edu/api/v1/artworks`)
-  const fetchPopular = async () => {
-    const data = await fetch(`https://api.artic.edu/api/v1/artworks`)
-    const projects = await data.json()
-    setProjects(projects.data)
-    setFiltred(projects.data)
-    // console.log(projects.data)
-  }
+  // const fetchPopular = async () => {
+  //   const data = await fetch(`https://api.artic.edu/api/v1/artworks`)
+  //   const projects = await data.json()
+  //   setProjects(projects.data)
+  //   setFiltred(projects.data)
+  //   // console.log(projects.data)
+  // }
 
   return (
     <>
@@ -68,12 +102,15 @@ const Works: NextPage<Props> = ({ seo }) => {
           {filtred.map((project: never | any) => {
             return (
               <ProjectComponent
-                key={project.id}
-                classCatagory={'dev all'}
+                key={project._id}
+                classCatagory={` ${project.category.dev ? 'dev' : ''} ${project.category.all ? 'all' : ''} ${
+                  project.category.uxui ? 'uxui' : ''
+                } ${project.category.graphic ? 'graphic' : ''}`}
                 linkRef={NavLinkEnum.Works}
-                title={project.artist_title}
+                title={project.title}
                 titleSecondary={project.title}
-                imageRef={`https://www.artic.edu/iiif/2/${project.image_id}/full/843,/0/default.jpg`}
+                imageRef={project.coverImage}
+                // imageRef={`https://www.artic.edu/iiif/2/${project.image_id}/full/843,/0/default.jpg`}
               />
             )
           })}
