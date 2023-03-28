@@ -10,7 +10,10 @@ const WorkSchema: Schema = new Schema({
     required: true,
     unique: true,
   },
-
+  secondaryTitle: {
+    type: String,
+    required: true,
+  },
   seo: {
     title: { type: String, required: true },
     description: { type: String, required: true },
