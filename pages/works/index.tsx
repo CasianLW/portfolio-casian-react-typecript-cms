@@ -10,6 +10,7 @@ import { getPageSeoBySlug } from '@/utils/page-seo-api'
 import { AnimatePresence, motion } from 'framer-motion'
 import { GetStaticProps, NextPage } from 'next'
 import { useEffect, useState } from 'react'
+import { IWorkInfo } from '../admin/works/[id]'
 
 interface Props {
   seo: Seo
@@ -64,7 +65,11 @@ const Works: NextPage<Props> = ({ seo, works }) => {
   }, [setActiveNavLink])
 
   // filter
-  const [projects, setProjects] = useState(works)
+  function filterPublishedWorks(works: Array<IWorkInfo>): Array<IWorkInfo> {
+    return works.filter((work) => work.published)
+  }
+
+  const [projects, setProjects] = useState(filterPublishedWorks(works))
   const [filtred, setFiltred] = useState([])
   const [activeCategory, setActiveCategory] = useState('all')
 
