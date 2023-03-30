@@ -75,45 +75,45 @@ export const getAllProjects: () => Project[] = () => {
 
 // services
 
-export const getServiceByFileName: (fileName: string) => Service = (fileName) => {
-  const fullPath = join(contentServicesDirectory, fileName)
+// export const getServiceByFileName: (fileName: string) => Service = (fileName) => {
+//   const fullPath = join(contentServicesDirectory, fileName)
 
-  const fileContents = fs.readFileSync(fullPath, 'utf8')
+//   const fileContents = fs.readFileSync(fullPath, 'utf8')
 
-  const fileData = JSON.parse(fileContents)
+//   const fileData = JSON.parse(fileContents)
 
-  const { title, liens, primaryImage, secondaryImage, description, seo, order } = fileData
-  const slug = fileName.replace(/\.json$/, '')
-  // const categorys = fileData.categorys.map((s: { category: string }) => s.category)
-  const categories = fileData.categories.map((g: { categorie: string }) => g.categorie)
+//   const { title, liens, primaryImage, secondaryImage, description, seo, order } = fileData
+//   const slug = fileName.replace(/\.json$/, '')
+//   // const categorys = fileData.categorys.map((s: { category: string }) => s.category)
+//   const categories = fileData.categories.map((g: { categorie: string }) => g.categorie)
 
-  // const methods = fileData.methods.map((g: { method: string }) => g.method)
+//   // const methods = fileData.methods.map((g: { method: string }) => g.method)
 
-  const service: Service = {
-    title,
-    description,
-    primaryImage,
-    slug,
-    order,
-    categories,
-  }
+//   const service: Service = {
+//     title,
+//     description,
+//     primaryImage,
+//     slug,
+//     order,
+//     categories,
+//   }
 
-  return service
-}
+//   return service
+// }
 // get all services
-export const getAllServices: () => Service[] = () => {
-  // add paths for getting all Services
-  const filesNames = fs.readdirSync(contentServicesDirectory)
+// export const getAllServices: () => Service[] = () => {
+//   // add paths for getting all Services
+//   const filesNames = fs.readdirSync(contentServicesDirectory)
 
-  // get the Projects from the filenames with the needed fields sorted by date in descending order
-  const services = filesNames
-    .map((fileName) => getProjectByFileName(fileName))
+//   // get the Projects from the filenames with the needed fields sorted by date in descending order
+//   const services = filesNames
+//     .map((fileName) => getProjectByFileName(fileName))
 
-    .sort((f1, f2) => {
-      if (f1.order === f2.order) return f1.title.localeCompare(f2.title)
-      return f1.order - f2.order
-    })
+//     .sort((f1, f2) => {
+//       if (f1.order === f2.order) return f1.title.localeCompare(f2.title)
+//       return f1.order - f2.order
+//     })
 
-  // return the available Projects
-  return services
-}
+//   // return the available Projects
+//   return services
+// }
