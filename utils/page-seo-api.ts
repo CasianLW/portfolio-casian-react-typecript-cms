@@ -28,16 +28,16 @@ export const getPageSeoBySlug = async (slug: string): Promise<Seo> => {
     } else {
       // Return default values if no SEO data is found for the given slug
       return {
-        title: 'My Website',
-        description: 'Welcome to My Website.',
+        title: 'Casian Fullstack developer & UX / UI DESIGNER',
+        description: 'Bienvenue sur mon site',
       }
     }
   } catch (error) {
     console.error(error)
     // Return default values in case of an error
     return {
-      title: 'My Website',
-      description: 'Welcome to My Website.',
+      title: 'Casian Fullstack developer & UX / UI DESIGNER',
+      description: 'Bienvenue sur mon site',
     }
   }
 }
