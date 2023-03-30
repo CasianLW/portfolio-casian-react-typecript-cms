@@ -50,7 +50,7 @@ export const getStaticProps: GetStaticProps = async () => {
 }
 
 const Services: NextPage<Props> = ({ seo, services }) => {
-  function filterPublishedServices(services: Array<IServiceInfo>): Array<IServiceInfo> {
+  function filterPublishedServices(services: IServiceInfo[]): IServiceInfo[] {
     return services.filter((service) => service.published)
   }
   const [activeIndex, setActiveIndex] = useState(0)
@@ -59,7 +59,7 @@ const Services: NextPage<Props> = ({ seo, services }) => {
 
   const handleClick = (index: number) => {
     setActiveIndex(index)
-    console.log(servicesList)
+    // console.log(filterPublishedServices(servicesList))
   }
 
   const { setActiveNavLink } = useNavSettingsContext()
@@ -67,8 +67,8 @@ const Services: NextPage<Props> = ({ seo, services }) => {
   useEffect(() => {
     setActiveNavLink(NavLinkEnum.Services)
     // getServicesList()
-    setServicesList(services) // Update servicesList with the services prop when the component mounts
-  }, [setActiveNavLink, services])
+    // setServicesList(services) // Update servicesList with the services prop when the component mounts
+  }, [setActiveNavLink])
 
   return (
     <>
