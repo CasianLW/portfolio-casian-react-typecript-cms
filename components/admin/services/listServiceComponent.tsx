@@ -113,7 +113,7 @@ const ServiceItem: FC<ServiceItemInterface> = ({ getServicesList, checkboxValue,
             checked={isPriceChecked}
             onChange={() => checkboxUpdate(id, true)}
           />
-          <span>{isPriceChecked ? 'ON' : 'OFF'}</span>
+          <span>Price {isPriceChecked ? 'ON' : 'OFF'}</span>
         </label>
       </div>
       <p className="px-1">
