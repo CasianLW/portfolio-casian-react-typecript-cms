@@ -33,7 +33,7 @@ const ListItem: FC<ListItemProps> = ({ id, title, isChecked, isPriceChecked, onD
               checked={isPriceChecked}
               onChange={() => onCheckboxChange(id, true)}
             />
-            <span>{isPriceChecked ? 'ON' : 'OFF'}</span>
+            <span>Price {isPriceChecked ? 'ON' : 'OFF'}</span>
           </label>
         )}
       </div>
