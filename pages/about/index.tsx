@@ -3,7 +3,7 @@ import { Seo } from '@/cas-types'
 import NavComponent, { NavLinkEnum } from '@/components/nav'
 import SeoComponent from '@/components/shared/seo-component'
 import { useNavSettingsContext } from '@/context/nav-settings-context'
-import { getPageSeoBySlug } from '@/utils/content-api'
+import { getPageSeoBySlug } from '@/utils/page-seo-api'
 import { GetStaticProps, NextPage } from 'next'
 import { useEffect } from 'react'
 
@@ -12,7 +12,8 @@ interface Props {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const seo = getPageSeoBySlug('about')
+  const slug = 'About'
+  const seo = await getPageSeoBySlug(slug)
   return {
     props: { seo },
   }
