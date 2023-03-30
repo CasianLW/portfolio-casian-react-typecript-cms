@@ -7,6 +7,7 @@ import { getPageSeoBySlug } from '@/utils/page-seo-api'
 import { motion } from 'framer-motion'
 import { GetStaticProps, NextPage } from 'next'
 import { FC, useEffect, useState } from 'react'
+import { IServiceInfo } from '../admin/services/[id]'
 
 interface Props {
   seo: Seo
@@ -49,9 +50,12 @@ export const getStaticProps: GetStaticProps = async () => {
 }
 
 const Services: NextPage<Props> = ({ seo, services }) => {
+  function filterPublishedServices(services: Array<IServiceInfo>): Array<IServiceInfo> {
+    return services.filter((service) => service.published)
+  }
   const [activeIndex, setActiveIndex] = useState(0)
   // const [servicesList, setServicesList] = useState([])
-  const [servicesList, setServicesList] = useState(services) // Initialize servicesList with services prop
+  const [servicesList, setServicesList] = useState(filterPublishedServices(services)) // Initialize servicesList with services prop
 
   const handleClick = (index: number) => {
     setActiveIndex(index)
