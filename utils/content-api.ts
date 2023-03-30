@@ -1,24 +1,24 @@
 import { Service, Project, Seo } from '@/cas-types'
-import fs from 'fs'
-import { join } from 'path'
+// import fs from 'fs'
+// import { join } from 'path'
 
-const contentPagesDirectory = join(process.cwd(), '_content/pages')
-// const contentProjectsDirectory = join(process.cwd(), '_content/projects')
-// const contentServicesDirectory = join(process.cwd(), '_content/services')
+// const contentPagesDirectory = join(process.cwd(), '_content/pages')
+// // const contentProjectsDirectory = join(process.cwd(), '_content/projects')
+// // const contentServicesDirectory = join(process.cwd(), '_content/services')
 
-export const getPageSeoBySlug: (slug: string) => Seo = (slug) => {
-  const realSlug = slug.replace(/\.json$/, '')
+// export const getPageSeoBySlug: (slug: string) => Seo = (slug) => {
+//   const realSlug = slug.replace(/\.json$/, '')
 
-  const fullPath = join(contentPagesDirectory, `${realSlug}.json`)
+//   const fullPath = join(contentPagesDirectory, `${realSlug}.json`)
 
-  const fileContents = fs.readFileSync(fullPath, 'utf8')
+//   const fileContents = fs.readFileSync(fullPath, 'utf8')
 
-  const pageData = JSON.parse(fileContents)
+//   const pageData = JSON.parse(fileContents)
 
-  const seo = pageData.seo
+//   const seo = pageData.seo
 
-  return seo
-}
+//   return seo
+// }
 
 // // projets
 
