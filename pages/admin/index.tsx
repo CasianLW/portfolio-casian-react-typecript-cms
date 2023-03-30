@@ -18,7 +18,7 @@ const AdminPage: NextPage<Props> = () => {
   }, [setActiveNavLink])
 
   return (
-    <AdminLayoutComponent session={null}>
+    <AdminLayoutComponent>
       <>
         <SeoComponent seo={{ title: 'Admin Dashboard', description: 'Admin dashboard' }} />
         <header className="">
