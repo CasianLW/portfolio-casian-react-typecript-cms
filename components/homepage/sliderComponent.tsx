@@ -34,7 +34,7 @@ const SliderItemComponent: FC = () => {
           {/* <a className="md:order-1">About</a> */}
           <Image
             priority={true}
-            className="w-[80vw]"
+            className="w-[80vw] rounded-[32px]"
             src={homepageMobileApps}
             alt="image applications mobiles casian.fr"
           ></Image>
