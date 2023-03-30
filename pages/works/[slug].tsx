@@ -1,5 +1,4 @@
 import type { NextPage, GetStaticPaths, GetStaticProps } from 'next'
-// import Image from 'next/future/image'
 import Link from 'next/link'
 import { FC, useEffect } from 'react'
 
@@ -16,25 +15,39 @@ interface Params extends ParsedUrlQuery {
   slug: string
 }
 
+const getWorkInfo = async (slug: string): Promise<Project | null> => {
+  try {
+    const response = await fetch(`${process.env.URL}/api/works/${slug}`, {
+      method: 'GET',
+    })
+    const data = await response.json()
+
+    if (response.ok) {
+      const project = data.project as Project
+      return project
+    }
+    throw new Error('Failed to get project')
+  } catch (error: any) {
+    console.log(error)
+    return null
+  }
+}
+
 export const getStaticProps: GetStaticProps = async (context) => {
   const { slug } = context.params as Params
-
-  const project = getProjectByFileName(`${slug}.json`)
-
-  project.slug = slug
+  const project = await getWorkInfo(slug)
 
   return {
     props: {
       project,
+      slug,
     },
   }
 }
 
 export const getStaticPaths: GetStaticPaths = () => {
-  //only get the slug from works
   const projectsSlugs = getProjectsSlugs()
 
-  // map through to return work paths
   const paths = projectsSlugs.map((slug) => ({
     params: {
       slug,
@@ -48,17 +61,14 @@ export const getStaticPaths: GetStaticPaths = () => {
 }
 
 const ProjectPage: NextPage<Props> = ({ project }) => {
-  //   const { setActiveNavLink } = useNavSettingsContext()
-
-  //   useEffect(() => {
-  //     setActiveNavLink(NavLinkEnum.Projects)
-  //   }, [setActiveNavLink])
+  if (!project) {
+    return <div>Loading...</div>
+  }
 
   return (
     <>
-      <SeoComponent seo={project.seo} />
-
       <h1>Page projet</h1>
+      <h2>{project.title ?? ''}</h2>
     </>
   )
 }
