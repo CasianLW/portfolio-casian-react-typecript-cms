@@ -4,7 +4,7 @@ import ContectComponent from '@/components/contact-components/formComponent'
 import NavComponent, { NavLinkEnum } from '@/components/nav'
 import SeoComponent from '@/components/shared/seo-component'
 import { useNavSettingsContext } from '@/context/nav-settings-context'
-import { getPageSeoBySlug } from '@/utils/content-api'
+import { getPageSeoBySlug } from '@/utils/page-seo-api'
 import { GetStaticProps, NextPage } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -15,7 +15,8 @@ interface Props {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const seo = getPageSeoBySlug('contact')
+  const slug = 'Contact'
+  const seo = await getPageSeoBySlug(slug)
   return {
     props: { seo },
   }

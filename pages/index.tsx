@@ -1,6 +1,5 @@
 import SeoComponent from '@/components/shared/seo-component'
 import { Seo } from '@/cas-types'
-import { getPageSeoBySlug } from '@/utils/content-api'
 import { GetStaticProps, NextPage } from 'next'
 import { NavLinkEnum } from '@/components/nav'
 import { useNavSettingsContext } from '@/context/nav-settings-context'
@@ -10,13 +9,15 @@ import TypingTextComponent from '@/components/homepage/typetextComponent'
 import BlobComponent from '@/components/homepage/blobComponent'
 import TextSpinnerComponent from '@/components/homepage/spinnerLinkComponent'
 import ScrollAnimationComponent from '@/components/homepage/scrollAnimationComponent'
+import { getPageSeoBySlug } from '@/utils/page-seo-api'
 
 interface Props {
   seo: Seo
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const seo = getPageSeoBySlug('home')
+  const slug = 'Homepage'
+  const seo = await getPageSeoBySlug(slug)
   return {
     props: { seo },
   }
