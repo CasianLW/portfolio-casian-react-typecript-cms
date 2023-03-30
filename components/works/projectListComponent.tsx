@@ -30,7 +30,7 @@ const ProjectComponent: FC<ProjectProps> = ({
       //   transition={{ duration: 0.4 }}
       layout
       id={classCatagory}
-      className={`${classCatagory} relative w-4/5 mt-8 m-auto sm:w-1/2 sm:p-10 lg:w-1/3  `}
+      className={`${classCatagory} relative w-4/5 mt-8 m-auto sm:w-1/2 sm:p-10 lg:w-1/3 `}
       // style={{ display: displayCatagory }}
     >
       {/* <Link className="w-fit" href={getPathFromNavLink(linkRef)}> */}
@@ -43,7 +43,7 @@ const ProjectComponent: FC<ProjectProps> = ({
         {imageRef && (
           <CldImage
             priority={true}
-            className="stack-item w-full"
+            className="stack-item w-full rounded-[32px]"
             width="600"
             height="600"
             src={imageRef}
