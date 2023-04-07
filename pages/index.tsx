@@ -31,7 +31,7 @@ const Home: NextPage<Props> = ({ seo }) => {
   return (
     <>
       <SeoComponent seo={seo} />
-      <header className="top-header lateral-space">
+      <header className="top-header lateral-space mobile-scroll-fix ">
         <h1 className="main-title">Freelancer</h1>
         <TypingTextComponent />
         <BlobComponent />

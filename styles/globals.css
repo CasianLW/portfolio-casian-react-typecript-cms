@@ -136,4 +136,7 @@
   .cms-list-item {
     @apply py-1 my-2;
   }
+  .mobile-scroll-fix {
+    touch-action: none;
+  }
 } ;
