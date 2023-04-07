@@ -139,4 +139,7 @@
   .mobile-scroll-fix {
     touch-action: none;
   }
+  .bodyFix {
+    @apply max-w-[100vw] overflow-x-hidden;
+  }
 } ;
