@@ -30,7 +30,7 @@ const ProjectComponent: FC<ProjectProps> = ({
       //   transition={{ duration: 0.4 }}
       layout
       id={classCatagory}
-      className={`${classCatagory} relative w-4/5 mt-8 m-auto sm:w-1/2 sm:p-10 lg:w-1/3 mb-20 md:mb-0 `}
+      className={`${classCatagory} relative w-full mt-8 m-auto sm:w-1/2 sm:p-10 lg:w-1/3 mb-20 md:mb-0 `}
       // style={{ display: displayCatagory }}
     >
       {/* <Link className="w-fit" href={getPathFromNavLink(linkRef)}> */}
