@@ -178,7 +178,7 @@ const Checkbox: FC<CheckboxProps> = ({ name, checked, onChange }) => {
       }`}
     >
       <input
-        className="px-2  mr-2 pt-1 pb-1 border-2 rounded-md cursor-pointer border-cas-black-600"
+        className="px-2  mr-2 pt-1 pb-1 border-2 rounded-md cursor-pointer border-cas-black-600 min-w-[24px] min-h-[24px]"
         type="checkbox"
         name={name}
         checked={checked}
