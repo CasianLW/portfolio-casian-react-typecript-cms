@@ -8,7 +8,8 @@ export const GetTransformX = (start: number) => {
   useEffect(() => {
     // touch up or down
     const degChoisiWeb = 10
-    const degChoisiMobile = 5
+    const degChoisiMobile = 10
+    const sensibilityMobile = 20
     const sliderPourcentx = 2
     var mouvementStepCounter = -405
 
@@ -24,8 +25,8 @@ export const GetTransformX = (start: number) => {
         }
       } else if (event.type === 'touchmove') {
         const touchEvent = event as TouchEvent
-        const currentTouchY = touchEvent.touches[0]?.clientY - 30
-        const currentTouchX = touchEvent.touches[0]?.clientX - 30
+        const currentTouchY = touchEvent.touches[0]?.clientY - sensibilityMobile
+        const currentTouchX = touchEvent.touches[0]?.clientX - sensibilityMobile
         if (previousTouchY < currentTouchY || previousTouchX < currentTouchX) {
           // console.log('Touching down...')
           setTranslateX(translateX + degChoisiMobile)
