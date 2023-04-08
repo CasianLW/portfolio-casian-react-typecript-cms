@@ -142,4 +142,11 @@
   .bodyFix {
     @apply max-w-[100vw] overflow-x-hidden;
   }
+  .homepage-card-animation {
+    @apply hover:scale-105;
+    transition: all 0.3s ease-in;
+  }
+  .homepage-work-link:hover .voir-plus-work {
+    transform: translateY(-8px);
+  }
 } ;
