@@ -2,7 +2,6 @@ import { motion } from 'framer-motion'
 import { FC, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import Contact from '@/pages/contact'
 import { getPathFromNavLink, NavLinkEnum } from '../nav'
 import { CldImage } from 'next-cloudinary'
 
