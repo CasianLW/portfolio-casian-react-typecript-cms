@@ -8,8 +8,8 @@ export const GetTransformX = (start: number) => {
   useEffect(() => {
     // touch up or down
     const degChoisiWeb = 10
-    const degChoisiMobile = 10
-    const sensibilityMobile = 20
+    const degChoisiMobile = 15
+    const sensibilityMobile = 10
     const sliderPourcentx = 2
     var mouvementStepCounter = -405
 
