@@ -52,9 +52,9 @@ const Contact: NextPage<Props> = ({ seo }) => {
                   <a className="py-3" href="tel:+">
                     <u>Tel.+33 (0)7 83 41 57 55</u>
                   </a>
-                  <a className="py-3" href="mailto:">
+                  {/* <a className="py-3" href="mailto:">
                     <u>contact@casian.fr</u>
-                  </a>
+                  </a> */}
                 </div>
                 <div className="flex my-auto gap-8 justify-center sm:justify-start">
                   <Link className="w-fit" target="_blank" href={'https://www.linkedin.com/in/casianc/'}>
@@ -88,7 +88,8 @@ const Contact: NextPage<Props> = ({ seo }) => {
             <Image
               src={profilePicture}
               className="max-w-[50%] m-auto mt-10"
-              alt="Casian Ciorba Image UX UI Designer et Fullstack Mobile Developer"
+              alt="Casian Ciorba Photo UX UI Designer et Fullstack Mobile Developer"
+              priority={true}
               width={500}
               height={500}
               // blurDataURL="data:..." automatically provided
