@@ -149,4 +149,7 @@
   .homepage-work-link:hover .voir-plus-work {
     transform: translateY(-8px);
   }
+  .background-nav {
+    background: linear-gradient(rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 100%);
+  }
 } ;

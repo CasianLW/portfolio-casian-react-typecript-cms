@@ -84,7 +84,11 @@ const NavComponent: FC = () => {
     <nav
       className={
         'overflow-x-clip fixed inset-0 z-50 grid content-center justify-items-start gap-4 px-[5vw] py-6 before:fixed  before:inset-0 before:bg-cas-black-400 before:transition-all lg:absolute lg:bottom-[initial] lg:flex lg:gap-10 lg:py-8 lg:before:hidden ' +
-        `${navIsClosed ? ' fixed before:translate-x-full before:delay-[500ms] before:rounded-l-[48%]' : ' fixed'}`
+        `${
+          navIsClosed
+            ? ' background-nav fixed before:translate-x-full before:delay-[500ms] before:rounded-l-[48%]'
+            : ' fixed'
+        }`
       }
       ref={navRef}
     >
