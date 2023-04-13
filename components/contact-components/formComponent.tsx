@@ -77,7 +77,7 @@ const ContactComponent: FC = () => {
   const isFormComplete = formValues.name && formValues.email && formValues.sujet && formValues.message
 
   return (
-    <form id="contact" onSubmit={sendEmail}>
+    <form data-netlify="true" id="contact" onSubmit={sendEmail}>
       <fieldset>
         <input
           className="form-typespaces"
