@@ -8,6 +8,7 @@ import { IWork } from '@/@types/work'
 import { ParsedUrlQuery } from 'querystring'
 import { log } from 'util'
 import { IWorkInfo } from '../admin/works/[id]'
+import { CldImage } from 'next-cloudinary'
 
 interface Props {
   seo: Seo
@@ -82,8 +83,14 @@ const SingleWorkPage: NextPage<Props> = ({ seo, work }) => {
       <>
         <SeoComponent seo={seo} />
         <header className="top-header lateral-space">
-          <h1 className="main-title">Single Work Page</h1>
-          <div>- {work.title}</div>
+          <h1 className="main-title">{work.title}</h1>
+          <div className="grid my-5 sm:grid-cols-2">
+            <CldImage width="600" height="600" src={work.coverImage} alt={`${work.title} work image`} />
+            <div>
+              <h2 className="pt-3 sm:pt-0 mb-3 text-2xl font-semibold">{work.secondaryTitle}</h2>
+              <p className="sm:w-4/5">{work.description}</p>
+            </div>
+          </div>
         </header>
       </>
     )
