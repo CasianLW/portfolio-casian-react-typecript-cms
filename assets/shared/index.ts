@@ -1,5 +1,5 @@
 import logoCasianBlanc from './logo_casian_blanc.svg'
-import profilePicture from './casianpt.png'
+import profilePicture from './casianpt.webp'
 import showMoreArrows from './show_more_arrows.svg'
 import linkedinLogo from './linkedin-logo.svg'
 import githubLogo from './github-logo.svg'
