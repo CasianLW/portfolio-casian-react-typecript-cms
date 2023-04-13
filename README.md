@@ -1,5 +1,7 @@
 # casian.fr
 
+https://lucky-baklava-bfe6f8.netlify.app/
+
 ![Example Image](https://example.com/image.png)
 
 This Git project is a React/Node application featuring a CRUD CMS integrated with a MongoDB database. The website is styled using Tailwind and incorporates TypeScript for type checking. In addition, Framer Motion is utilized for managing animations.
