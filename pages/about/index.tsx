@@ -38,7 +38,7 @@ const About: NextPage<Props> = ({ seo }) => {
   return (
     <>
       <SeoComponent seo={seo} />
-      <header className="top-header lateral-space grid sm:grid-cols-3">
+      <header className="top-header lateral-space grid md:grid-cols-3">
         <section className="col-span-1 md:col-span-3">
           <h1 className="main-title">About</h1>
           <div className="grid sm:grid-cols-3 flex-col-reverse ">
@@ -55,7 +55,7 @@ const About: NextPage<Props> = ({ seo }) => {
                 <div className="grid grid-cols-1">
                   <div>
                     <h2>Compétences confirmées</h2>
-                    <div className="flex justify-around">
+                    <div className="flex  justify-around md:justify-start">
                       <CompetenceComponent texte={'BAC+2'} image={AboutRNCP} nomCompetence={'Infographie'} />
                       <CompetenceComponent texte={'BAC+2'} image={AboutRNCP} nomCompetence={'Webdesign'} />
                       <CompetenceComponent
@@ -177,7 +177,7 @@ interface CompetenceProps {
 
 const CompetenceComponent: FC<CompetenceProps> = ({ texte, image, nomCompetence }) => {
   return (
-    <div className="flex flex-col items-center w-full">
+    <div className="flex flex-col items-center w-full md:w-fit max-w-[60px] md:mr-10">
       <Image
         className="max-w-[56px]"
         src={image}
