@@ -91,7 +91,7 @@ const AddWorkComponent: FC<AddWorkInterface> = ({ getWorksList }) => {
         links: {
           website: { published: formData.links.website.published, link: formData.links.website.link },
 
-          otherRessource: {
+          otherResource: {
             published: formData.links.otherResource.published,
             link: formData.links.otherResource.link,
           },
@@ -181,7 +181,7 @@ const AddWorkComponent: FC<AddWorkInterface> = ({ getWorksList }) => {
   }
 
   const uploadedCloudinary = (result: ICloudinaryUploadResult, widget: ICloudinaryWidget) => {
-    console.log('cloudinary working')
+    // console.log('cloudinary working')
     if (result.info) {
       result.info &&
         setFormData((prevFormData) => ({
@@ -191,7 +191,7 @@ const AddWorkComponent: FC<AddWorkInterface> = ({ getWorksList }) => {
     }
   }
   const uploadedCloudinarySecondary = (result: ICloudinaryUploadResult, widget: ICloudinaryWidget) => {
-    console.log('cloudinary working')
+    // console.log('cloudinary working')
     if (result.info) {
       result.info &&
         setFormData((prevFormData) => ({
