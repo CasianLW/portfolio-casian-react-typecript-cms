@@ -98,9 +98,17 @@ const SingleWorkPage: NextPage<Props> = ({ seo, work }) => {
             <div>
               <h2 className="pt-3 sm:pt-0 mb-3 text-2xl font-semibold">{work.secondaryTitle}</h2>
               <p className="sm:w-4/5">{work.description}</p>
-              <div>
+              <div className="mt-8">
                 <h2> Tech & methods</h2>
-                <p>liste</p>
+                <p>
+                  <ul className="grid grid-cols-2">
+                    {work.skillPoints.map((point, index) => (
+                      <li className="text-sm md:text-base" key={index}>
+                        {point}
+                      </li>
+                    ))}
+                  </ul>
+                </p>
               </div>
               <div
                 className={
