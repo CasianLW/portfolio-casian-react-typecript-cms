@@ -86,11 +86,22 @@ const SingleWorkPage: NextPage<Props> = ({ seo, work }) => {
         <SeoComponent seo={seo} />
         <header className="top-header lateral-space">
           <h1 className="main-title">{work.title}</h1>
-          <div className="grid my-5 sm:grid-cols-2">
-            <CldImage width="600" height="600" priority src={work.coverImage} alt={`${work.title} work image`} />
+          <div className="grid my-5 md:grid-cols-2">
+            <CldImage
+              className="w-full h-auto md:pr-16"
+              width="599"
+              height="431"
+              priority
+              src={work.coverImage}
+              alt={`${work.title} work image`}
+            />
             <div>
               <h2 className="pt-3 sm:pt-0 mb-3 text-2xl font-semibold">{work.secondaryTitle}</h2>
               <p className="sm:w-4/5">{work.description}</p>
+              <div>
+                <h2> Tech & methods</h2>
+                <p>liste</p>
+              </div>
               <div className="flex">
                 <Link className="contact-btn  mt-6 mb-14" href={getPathFromNavLink(NavLinkEnum.Contact)}>
                   Contact
