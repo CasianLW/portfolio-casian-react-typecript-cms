@@ -37,7 +37,7 @@ const ProjectComponent: FC<ProjectProps> = ({
       <Link className="w-fit" href={`${getPathFromNavLink(NavLinkEnum.Works)}${slug}`}>
         {/* <a className="md:order-1">About</a> */}
         <div className="absolute ml-[12%] text-left -top-8 sm:-top-1">
-          <h2 className="text-4xl font-semibold ">{limitTitle(title, 10)}</h2>
+          <h2 className="text-4xl font-semibold mb-0">{limitTitle(title, 10)}</h2>
           <h3 className="text-xs md:text-lg line-clamp-1">{limitTitle(titleSecondary, 32)}</h3>
         </div>
         {imageRef && (
