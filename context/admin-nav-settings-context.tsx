@@ -27,8 +27,8 @@ export const AdminNavSettingsProvider: FC<AdminNavSettingsProviderProps> = ({ ch
   const [navIsClosed, setNavIsClosed] = useState(true)
   const [activeNavLink, setActiveNavLink] = useState<AdminNavLinkEnum | null>(null)
   const [closing, setClosing] = useState(false)
-  console.log(navIsClosed)
-  console.log(activeNavLink)
+  // console.log(navIsClosed)
+  // console.log(activeNavLink)
 
   return (
     <AdminNavSettingsContext.Provider
