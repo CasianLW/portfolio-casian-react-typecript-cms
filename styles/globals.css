@@ -38,6 +38,12 @@
   .secondary-title {
     @apply text-2xl font-bold;
   }
+  h2 {
+    @apply text-xl sm:text-2xl mb-3 md:mb-5 mt-2 font-semibold;
+  }
+  .contact-btn {
+    @apply;
+  }
 
   .primary-btn-white {
     @apply hover:custom-gradient-primary w-full disabled:bg-none bg-cas-black-600 bg-opacity-20 hover:bg-opacity-100 text-cas-black-600 hover:text-cas-white-100 p-3 mt-4 rounded-3xl;
