@@ -147,7 +147,7 @@ const IllustrationComponent: FC = () => {
         height={200}
         // blurDataURL="data:..." automatically provided
       />
-      <div id="blob-container" className="stack-item mb-auto ml-8 mt-8">
+      <div id="blob-container" className="stack-item mb-auto ml-8 mt-8 z-10">
         <div
           id="blob1"
           className={`blob bg-cas-gradient-blue ${isHovered && 'paused'}`}
