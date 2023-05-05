@@ -70,7 +70,7 @@ const About: NextPage<Props> = ({ seo }) => {
                       />
                     </div>
                   </div>
-                  <div>
+                  <div className="grid">
                     <h2>Contact</h2>
                     <div className="grid">
                       <a className="pb-3 w-fit hover:link-active" href="tel:+">
@@ -106,7 +106,7 @@ const About: NextPage<Props> = ({ seo }) => {
                         <p className="text-sm">GitHub</p>
                       </Link>
                     </div>
-                    <Link className="contact-btn" href={getPathFromNavLink(NavLinkEnum.Contact)}>
+                    <Link className="contact-btn md:w-1/3 mt-6 mb-14" href={getPathFromNavLink(NavLinkEnum.Contact)}>
                       Contact
                     </Link>
                   </div>
