@@ -31,6 +31,17 @@ const EditWorkComponent: FC<EditWorkInterface> = ({ dataWork, editWorkMethod }) 
       uxui: dataWork.category.uxui,
       graphic: dataWork.category.graphic,
     },
+    order: dataWork.order,
+    links: {
+      website: { published: dataWork.links.website.published, link: dataWork.links.website.link },
+
+      otherResource: {
+        published: dataWork.links.otherResource.published,
+        link: dataWork.links.otherResource.link,
+      },
+    },
+    skillPoints: dataWork.skillPoints || [],
+    pointText: '',
     published: dataWork.published,
   })
   const [submitStatus, setSubmitStatus] = useState<'submitting' | 'success' | 'error' | 'idle' | 'changed'>('idle')
@@ -61,6 +72,16 @@ const EditWorkComponent: FC<EditWorkInterface> = ({ dataWork, editWorkMethod }) 
         },
 
         secondaryImage: formData.secondaryImage,
+        order: formData.order,
+        links: {
+          website: { published: formData.links.website.published, link: formData.links.website.link },
+
+          otherResource: {
+            published: formData.links.otherResource.published,
+            link: formData.links.otherResource.link,
+          },
+        },
+        skillPoints: formData.skillPoints,
         published: formData.published,
       }),
     })
@@ -102,12 +123,22 @@ const EditWorkComponent: FC<EditWorkInterface> = ({ dataWork, editWorkMethod }) 
   }
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setSubmitStatus('changed')
-
-    setFormData({
-      ...formData,
-      [event.target.name]: event.target.value,
-    })
+    const { name, value } = event.target
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+      links: {
+        ...prevFormData.links,
+        website: {
+          ...prevFormData.links.website,
+          link: name === 'websiteLink' ? value : prevFormData.links.website.link,
+        },
+        otherResource: {
+          ...prevFormData.links.otherResource,
+          link: name === 'otherResourceLink' ? value : prevFormData.links.otherResource.link,
+        },
+      },
+    }))
   }
   const alertComponent = () => {
     switch (submitStatus) {
@@ -124,16 +155,16 @@ const EditWorkComponent: FC<EditWorkInterface> = ({ dataWork, editWorkMethod }) 
     }
   }
 
-  const uploadedCloudinary = (result: ICloudinaryUploadResult, widget: ICloudinaryWidget) => {
-    console.log('cloudinary working')
-    if (result.info) {
-      result.info &&
-        setFormData((prevFormData) => ({
-          ...prevFormData,
-          imgLink: result.info.public_id,
-        }))
-    }
-  }
+  // const uploadedCloudinary = (result: ICloudinaryUploadResult, widget: ICloudinaryWidget) => {
+  //   console.log('cloudinary working')
+  //   if (result.info) {
+  //     result.info &&
+  //       setFormData((prevFormData) => ({
+  //         ...prevFormData,
+  //         imgLink: result.info.public_id,
+  //       }))
+  //   }
+  // }
   const uploadedCloudinarySecondary = (result: ICloudinaryUploadResult, widget: ICloudinaryWidget) => {
     console.log('cloudinary working')
     if (result.info) {
@@ -144,6 +175,21 @@ const EditWorkComponent: FC<EditWorkInterface> = ({ dataWork, editWorkMethod }) 
         }))
     }
   }
+  const addPointToList = (event: any) => {
+    event.preventDefault()
+    setFormData({
+      ...formData,
+      pointText: '',
+      skillPoints: [...formData.skillPoints, formData.pointText], // fixed
+    })
+  }
+
+  const deletePoint = (index: number) => {
+    const newPoints = [...formData.skillPoints]
+    newPoints.splice(index, 1)
+    setFormData((prevFormData) => ({ ...prevFormData, skillPoints: newPoints }))
+  }
+
   return (
     <>
       {/* <style>{`
@@ -182,7 +228,93 @@ const EditWorkComponent: FC<EditWorkInterface> = ({ dataWork, editWorkMethod }) 
             onChange={handleInputChange}
           />
         </div>
+        <div className="mt-16">
+          <h3>Tech & methods:</h3>
+          <div className="grid">
+            <label htmlFor="pointText">Point text:</label>
+            <input name="pointText" value={formData.pointText} onChange={handleInputChange} />
+            <button onClick={addPointToList}>Add point to list</button>
+          </div>
+          <div>
+            <p>Point List:</p>
+            <ul>
+              {formData.skillPoints.map((point, index) => (
+                <li className="flex justify-between" key={index}>
+                  <p>{point}</p>{' '}
+                  <button className="deleteBtn" onClick={() => deletePoint(index)}>
+                    Delete
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+        <div className="grid  mt-16">
+          <label htmlFor="websiteBox">Website link ?</label>
+          <div>
+            <input
+              type={'checkbox'}
+              name="websiteBox"
+              checked={formData.links.website.published}
+              onChange={(event) =>
+                setFormData({
+                  ...formData,
+                  links: {
+                    ...formData.links,
+                    website: {
+                      ...formData.links.website,
+                      published: event.target.checked,
+                    },
+                  },
+                })
+              }
+            />
+            <span className="text-cas-white-100">{formData.links.website.published ? 'Yes' : 'No'}</span>
+          </div>
+          <input
+            disabled={!formData.links.website.published}
+            required
+            placeholder={formData.links.website.published ? 'https://....' : 'Check the box to enter link'}
+            type="text"
+            name="websiteLink"
+            value={formData.links.website.link}
+            onChange={handleInputChange}
+          />
+        </div>
+
         <div className="grid">
+          <label htmlFor="otherResourceBox">Other link ?</label>
+          <div>
+            <input
+              type={'checkbox'}
+              name="otherResourceBox"
+              checked={formData.links.otherResource.published}
+              onChange={(event) =>
+                setFormData({
+                  ...formData,
+                  links: {
+                    ...formData.links,
+                    otherResource: {
+                      ...formData.links.otherResource,
+                      published: event.target.checked,
+                    },
+                  },
+                })
+              }
+            />
+            <span className="text-cas-white-100">{formData.links.otherResource.published ? 'Yes' : 'No'}</span>
+          </div>
+          <input
+            disabled={!formData.links.otherResource.published}
+            required
+            placeholder={formData.links.otherResource.published ? 'https://....' : 'Check the box to enter link'}
+            type="text"
+            name="otherResourceLink"
+            value={formData.links.otherResource.link}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="grid mt-16">
           <label htmlFor="imgLink">Lien image</label>
           {/* <input required name="imgLink" value={formData.imgLink} onChange={handleInputChange} /> */}
           <input
@@ -268,6 +400,11 @@ const EditWorkComponent: FC<EditWorkInterface> = ({ dataWork, editWorkMethod }) 
               Graphic
             </label>
           </div>
+        </div>
+        <div className="grid">
+          <label htmlFor="order">Ordre dans la liste</label>
+          <input required name="order" type="number" value={formData.order} onChange={handleInputChange} />
+          *50 étant la valeur défault de tous les projets
         </div>
 
         <div className="my-10">
