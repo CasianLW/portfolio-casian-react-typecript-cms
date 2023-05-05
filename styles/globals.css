@@ -39,7 +39,7 @@
     @apply text-2xl font-bold;
   }
   h2 {
-    @apply text-xl sm:text-2xl mb-3 md:mb-5 mt-2 font-semibold;
+    @apply text-xl sm:text-2xl mb-3  mt-2 font-semibold;
   }
   .contact-btn {
     @apply w-full bg-cas-gradient-blue py-4 text-xl font-semibold text-center rounded-xl;
