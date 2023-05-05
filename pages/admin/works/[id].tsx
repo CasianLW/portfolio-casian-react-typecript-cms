@@ -30,6 +30,13 @@ export interface IWorkInfo {
   coverImage: string
   secondaryImage: string
   published: boolean
+  order: number
+  pointText: string
+  pointList: string[]
+  links: {
+    website: { published: boolean; link: string }
+    otherResource: { published: boolean; link: string }
+  }
 }
 const WorkInfoPage: NextPage<Props> = () => {
   // const [loading, setLoading] = useState(true)
