@@ -36,7 +36,7 @@ const WorkSchema: Schema = new Schema({
       published: { type: Boolean, required: false, default: false },
       link: { type: String, required: false, default: '' },
     },
-    otherRessource: {
+    otherResource: {
       published: { type: Boolean, required: false, default: false },
       link: { type: String, required: false, default: '' },
     },
