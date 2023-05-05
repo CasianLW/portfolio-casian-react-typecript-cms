@@ -38,6 +38,7 @@ const EditWorkComponent: FC<EditWorkInterface> = ({ dataWork, editWorkMethod }) 
       otherResource: {
         published: dataWork.links.otherResource.published,
         link: dataWork.links.otherResource.link,
+        title: dataWork.links.otherResource.title,
       },
     },
     skillPoints: dataWork.skillPoints || [],
@@ -79,6 +80,7 @@ const EditWorkComponent: FC<EditWorkInterface> = ({ dataWork, editWorkMethod }) 
           otherResource: {
             published: formData.links.otherResource.published,
             link: formData.links.otherResource.link,
+            title: formData.links.otherResource.title,
           },
         },
         skillPoints: formData.skillPoints,
@@ -136,6 +138,7 @@ const EditWorkComponent: FC<EditWorkInterface> = ({ dataWork, editWorkMethod }) 
         otherResource: {
           ...prevFormData.links.otherResource,
           link: name === 'otherResourceLink' ? value : prevFormData.links.otherResource.link,
+          title: name === 'otherResourceTitle' ? value : prevFormData.links.otherResource.title,
         },
       },
     }))
@@ -282,7 +285,7 @@ const EditWorkComponent: FC<EditWorkInterface> = ({ dataWork, editWorkMethod }) 
           />
         </div>
 
-        <div className="grid">
+        <div className="grid mt-5">
           <label htmlFor="otherResourceBox">Other link ?</label>
           <div>
             <input
@@ -304,6 +307,16 @@ const EditWorkComponent: FC<EditWorkInterface> = ({ dataWork, editWorkMethod }) 
             />
             <span className="text-cas-white-100">{formData.links.otherResource.published ? 'Yes' : 'No'}</span>
           </div>
+          <input
+            className="mb-2"
+            disabled={!formData.links.otherResource.published}
+            required
+            placeholder={formData.links.otherResource.published ? 'Button title...' : 'Check the box to enter title'}
+            type="text"
+            name="otherResourceTitle"
+            value={formData.links.otherResource.title}
+            onChange={handleInputChange}
+          />
           <input
             disabled={!formData.links.otherResource.published}
             required
