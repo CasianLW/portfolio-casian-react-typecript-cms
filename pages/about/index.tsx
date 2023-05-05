@@ -185,7 +185,7 @@ const CompetenceComponent: FC<CompetenceProps> = ({ texte, image, nomCompetence 
         width={100}
         height={100}
       />
-      <h4 className="text-xs text-center">{nomCompetence}</h4>
+      <h4 className="text-xs text-center md:text-sm">{nomCompetence}</h4>
       <p className="text-center text-xs link-active">{texte}</p>
     </div>
   )
