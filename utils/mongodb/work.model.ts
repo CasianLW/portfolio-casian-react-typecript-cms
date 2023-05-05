@@ -26,6 +26,16 @@ const WorkSchema: Schema = new Schema({
     required: true,
   },
 
+  skillPoints: {
+    type: Array,
+    default: [''],
+  },
+
+  links: {
+    website: { type: String, required: false, default: '' },
+    otherRessource: { type: String, required: false, default: '' },
+  },
+
   coverImage: {
     type: String,
     required: true,
