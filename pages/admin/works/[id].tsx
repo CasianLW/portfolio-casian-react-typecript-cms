@@ -35,7 +35,7 @@ export interface IWorkInfo {
   skillPoints: string[]
   links: {
     website: { published: boolean; link: string }
-    otherResource: { published: boolean; link: string }
+    otherResource: { published: boolean; link: string; title: string }
   }
 }
 const WorkInfoPage: NextPage<Props> = () => {
