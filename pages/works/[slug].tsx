@@ -9,6 +9,8 @@ import { ParsedUrlQuery } from 'querystring'
 import { log } from 'util'
 import { IWorkInfo } from '../admin/works/[id]'
 import { CldImage } from 'next-cloudinary'
+import Link from 'next/link'
+import { NavLinkEnum, getPathFromNavLink } from '@/components/nav'
 
 interface Props {
   seo: Seo
@@ -89,6 +91,11 @@ const SingleWorkPage: NextPage<Props> = ({ seo, work }) => {
             <div>
               <h2 className="pt-3 sm:pt-0 mb-3 text-2xl font-semibold">{work.secondaryTitle}</h2>
               <p className="sm:w-4/5">{work.description}</p>
+              <div className="flex">
+                <Link className="contact-btn  mt-6 mb-14" href={getPathFromNavLink(NavLinkEnum.Contact)}>
+                  Contact
+                </Link>
+              </div>
             </div>
           </div>
         </header>
