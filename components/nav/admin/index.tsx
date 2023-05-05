@@ -6,6 +6,7 @@ import { useAdminNavSettingsContext } from '@/context/admin-nav-settings-context
 import { logoCasianBlanc } from '@/assets/shared'
 import Image from 'next/image'
 import BurgerComponent from './burger-component'
+import NetlifyBuildDuration from '@/components/admin/shared/netlifyBuildsComponent'
 
 export enum AdminNavLinkEnum {
   Dashboard = 'Dashboard',
@@ -106,6 +107,7 @@ const AdminNavComponent: FC = () => {
             <AdminNavLinkComponent key={i} navLink={navLink} href={href} supplentaryClasses={supplementaryClasses} />
           )
         })}
+      {/* <NetlifyBuildDuration siteId="your-site-id" accessToken="your-access-token" /> */}
     </nav>
   )
 }
