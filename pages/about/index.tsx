@@ -132,7 +132,7 @@ const IllustrationComponent: FC = () => {
   }
   return (
     <section className="grid mb-10 h-fit sm:mb-0 mx-[-5vw] p-[10%] md:p-0 sm:mx-0 sm:mt-12  text-cas-white-100 col-span-1 ">
-      <div className="stack-item">
+      <div className="stack-item z-10">
         <h3 className="text-1xl md:text-4xl mt-[5%] float-right">Casian C.</h3>
       </div>
       <div className="ml-auto w-4/5 md:w-full stack-item p-10 rounded-[32px]  bg-cas-black-400 h-4/5 mt-auto"></div>
