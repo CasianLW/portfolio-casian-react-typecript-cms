@@ -41,6 +41,7 @@ const WorkSchema: Schema = new Schema({
       link: { type: String, required: false, default: '' },
     },
   },
+  order: { type: Number, default: 50 },
 
   coverImage: {
     type: String,
