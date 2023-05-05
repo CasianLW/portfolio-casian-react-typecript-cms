@@ -42,7 +42,19 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     console.log(req.body)
     try {
       await dbConnect()
-      var { title, secondaryTitle, seo, slug, description, coverImage, secondaryImage, category, published } = req.body
+      var {
+        title,
+        secondaryTitle,
+        seo,
+        slug,
+        description,
+        coverImage,
+        secondaryImage,
+        category,
+        published,
+        links,
+        skillPoints,
+      } = req.body
 
       // Validate request body against the WorkModel schema
       if (
@@ -54,7 +66,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         !description ||
         !coverImage ||
         !secondaryImage ||
-        !category
+        !category ||
+        !links ||
+        !skillPoints
       ) {
         return res.status(400).json({ success: false, message: 'Missing required fields in the request body' })
       }
@@ -81,6 +95,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         secondaryImage,
         category,
         published,
+        links,
+        skillPoints,
       })
       res.status(201).json({ success: true, data: work })
     } catch (error) {
