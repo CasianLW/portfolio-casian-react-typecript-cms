@@ -177,7 +177,7 @@ interface CompetenceProps {
 
 const CompetenceComponent: FC<CompetenceProps> = ({ texte, image, nomCompetence }) => {
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center w-full">
       <Image
         className="max-w-[56px]"
         src={image}
@@ -185,8 +185,8 @@ const CompetenceComponent: FC<CompetenceProps> = ({ texte, image, nomCompetence 
         width={100}
         height={100}
       />
-      <h4>{nomCompetence}</h4>
-      <p className="text-center">{texte}</p>
+      <h4 className="text-xs text-center">{nomCompetence}</h4>
+      <p className="text-center text-xs link-active">{texte}</p>
     </div>
   )
 }
