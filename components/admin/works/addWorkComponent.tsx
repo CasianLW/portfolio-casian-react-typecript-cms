@@ -255,11 +255,11 @@ const AddWorkComponent: FC<AddWorkInterface> = ({ getWorksList }) => {
           </div>
         </div>
         <div className="grid  mt-16">
-          <label htmlFor="slug">Website link ?</label>
+          <label htmlFor="websiteBox">Website link ?</label>
           <div>
             <input
               type={'checkbox'}
-              name="published"
+              name="websiteBox"
               checked={formData.links.website.published}
               onChange={(event) =>
                 setFormData({
@@ -281,17 +281,17 @@ const AddWorkComponent: FC<AddWorkInterface> = ({ getWorksList }) => {
             required
             placeholder={formData.links.website.published ? 'https://....' : 'Check the box to enter link'}
             type="text"
-            name="slug"
+            name="websiteLink"
             value={formData.links.website.link}
             onChange={handleInputChange}
           />
         </div>
         <div className="grid">
-          <label htmlFor="slug">Other link ?</label>
+          <label htmlFor="otherResourceBox">Other link ?</label>
           <div>
             <input
               type={'checkbox'}
-              name="published"
+              name="otherResourceBox"
               checked={formData.links.otherResource.published}
               onChange={(event) =>
                 setFormData({
@@ -313,7 +313,7 @@ const AddWorkComponent: FC<AddWorkInterface> = ({ getWorksList }) => {
             required
             placeholder={formData.links.otherResource.published ? 'https://....' : 'Check the box to enter link'}
             type="text"
-            name="slug"
+            name="otherResourceLink"
             value={formData.links.otherResource.link}
             onChange={handleInputChange}
           />
