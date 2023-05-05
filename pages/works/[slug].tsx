@@ -102,9 +102,35 @@ const SingleWorkPage: NextPage<Props> = ({ seo, work }) => {
                 <h2> Tech & methods</h2>
                 <p>liste</p>
               </div>
+              <div
+                className={
+                  'grid  mt-8' +
+                  `${
+                    work.links.otherResource.published && work.links.website.published
+                      ? ' grid-cols-2 gap-5 md:gap-8'
+                      : ' grid-cols-1'
+                  }`
+                }
+              >
+                {work.links.website.published ? (
+                  <Link className="work-link-btn  " target="_blank" href={work.links.website.link}>
+                    Website link
+                  </Link>
+                ) : (
+                  ''
+                )}
+                {work.links.otherResource.published ? (
+                  <Link className="work-link-btn ml-auto " target="_blank" href={work.links.otherResource.link}>
+                    Link
+                  </Link>
+                ) : (
+                  ''
+                )}
+              </div>
+
               <div className="flex">
                 <Link className="contact-btn  mt-6 mb-14" href={getPathFromNavLink(NavLinkEnum.Contact)}>
-                  Contact
+                  Contact me
                 </Link>
               </div>
             </div>
