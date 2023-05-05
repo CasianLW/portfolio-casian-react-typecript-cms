@@ -14,8 +14,31 @@ const AddWorkComponent: FC<AddWorkInterface> = ({ getWorksList }) => {
   interface ICloudinaryWidget {
     close: () => void
   }
+  interface FormDataType {
+    seoTitle: string
+    seoDescription: string
+    title: string
+    secondaryTitle: string
+    slug: string
+    description: string
+    imgLink: string
+    secondaryImage: string
+    category: {
+      dev: boolean
+      uxui: boolean
+      graphic: boolean
+    }
+    published: boolean
+    order: number
+    pointText: string
+    pointList: string[]
+    links: {
+      website: { published: boolean; link: string }
+      otherResource: { published: boolean; link: string }
+    }
+  }
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormDataType>({
     seoTitle: '',
     seoDescription: '',
     title: '',
@@ -30,6 +53,13 @@ const AddWorkComponent: FC<AddWorkInterface> = ({ getWorksList }) => {
       graphic: false,
     },
     published: false,
+    order: 50,
+    pointText: '',
+    pointList: [],
+    links: {
+      website: { published: false, link: '' },
+      otherResource: { published: false, link: '' },
+    },
   })
   const [submitStatus, setSubmitStatus] = useState<'submitting' | 'success' | 'error' | 'idle'>('idle')
   const [messageText, setMessageText] = useState()
@@ -57,6 +87,15 @@ const AddWorkComponent: FC<AddWorkInterface> = ({ getWorksList }) => {
           uxui: formData.category.uxui,
           graphic: formData.category.graphic,
         },
+        links: {
+          website: { published: formData.links.website.published, link: formData.links.website.link },
+
+          otherRessource: {
+            published: formData.links.otherResource.published,
+            link: formData.links.otherResource.link,
+          },
+        },
+        skillPoints: formData.pointList,
 
         secondaryImage: formData.secondaryImage,
         published: formData.published,
@@ -78,12 +117,19 @@ const AddWorkComponent: FC<AddWorkInterface> = ({ getWorksList }) => {
         description: '',
         imgLink: '',
         secondaryImage: '',
+        order: 50,
         category: {
           dev: false,
           uxui: false,
           graphic: false,
         },
         published: false,
+        pointText: '',
+        pointList: [],
+        links: {
+          website: { published: false, link: '' },
+          otherResource: { published: false, link: '' },
+        },
       })
       setTimeout(() => {
         setSubmitStatus('idle')
@@ -141,12 +187,25 @@ const AddWorkComponent: FC<AddWorkInterface> = ({ getWorksList }) => {
         }))
     }
   }
+  const addPointToList = (event: any) => {
+    event.preventDefault()
+    setFormData({
+      ...formData,
+      pointText: '',
+      pointList: [...formData.pointList, formData.pointText],
+    })
+  }
+  const deletePoint = (index: number) => {
+    const newPoints = [...formData.pointList]
+    newPoints.splice(index, 1)
+    setFormData({ ...formData, pointList: newPoints })
+  }
   return (
     <>
       <h2 className="secondary-title">Add new Work</h2>
       <form className="mt-10 " onSubmit={handleSubmit}>
-        <h3>Ajouter un projet</h3>
-        <div className="grid">
+        <h3>*Complétez le formulaire pour ajouter un projet</h3>
+        <div className="grid  mt-6">
           <label htmlFor="title">Title</label>
           <input required type="text" name="title" value={formData.title} onChange={handleInputChange} />
         </div>
@@ -174,7 +233,92 @@ const AddWorkComponent: FC<AddWorkInterface> = ({ getWorksList }) => {
             onChange={handleInputChange}
           />
         </div>
+        <div className="mt-16">
+          <h3>Tech & methods:</h3>
+          <div className="grid">
+            <label htmlFor="pointText">Point text:</label>
+            <input name="pointText" value={formData.pointText} onChange={handleInputChange} />
+            <button onClick={addPointToList}>Add point to list</button>
+          </div>
+          <div>
+            <p>Point List:</p>
+            <ul>
+              {formData.pointList.map((point, index) => (
+                <li className="flex justify-between" key={index}>
+                  <p>{point}</p>{' '}
+                  <button className="deleteBtn" onClick={() => deletePoint(index)}>
+                    Delete
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+        <div className="grid  mt-16">
+          <label htmlFor="slug">Website link ?</label>
+          <div>
+            <input
+              type={'checkbox'}
+              name="published"
+              checked={formData.links.website.published}
+              onChange={(event) =>
+                setFormData({
+                  ...formData,
+                  links: {
+                    ...formData.links,
+                    website: {
+                      ...formData.links.website,
+                      published: event.target.checked,
+                    },
+                  },
+                })
+              }
+            />
+            <span className="text-cas-white-100">{formData.links.website.published ? 'Yes' : 'No'}</span>
+          </div>
+          <input
+            disabled={!formData.links.website.published}
+            required
+            placeholder={formData.links.website.published ? 'https://....' : 'Check the box to enter link'}
+            type="text"
+            name="slug"
+            value={formData.links.website.link}
+            onChange={handleInputChange}
+          />
+        </div>
         <div className="grid">
+          <label htmlFor="slug">Other link ?</label>
+          <div>
+            <input
+              type={'checkbox'}
+              name="published"
+              checked={formData.links.otherResource.published}
+              onChange={(event) =>
+                setFormData({
+                  ...formData,
+                  links: {
+                    ...formData.links,
+                    otherResource: {
+                      ...formData.links.otherResource,
+                      published: event.target.checked,
+                    },
+                  },
+                })
+              }
+            />
+            <span className="text-cas-white-100">{formData.links.otherResource.published ? 'Yes' : 'No'}</span>
+          </div>
+          <input
+            disabled={!formData.links.otherResource.published}
+            required
+            placeholder={formData.links.otherResource.published ? 'https://....' : 'Check the box to enter link'}
+            type="text"
+            name="slug"
+            value={formData.links.otherResource.link}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="grid mt-16">
           <label htmlFor="imgLink">Lien image</label>
           {/* <input required name="imgLink" value={formData.imgLink} onChange={handleInputChange} /> */}
           <input
@@ -260,6 +404,10 @@ const AddWorkComponent: FC<AddWorkInterface> = ({ getWorksList }) => {
               Graphic
             </label>
           </div>
+        </div>
+        <div className="grid">
+          <label htmlFor="order">Ordre dans la liste</label>
+          <input required name="order" type="number" value={formData.order} onChange={handleInputChange} />
         </div>
 
         <div className="my-10">
