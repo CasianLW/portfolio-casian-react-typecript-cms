@@ -87,7 +87,7 @@ const Contact: NextPage<Props> = ({ seo }) => {
 
             <Image
               src={profilePicture}
-              className="max-w-[50%] m-auto mt-10"
+              className="w-1/2 md:max-w-[36%] md:min-w-[248px] m-auto mt-10"
               alt="Casian Ciorba Photo UX UI Designer et Fullstack Mobile Developer"
               priority={true}
               width={500}
