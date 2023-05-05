@@ -87,6 +87,7 @@ const AddWorkComponent: FC<AddWorkInterface> = ({ getWorksList }) => {
           uxui: formData.category.uxui,
           graphic: formData.category.graphic,
         },
+        order: formData.order,
         links: {
           website: { published: formData.links.website.published, link: formData.links.website.link },
 
@@ -147,10 +148,22 @@ const AddWorkComponent: FC<AddWorkInterface> = ({ getWorksList }) => {
   }
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [event.target.name]: event.target.value,
-    })
+    const { name, value } = event.target
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+      links: {
+        ...prevFormData.links,
+        website: {
+          ...prevFormData.links.website,
+          link: name === 'websiteLink' ? value : prevFormData.links.website.link,
+        },
+        otherResource: {
+          ...prevFormData.links.otherResource,
+          link: name === 'otherResourceLink' ? value : prevFormData.links.otherResource.link,
+        },
+      },
+    }))
   }
   const alertComponent = () => {
     switch (submitStatus) {
