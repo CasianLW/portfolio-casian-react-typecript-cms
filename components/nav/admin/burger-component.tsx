@@ -7,7 +7,7 @@ const BurgerComponent: FC = () => {
   const { setNavIsClosed, navIsClosed, closing, setClosing } = useAdminNavSettingsContext()
 
   const handleClick = () => {
-    console.log(closing)
+    // console.log(closing)
     if (closing) return
     setNavIsClosed(!navIsClosed)
     if (navIsClosed) {
