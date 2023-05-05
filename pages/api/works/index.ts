@@ -54,6 +54,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         published,
         links,
         skillPoints,
+        order,
       } = req.body
 
       // Validate request body against the WorkModel schema
@@ -68,7 +69,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         !secondaryImage ||
         !category ||
         !links ||
-        !skillPoints
+        !skillPoints ||
+        !order
       ) {
         return res.status(400).json({ success: false, message: 'Missing required fields in the request body' })
       }
@@ -97,6 +99,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         published,
         links,
         skillPoints,
+        order,
       })
       res.status(201).json({ success: true, data: work })
     } catch (error) {
