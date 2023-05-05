@@ -32,7 +32,7 @@ export interface IWorkInfo {
   published: boolean
   order: number
   pointText: string
-  pointList: string[]
+  skillPoints: string[]
   links: {
     website: { published: boolean; link: string }
     otherResource: { published: boolean; link: string }
