@@ -32,8 +32,14 @@ const WorkSchema: Schema = new Schema({
   },
 
   links: {
-    website: { type: String, required: false, default: '' },
-    otherRessource: { type: String, required: false, default: '' },
+    website: {
+      published: { type: Boolean, required: false, default: false },
+      link: { type: String, required: false, default: '' },
+    },
+    otherRessource: {
+      published: { type: Boolean, required: false, default: false },
+      link: { type: String, required: false, default: '' },
+    },
   },
 
   coverImage: {
