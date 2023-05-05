@@ -408,6 +408,7 @@ const AddWorkComponent: FC<AddWorkInterface> = ({ getWorksList }) => {
         <div className="grid">
           <label htmlFor="order">Ordre dans la liste</label>
           <input required name="order" type="number" value={formData.order} onChange={handleInputChange} />
+          *50 étant la valeur défault de tous les projets
         </div>
 
         <div className="my-10">
