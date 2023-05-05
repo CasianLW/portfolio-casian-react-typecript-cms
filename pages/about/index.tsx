@@ -73,7 +73,7 @@ const About: NextPage<Props> = ({ seo }) => {
                   <div>
                     <h2>Contact</h2>
                     <div className="grid">
-                      <a className="py-3 w-fit hover:link-active" href="tel:+">
+                      <a className="pb-3 w-fit hover:link-active" href="tel:+">
                         <u>Tel.+33 (0)7 83 41 57 55</u>
                       </a>
                       {/* <a className="py-3" href="mailto:">
@@ -106,7 +106,9 @@ const About: NextPage<Props> = ({ seo }) => {
                         <p className="text-sm">GitHub</p>
                       </Link>
                     </div>
-                    <Link href={getPathFromNavLink(NavLinkEnum.Contact)}>Contact</Link>
+                    <Link className="contact-btn" href={getPathFromNavLink(NavLinkEnum.Contact)}>
+                      Contact
+                    </Link>
                   </div>
                 </div>
                 {/* )} */}
