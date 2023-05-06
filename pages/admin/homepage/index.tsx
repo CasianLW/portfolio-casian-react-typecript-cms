@@ -87,9 +87,6 @@ const HomepageCMS: NextPage<Props> = () => {
     getWorksList()
   }, [setSubmitStatus, setMessageText, setWorksList])
 
-  const test = () => {
-    console.log(worksList)
-  }
   const alertComponent = () => {
     switch (submitStatus) {
       case 'submitting':
