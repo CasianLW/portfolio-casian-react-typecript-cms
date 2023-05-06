@@ -39,6 +39,7 @@ const HomepageCMS: NextPage<Props> = () => {
     setActiveNavLink(AdminNavLinkEnum.Homepage)
   }, [setActiveNavLink])
   const [loading, setLoading] = useState(true)
+  const [actualWorksList, setActualWorksList] = useState<string[]>([])
   const [worksList, setWorksList] = useState<WorkInterface[]>([])
   const [submitStatus, setSubmitStatus] = useState<'submitting' | 'success' | 'error' | 'idle'>('idle')
   const [messageText, setMessageText] = useState(String)
@@ -51,12 +52,18 @@ const HomepageCMS: NextPage<Props> = () => {
       const response = await fetch('/api/works/', {
         method: 'GET',
       })
+      const responseHp = await fetch('/api/homepage/', {
+        method: 'GET',
+      })
+      const dataHp = await responseHp.json()
       const data = await response.json()
       // console.log(data)
-      if (response.ok) {
+      if (response.ok && responseHp.ok) {
         // Handle success
         setSubmitStatus('success')
         setWorksList(data.works.reverse())
+        setActualWorksList(dataHp.homepage[0]?.selectedWorks || [])
+        console.log(dataHp.homepage)
         setLoading(false)
         // console.log(Array.isArray(worksList) + 'ies it is')
 
@@ -122,13 +129,13 @@ const HomepageCMS: NextPage<Props> = () => {
     event.preventDefault()
 
     setSubmitStatus('submitting')
-    const response = await fetch('/api/works/', {
+    const response = await fetch('/api/homepage/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        selectedWork: homepageWorks,
+        selectedWorks: homepageWorks,
       }),
     })
     const data = await response.json()
@@ -159,25 +166,34 @@ const HomepageCMS: NextPage<Props> = () => {
         <header className="top-header-admin lateral-space">
           <h1 className="main-title">Homepage</h1>
         </header>
-        <section className="admin-content">
+        <section className="admin-content lateral-space ">
           {loading ? ( // Conditional rendering based on the loading state
             <div>Loading works ...</div>
           ) : (
             <form onSubmit={updateList}>
-              <section className="grid gap-4 grid-cols-1 md:grid-cols-2">
+              <section className="grid gap-4 grid-cols-1 md:grid-cols-3">
                 <div className="col-span-1">
                   <div>
-                    <select multiple={true} value={[...homepageWorks]} onChange={handleSelectWork}>
+                    <h2>Liste projets</h2>
+
+                    <select
+                      className="min-w-[120px]"
+                      multiple={true}
+                      value={[...homepageWorks]}
+                      onChange={handleSelectWork}
+                    >
                       {worksList
                         ?.filter((work) => !homepageWorks.includes(work.slug))
                         .map((work) => (
-                          <option className="text-cas-black-600" key={work.slug} value={work.slug}>
+                          <option className="text-cas-black-600 " key={work.slug} value={work.slug}>
                             {work.title}
                           </option>
                         ))}
                     </select>
                   </div>
-                  IF OPTION LIST IS EMPTY, DISPLAY everything selected
+                  {worksList.filter((work) => !homepageWorks.includes(work.slug)).length === 0 ? (
+                    <div>La liste est vide, ajoutez plus de projets</div>
+                  ) : null}{' '}
                 </div>
                 <div className="col-span-1">
                   <h2>Selected Works</h2>
@@ -185,7 +201,7 @@ const HomepageCMS: NextPage<Props> = () => {
                     {[...homepageWorks].map((workSlug) => {
                       const work = worksList?.find((w) => w.slug === workSlug)
                       return (
-                        <li key={workSlug}>
+                        <li className="list-decimal	" key={workSlug}>
                           {work?.title}
                           <button className="text-red-500" onClick={() => handleRemoveWork(workSlug)}>
                             Remove
@@ -194,6 +210,20 @@ const HomepageCMS: NextPage<Props> = () => {
                       )
                     })}
                   </ul>
+                  {homepageWorks.length == 0 ? '* Selectionnez des projets' : ''}
+                </div>
+                <div className="col-span-1">
+                  <h2>Actual Works</h2>
+
+                  <ol type="1">
+                    {[...actualWorksList].map((workSlug) => {
+                      return (
+                        <li className="list-decimal	py-2" key={workSlug}>
+                          {workSlug}
+                        </li>
+                      )
+                    })}
+                  </ol>
                 </div>
               </section>
               <button type="submit">Click to update</button>
