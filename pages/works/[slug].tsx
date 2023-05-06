@@ -101,11 +101,12 @@ const SingleWorkPage: NextPage<Props> = ({ seo, work }) => {
               <div className="mt-8">
                 <h2> Tech & methods</h2>
                 <ul className="grid grid-cols-2">
-                  {work.skillPoints.map((point, index) => (
-                    <li className="text-sm md:text-base" key={index}>
-                      {point}
-                    </li>
-                  ))}
+                  {work.skillPoints &&
+                    work.skillPoints.map((point, index) => (
+                      <li className="text-sm md:text-base" key={index}>
+                        {point}
+                      </li>
+                    ))}
                 </ul>
               </div>
               <div
@@ -118,14 +119,14 @@ const SingleWorkPage: NextPage<Props> = ({ seo, work }) => {
                   }`
                 }
               >
-                {work.links.website.published ? (
+                {work.links.website && work.links.website.published ? (
                   <Link className="work-link-btn  " target="_blank" href={work.links.website.link}>
                     Website link
                   </Link>
                 ) : (
                   ''
                 )}
-                {work.links.otherResource.published ? (
+                {work.links.otherResource && work.links.otherResource.published ? (
                   <Link className="work-link-btn ml-auto " target="_blank" href={work.links.otherResource.link}>
                     {work.links.otherResource.title}
                   </Link>
