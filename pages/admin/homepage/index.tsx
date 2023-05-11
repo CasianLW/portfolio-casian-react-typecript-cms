@@ -39,7 +39,9 @@ const HomepageCMS: NextPage<Props> = () => {
     setActiveNavLink(AdminNavLinkEnum.Homepage)
   }, [setActiveNavLink])
   const [loading, setLoading] = useState(true)
-  const [actualWorksList, setActualWorksList] = useState<string[]>([])
+  // const [actualWorksList, setActualWorksList] = useState<string[]>([])
+  const [actualWorksList, setActualWorksList] = useState<{ slug: string }[]>([])
+
   const [worksList, setWorksList] = useState<WorkInterface[]>([])
   const [submitStatus, setSubmitStatus] = useState<'submitting' | 'success' | 'error' | 'idle'>('idle')
   const [messageText, setMessageText] = useState(String)
@@ -222,9 +224,11 @@ const HomepageCMS: NextPage<Props> = () => {
                         ))}
                     </select>
                   </div>
-                  {worksList.filter((work) => !homepageWorks.includes(work.slug)).length === 0 ? (
+                  {worksList.some(
+                    (work) => !homepageWorks.some((homepageWork) => homepageWork.slug === work.slug)
+                  ) ? null : (
                     <div>La liste est vide, ajoutez plus de projets</div>
-                  ) : null}{' '}
+                  )}
                 </div>
                 <div className="col-span-1">
                   <h2>Selected Works</h2>
