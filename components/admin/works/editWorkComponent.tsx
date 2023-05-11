@@ -158,18 +158,16 @@ const EditWorkComponent: FC<EditWorkInterface> = ({ dataWork, editWorkMethod }) 
     }
   }
 
-  // const uploadedCloudinary = (result: ICloudinaryUploadResult, widget: ICloudinaryWidget) => {
-  //   console.log('cloudinary working')
-  //   if (result.info) {
-  //     result.info &&
-  //       setFormData((prevFormData) => ({
-  //         ...prevFormData,
-  //         imgLink: result.info.public_id,
-  //       }))
-  //   }
-  // }
+  const uploadedCloudinary = (result: ICloudinaryUploadResult, widget: ICloudinaryWidget) => {
+    if (result.info) {
+      result.info &&
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          imgLink: result.info.public_id,
+        }))
+    }
+  }
   const uploadedCloudinarySecondary = (result: ICloudinaryUploadResult, widget: ICloudinaryWidget) => {
-    console.log('cloudinary working')
     if (result.info) {
       result.info &&
         setFormData((prevFormData) => ({
@@ -342,7 +340,7 @@ const EditWorkComponent: FC<EditWorkInterface> = ({ dataWork, editWorkMethod }) 
             <CldImage width="600" height="600" src={formData.imgLink} alt="Description of my image" />
           )}
           <CldUploadButton
-            onUpload={uploadedCloudinarySecondary}
+            onUpload={uploadedCloudinary}
             uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET}
           />
         </div>
