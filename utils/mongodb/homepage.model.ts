@@ -6,8 +6,32 @@ import { models, model, Schema } from 'mongoose'
 
 const HomepageSchema: Schema = new Schema({
   selectedWorks: {
-    type: Array,
-    default: [''],
+    type: [
+      new Schema({
+        seoTitle: String,
+        seoDescription: String,
+        title: String,
+        secondaryTitle: String,
+        slug: String,
+        description: String,
+        secondaryImage: String,
+        coverImage: { type: String, required: true },
+        category: {
+          dev: Boolean,
+          uxui: Boolean,
+          graphic: Boolean,
+        },
+        published: Boolean,
+        order: Number,
+        pointText: String,
+        pointList: [String],
+        links: {
+          website: { published: Boolean, link: String },
+          otherResource: { published: Boolean, link: String, title: String },
+        },
+      }),
+    ],
+    default: [],
   },
 })
 
