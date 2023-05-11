@@ -4,7 +4,7 @@ import SeoComponent from '@/components/shared/seo-component'
 import { useAdminNavSettingsContext } from '@/context/admin-nav-settings-context'
 import AdminLayoutComponent from '@/layout/admin'
 import { NextPage } from 'next'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 interface Props {
   seo: Seo
@@ -16,7 +16,7 @@ interface WorkInterface {
   secondaryTitle: string
   slug: string
   description: string
-  imgLink: string
+  coverImage: string
   secondaryImage: string
   category: {
     dev: boolean
@@ -43,9 +43,10 @@ const HomepageCMS: NextPage<Props> = () => {
   const [worksList, setWorksList] = useState<WorkInterface[]>([])
   const [submitStatus, setSubmitStatus] = useState<'submitting' | 'success' | 'error' | 'idle'>('idle')
   const [messageText, setMessageText] = useState(String)
-  const [homepageWorks, setHomepageWorks] = useState<string[]>([])
+  // const [homepageWorks, setHomepageWorks] = useState<string[]>([])
+  const [homepageWorks, setHomepageWorks] = useState<WorkInterface[]>([])
 
-  const getWorksList = async () => {
+  const getWorksList = useCallback(async () => {
     // console.log('test du transfer')
     try {
       setSubmitStatus('submitting')
@@ -57,7 +58,8 @@ const HomepageCMS: NextPage<Props> = () => {
       })
       const dataHp = await responseHp.json()
       const data = await response.json()
-      // console.log(data)
+      console.log(data)
+      console.log(dataHp)
       if (response.ok && responseHp.ok) {
         // Handle success
         setSubmitStatus('success')
@@ -82,10 +84,10 @@ const HomepageCMS: NextPage<Props> = () => {
         setSubmitStatus('idle')
       }, 4000)
     }
-  }
+  }, [setSubmitStatus, setMessageText, setWorksList])
   useEffect(() => {
     getWorksList()
-  }, [setSubmitStatus, setMessageText, setWorksList])
+  }, [getWorksList])
 
   const alertComponent = () => {
     switch (submitStatus) {
@@ -101,27 +103,55 @@ const HomepageCMS: NextPage<Props> = () => {
         return null
     }
   }
+  // const handleSelectWork = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  //   const selectedWorkSlug = e.target.value
+  //   if (homepageWorks.length >= 6 && !homepageWorks.includes(selectedWorkSlug)) {
+  //     alert('You can only select up to 6 works')
+  //     return
+  //   }
+  //   const newHomepageWorks = [...homepageWorks]
+  //   if (homepageWorks.includes(selectedWorkSlug)) {
+  //     const index = newHomepageWorks.indexOf(selectedWorkSlug)
+  //     newHomepageWorks.splice(index, 1)
+  //   } else {
+  //     newHomepageWorks.push(selectedWorkSlug)
+  //   }
+  //   setHomepageWorks(newHomepageWorks)
+  // }
+  // const handleRemoveWork = (workSlug: string) => {
+  //   const newHomepageWorks = [...homepageWorks]
+  //   const index = newHomepageWorks.indexOf(workSlug)
+  //   newHomepageWorks.splice(index, 1)
+  //   setHomepageWorks(newHomepageWorks)
+  // }
+
   const handleSelectWork = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    console.log(homepageWorks)
+    console.log(worksList)
     const selectedWorkSlug = e.target.value
-    if (homepageWorks.length >= 6 && !homepageWorks.includes(selectedWorkSlug)) {
+    const selectedWork = worksList.find((work) => work.slug === selectedWorkSlug)
+
+    if (homepageWorks.length >= 6 && !homepageWorks.some((work) => work.slug === selectedWorkSlug)) {
       alert('You can only select up to 6 works')
       return
     }
-    const newHomepageWorks = [...homepageWorks]
-    if (homepageWorks.includes(selectedWorkSlug)) {
-      const index = newHomepageWorks.indexOf(selectedWorkSlug)
-      newHomepageWorks.splice(index, 1)
-    } else {
-      newHomepageWorks.push(selectedWorkSlug)
-    }
-    setHomepageWorks(newHomepageWorks)
+
+    setHomepageWorks((prevState) => {
+      const isSelected = prevState.some((work) => work.slug === selectedWorkSlug)
+
+      if (isSelected) {
+        return prevState.filter((work) => work.slug !== selectedWorkSlug)
+      } else {
+        // return [...prevState, selectedWork]
+        return [...prevState, selectedWork].filter((work) => work !== undefined)
+      }
+    })
   }
-  const handleRemoveWork = (workSlug: string) => {
-    const newHomepageWorks = [...homepageWorks]
-    const index = newHomepageWorks.indexOf(workSlug)
-    newHomepageWorks.splice(index, 1)
-    setHomepageWorks(newHomepageWorks)
+
+  const handleRemoveWork = (workToRemove: WorkInterface) => {
+    setHomepageWorks((prevState) => prevState.filter((work) => work.slug !== workToRemove.slug))
   }
+
   const updateList = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
@@ -136,6 +166,7 @@ const HomepageCMS: NextPage<Props> = () => {
       }),
     })
     const data = await response.json()
+    console.log(response)
 
     if (response.ok) {
       // Handle success
@@ -173,10 +204,11 @@ const HomepageCMS: NextPage<Props> = () => {
                   <div>
                     <h2>Liste projets</h2>
 
+                    {/* <select className="min-w-[120px]" multiple={true} value={homepageWorks} onChange={handleSelectWork}> */}
                     <select
                       className="min-w-[120px]"
                       multiple={true}
-                      value={[...homepageWorks]}
+                      value={homepageWorks.map((work) => work.slug)}
                       onChange={handleSelectWork}
                     >
                       {worksList
@@ -195,12 +227,11 @@ const HomepageCMS: NextPage<Props> = () => {
                 <div className="col-span-1">
                   <h2>Selected Works</h2>
                   <ul>
-                    {[...homepageWorks].map((workSlug) => {
-                      const work = worksList?.find((w) => w.slug === workSlug)
+                    {[...homepageWorks].map((work) => {
                       return (
-                        <li className="list-decimal	" key={workSlug}>
-                          {work?.title}
-                          <button className="text-red-500" onClick={() => handleRemoveWork(workSlug)}>
+                        <li className="list-decimal" key={work.slug}>
+                          {work.title}
+                          <button className="text-red-500" onClick={() => handleRemoveWork(work)}>
                             Remove
                           </button>
                         </li>
@@ -213,10 +244,10 @@ const HomepageCMS: NextPage<Props> = () => {
                   <h2>Actual Works</h2>
 
                   <ol type="1">
-                    {[...actualWorksList].map((workSlug) => {
+                    {[...actualWorksList].map((workSaved) => {
                       return (
-                        <li className="list-decimal	py-2" key={workSlug}>
-                          {workSlug}
+                        <li className="list-decimal	py-2" key={workSaved.slug}>
+                          {workSaved.slug}
                         </li>
                       )
                     })}
