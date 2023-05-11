@@ -17,25 +17,19 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   if (req.method === 'POST') {
-    console.log(req.body)
     try {
       await dbConnect()
       const { selectedWorks } = req.body
 
-      // Validate request body against the WorkModel schema
       if (!selectedWorks) {
         return res.status(400).json({ success: false, message: 'Missing required fields in the request body' })
       }
 
-      const updatedHomepage = await HomepageModel.findOneAndUpdate(
-        {}, // Empty filter object to match any document in the collection
-        { selectedWorks }, // The new document with updated selectedWorks field
-        { upsert: true, new: true } // Options to create a new document if it doesn't exist and return the updated document
-      )
+      const updatedHomepage = await HomepageModel.findOneAndUpdate({}, { selectedWorks }, { upsert: true, new: true })
       res.status(201).json({ success: true, data: updatedHomepage.selectedWorks })
     } catch (error) {
       console.error(error)
-      res.status(400).json({ success: false, message: 'Error updating homepage item' })
+      res.status(400).json({ success: false, message: 'Error updating homepage item', error: error })
     }
   }
 
