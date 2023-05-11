@@ -142,8 +142,10 @@ const HomepageCMS: NextPage<Props> = () => {
       if (isSelected) {
         return prevState.filter((work) => work.slug !== selectedWorkSlug)
       } else {
-        // return [...prevState, selectedWork]
-        return [...prevState, selectedWork].filter((work) => work !== undefined)
+        if (selectedWork) {
+          return [...prevState, selectedWork]
+        }
+        return prevState
       }
     })
   }
@@ -212,7 +214,7 @@ const HomepageCMS: NextPage<Props> = () => {
                       onChange={handleSelectWork}
                     >
                       {worksList
-                        ?.filter((work) => !homepageWorks.includes(work.slug))
+                        ?.filter((work) => !homepageWorks.some((homepageWork) => homepageWork.slug === work.slug))
                         .map((work) => (
                           <option className="text-cas-black-600 " key={work.slug} value={work.slug}>
                             {work.title}
