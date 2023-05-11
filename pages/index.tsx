@@ -26,25 +26,26 @@ export const getStaticProps: GetStaticProps = async () => {
 const Home: NextPage<Props> = ({ seo }) => {
   const { setActiveNavLink } = useNavSettingsContext()
 
-  const [actualWorksList, setActualWorksList] = useState<string[]>([])
-  const [worksList, setWorksList] = useState<IWorkInfo[]>([])
-  const [sortedWorks, setSortedWorks] = useState<IWorkInfo[]>([])
+  // const [actualWorksList, setActualWorksList] = useState<string[]>([])
+  const [actualWorksList, setActualWorksList] = useState<IWorkInfo[]>([])
+  // const [worksList, setWorksList] = useState<IWorkInfo[]>([])
+  // const [sortedWorks, setSortedWorks] = useState<IWorkInfo[]>([])
 
   const getWorksList = async () => {
     // console.log('test du transfer')
     try {
-      const response = await fetch('/api/works/', {
-        method: 'GET',
-      })
+      // const response = await fetch('/api/works/', {
+      //   method: 'GET',
+      // })
       const responseHp = await fetch('/api/homepage/', {
         method: 'GET',
       })
       const dataHp = await responseHp.json()
-      const data = await response.json()
+      // const data = await response.json()
       // console.log(data)
-      if (response.ok && responseHp.ok) {
+      if (responseHp.ok) {
         // Handle success
-        setWorksList(data.works.reverse())
+        // setWorksList(data.works.reverse())
         setActualWorksList(dataHp.homepage[0]?.selectedWorks || [])
         // console.log(dataHp.homepage)
         // console.log(Array.isArray(worksList) + 'ies it is')
@@ -56,31 +57,30 @@ const Home: NextPage<Props> = ({ seo }) => {
   }
   // getWorksList()
 
-  const sortWorks = (worksList: IWorkInfo[], actualWorksList: string[]): IWorkInfo[] => {
-    return worksList.sort((b, a) => {
-      const aIndex = actualWorksList.indexOf(a.slug)
-      const bIndex = actualWorksList.indexOf(b.slug)
+  // const sortWorks = (worksList: IWorkInfo[], actualWorksList: string[]): IWorkInfo[] => {
+  //   return worksList.sort((b, a) => {
+  //     const aIndex = actualWorksList.indexOf(a.slug)
+  //     const bIndex = actualWorksList.indexOf(b.slug)
 
-      if (aIndex === -1) return 1
-      if (bIndex === -1) return -1
+  //     if (aIndex === -1) return 1
+  //     if (bIndex === -1) return -1
 
-      return aIndex - bIndex
-    })
-  }
+  //     return aIndex - bIndex
+  //   })
+  // }
 
   useEffect(() => {
     const fetchAndSortWorks = async () => {
-      setActiveNavLink(NavLinkEnum.Home)
       await getWorksList()
+      setActiveNavLink(NavLinkEnum.Home)
     }
-
     fetchAndSortWorks()
   }, [setActiveNavLink])
 
-  useEffect(() => {
-    const sorted = sortWorks(worksList, actualWorksList)
-    setSortedWorks(sorted)
-  }, [worksList, actualWorksList])
+  // useEffect(() => {
+  //   const sorted = sortWorks(worksList, actualWorksList)
+  //   setSortedWorks(sorted)
+  // }, [worksList, actualWorksList])
 
   return (
     <>
@@ -90,7 +90,7 @@ const Home: NextPage<Props> = ({ seo }) => {
         <h1 className="main-title">Freelancer</h1>
         <TypingTextComponent />
         <BlobComponent />
-        <SliderComponent projectsList={sortedWorks} />
+        <SliderComponent projectsList={actualWorksList} />
         <TextSpinnerComponent />
         <ScrollAnimationComponent />
       </header>
