@@ -58,18 +58,24 @@ const SliderItemComponent: FC<SliderItemInterface> = ({ title, imageLink, projec
       className="slider-item flex-1 overflow-hidden w-[50px] min-w-[310px] h-fit  sm:px-2"
     >
       <div className="relative left-[1%] top-[2.5%] w-[98%] h-[95%] flex">
-        <Link className="w-fit grid homepage-work-link" href={getPathFromNavLink(NavLinkEnum.Works) + projectSlug}>
+        <Link
+          prefetch
+          className="w-fit grid homepage-work-link"
+          href={getPathFromNavLink(NavLinkEnum.Works) + projectSlug}
+        >
           <div className="stack-item z-10 mb-2 self-end translate-y-10 voir-plus-work transition-transform">
             <p>Voir plus</p>
           </div>
-          <CldImage
-            className="w-[80vw] h-full rounded-[32px] stack-item"
-            priority={true}
-            width="600"
-            height="600"
-            src={imageLink}
-            alt={'Présentation projet ' + title}
-          />
+          {imageLink && (
+            <CldImage
+              className="w-[80vw] h-full rounded-[32px] stack-item"
+              priority={true}
+              width="600"
+              height="600"
+              src={imageLink}
+              alt={'Présentation projet ' + title}
+            />
+          )}
           {/* <Image
             className="w-[80vw] rounded-[32px] stack-item"
             src={homepageMobileApps}
@@ -92,7 +98,7 @@ const SliderNextWorkComponent: FC = () => {
       className="slider-item flex-1 overflow-hidden w-[50px] min-w-[310px] h-fit "
     >
       <div className="relative left-[1%] top-[2.5%] w-[98%] flex flex-col h-full">
-        <Link className="w-fit grid homepage-card-animation" href={getPathFromNavLink(NavLinkEnum.Contact)}>
+        <Link prefetch className="w-fit grid homepage-card-animation" href={getPathFromNavLink(NavLinkEnum.Contact)}>
           <div className="stack-item self-center">
             <h3 className=" ml-auto text-xl mr-2 text-right">Your work next?</h3>
           </div>
@@ -100,7 +106,7 @@ const SliderNextWorkComponent: FC = () => {
             priority={true}
             className="w-[80vw] rounded-[32px] stack-item"
             src={yourWorkHere}
-            alt={'image your next work here?'}
+            alt={'image of your next work here?'}
           ></Image>
         </Link>
       </div>
