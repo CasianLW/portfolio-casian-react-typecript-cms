@@ -88,13 +88,13 @@ const EditPageComponent: FC<EditPageInterface> = ({ dataPage, editPageMethod }) 
   const uploadedCloudinarySecondary = (result: ICloudinaryUploadResult, widget: ICloudinaryWidget) => {
     console.log('cloudinary working')
     if (result.info) {
-      result.info &&
-        setFormData((prevFormData) => ({
-          ...prevFormData,
-          secondaryImage: result.info.public_id,
-        }))
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        searchImage: result.info.public_id, // Update the searchImage state with the new image string
+      }))
     }
   }
+
   return (
     <>
       <h2 className="secondary-title">Edit Page</h2>
