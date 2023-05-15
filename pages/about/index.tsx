@@ -46,9 +46,24 @@ const About: NextPage<Props> = ({ seo }) => {
               <IllustrationComponent />
             </div>
             <div className="sm:col-span-2 ">
-              <p className="sm:w-2/3 my-5">
+              <p className="sm:w-2/3 my-5 md:w-1/2">
                 Hello, je suis un développeur fullstack mobile et UX/UI designer freelance. Mon champ d&apos;expertise
                 s&apos;étend sur plusieurs domaines, que je ne cesse de renforcer et d&apos;élargir.
+              </p>
+              <p className="sm:w-2/3 my-5 md:w-1/2">
+                En tant que freelance ambitieux, j&apos;ai le privilège de collaborer avec divers clients et
+                entreprises, quels que soient leur taille et leur domaine d&apos;activité. <br />
+                <br />
+                Pour mes projets de design, j&apos;utilise l&apos;ensemble des outils Adobe, tout en privilégiant{' '}
+                <span className="link-active">Figma</span>. <br />
+                En ce qui concerne le développement, je m&apos;adapte à tout langage, mais ma stack de prédilection est
+                la <span className="link-active"> MERN</span>, comprenant
+                <span className="link-active"> MongoDB, Express.js, React.js et Next.js</span>, avec une solide maîtrise
+                du <span className="link-active">Typescript</span>. <br />
+                <br />
+                Cette combinaison de compétences me permet d&apos;offrir des solutions créatives et performantes, tout
+                en répondant aux besoins spécifiques de chaque projet. Passionné par l&apos;innovation, je
+                m&apos;efforce d&apos;apporter une valeur ajoutée à chaque collaboration.
               </p>
               <div>
                 {/* {isLargeScreen && ( */}
@@ -64,7 +79,7 @@ const About: NextPage<Props> = ({ seo }) => {
                         nomCompetence={'UX | UI Design'}
                       />
                       <CompetenceComponent
-                        texte={'Bachelor (BAC+3)'}
+                        texte={'Bachelor'}
                         image={AboutRNCP}
                         nomCompetence={'Fullstack & mobile developer'}
                       />
