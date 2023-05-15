@@ -2,6 +2,7 @@ import { githubLogo, linkedinLogo, profilePicture } from '@/assets/shared'
 import { Seo } from '@/cas-types'
 import ContectComponent from '@/components/contact-components/formComponent'
 import NavComponent, { NavLinkEnum } from '@/components/nav'
+import { getPathFromNavLink } from '@/components/nav'
 import SeoComponent from '@/components/shared/seo-component'
 import { useNavSettingsContext } from '@/context/nav-settings-context'
 import { getPageSeoBySlug } from '@/utils/page-seo-api'
@@ -9,6 +10,7 @@ import { GetStaticProps, NextPage } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import MentionsLegales from '../mentions-legales'
 
 interface Props {
   seo: Seo
@@ -82,6 +84,9 @@ const Contact: NextPage<Props> = ({ seo }) => {
                     <p className="text-sm">GitHub</p>
                   </Link>
                 </div>
+                <Link className="w-fit py-4" href={getPathFromNavLink(NavLinkEnum.MentionsLegales)}>
+                  Mentions Légales
+                </Link>
               </div>
             )}
 
@@ -142,6 +147,9 @@ const Contact: NextPage<Props> = ({ seo }) => {
                 <p className="text-sm">GitHub</p>
               </Link>
             </div>
+            <Link className="w-fit py-4" href={getPathFromNavLink(NavLinkEnum.MentionsLegales)}>
+              Mentions Légales
+            </Link>
           </div>
         )}
       </header>
