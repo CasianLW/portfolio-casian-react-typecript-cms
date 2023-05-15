@@ -1,16 +1,13 @@
 import { Seo } from '@/cas-types'
 import SeoComponent from '@/components/shared/seo-component'
-import { getPageSeoBySlug } from '@/utils/page-seo-api'
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
-import { useEffect } from 'react'
 import { IWork } from '@/@types/work'
 import { ParsedUrlQuery } from 'querystring'
-import { log } from 'util'
 import { IWorkInfo } from '../admin/works/[id]'
 import { CldImage } from 'next-cloudinary'
 import Link from 'next/link'
 import { NavLinkEnum, getPathFromNavLink } from '@/components/nav'
-
+import { useRouter } from 'next/router'
 interface Props {
   seo: Seo
   work: IWorkInfo | null
@@ -79,6 +76,11 @@ export const getStaticProps: GetStaticProps = async (context) => {
   return await getWorkDetails(slug)
 }
 const SingleWorkPage: NextPage<Props> = ({ seo, work }) => {
+  const router = useRouter()
+
+  const goBack = () => {
+    router.back()
+  }
   if (work) {
     return (
       <>
@@ -86,6 +88,9 @@ const SingleWorkPage: NextPage<Props> = ({ seo, work }) => {
         <header className="top-header lateral-space">
           <h1 className="main-title">{work.title}</h1>
           <div className="grid my-5 md:grid-cols-2">
+            <Link className="absolute top-[20%] right-[5%] underline" href="#" onClick={goBack}>
+              &lt;-retour
+            </Link>
             {work.coverImage && (
               <CldImage
                 className="w-full h-auto md:pr-16"
