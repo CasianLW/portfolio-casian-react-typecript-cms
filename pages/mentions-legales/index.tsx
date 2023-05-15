@@ -1,15 +1,10 @@
-// import ContectComponent from '@/components/contact-components/formComponent'
-import { AboutRNCP } from '@/assets/about'
-import { casianPicture, githubLogo, linkedinLogo, profilePicture } from '@/assets/shared'
-import { Seo } from '@/cas-types'
 import NavComponent, { NavLinkEnum, getPathFromNavLink } from '@/components/nav'
 import SeoComponent from '@/components/shared/seo-component'
 import { useNavSettingsContext } from '@/context/nav-settings-context'
-import { getPageSeoBySlug } from '@/utils/page-seo-api'
-import { GetStaticProps, NextPage } from 'next'
-import Image, { StaticImageData } from 'next/image'
+import { NextPage } from 'next'
+
 import Link from 'next/link'
-import { FC, useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 const MentionsLegales: NextPage = () => {
   const { setActiveNavLink } = useNavSettingsContext()
