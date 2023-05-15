@@ -78,7 +78,7 @@ const Services: NextPage<Props> = ({ seo, services }) => {
       </header>
 
       <div className="mx-auto px-8 sm:px-0">
-        <div className="mt-10">
+        <div className="mt-10 mb-20">
           <div
             role="tablist"
             aria-label="tabs"
