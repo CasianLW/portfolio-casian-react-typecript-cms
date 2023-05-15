@@ -7,7 +7,9 @@ import { IWorkInfo } from '../admin/works/[id]'
 import { CldImage } from 'next-cloudinary'
 import Link from 'next/link'
 import { NavLinkEnum, getPathFromNavLink } from '@/components/nav'
+import { useNavSettingsContext } from '@/context/nav-settings-context'
 import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 interface Props {
   seo: Seo
   work: IWorkInfo | null
@@ -81,6 +83,10 @@ const SingleWorkPage: NextPage<Props> = ({ seo, work }) => {
   const goBack = () => {
     router.back()
   }
+  const { setActiveNavLink } = useNavSettingsContext()
+  useEffect(() => {
+    setActiveNavLink(NavLinkEnum.None)
+  }, [setActiveNavLink])
   if (work) {
     return (
       <>
