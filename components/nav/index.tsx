@@ -16,6 +16,7 @@ export enum NavLinkEnum {
   Blog = 'Blog',
   MentionsLegales = 'MentionsLegales',
   DonneesPersonnelles = 'DonneesPersonnelles',
+  None = '',
 }
 export const getPathFromNavLink: (navLink: NavLinkEnum) => string = (navLink: NavLinkEnum) => {
   switch (navLink) {
@@ -35,6 +36,8 @@ export const getPathFromNavLink: (navLink: NavLinkEnum) => string = (navLink: Na
       return '/mentions-legales/'
     case NavLinkEnum.DonneesPersonnelles:
       return '/donnees-personnelles/'
+    case NavLinkEnum.None:
+      return '/'
   }
 }
 
