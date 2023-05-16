@@ -4,7 +4,7 @@ import { Session } from 'next-auth'
 
 import { AdminNavSettingsProvider } from '@/context/admin-nav-settings-context'
 import AdminNavComponent from '@/components/nav/admin'
-import NetlifyDeployButton from '@/components/admin/shared/NetlifyDeployButton'
+import NetlifyDeployButton from '@/components/admin/shared/netlifyDeployButton'
 
 interface Props {
   children: JSX.Element
