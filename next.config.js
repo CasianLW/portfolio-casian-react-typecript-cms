@@ -11,7 +11,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['www.artic.edu', 'images.unsplash.com', 'res.cloudinary.com', 'www.casian.fr'],
+    domains: ['www.artic.edu', 'images.unsplash.com', 'res.cloudinary.com', 'www.casian.fr', 'api.netlify.com'],
   },
 }
 
