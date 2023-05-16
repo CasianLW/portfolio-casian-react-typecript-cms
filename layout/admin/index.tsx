@@ -4,6 +4,7 @@ import { Session } from 'next-auth'
 
 import { AdminNavSettingsProvider } from '@/context/admin-nav-settings-context'
 import AdminNavComponent from '@/components/nav/admin'
+import NetlifyDeployButton from '@/components/admin/shared/NetlifyDeployButton'
 
 interface Props {
   children: JSX.Element
@@ -28,6 +29,9 @@ const AdminLayoutContent: FC<Props> = ({ children }) => {
       <AdminNavSettingsProvider>
         <div className="w-fit mx-auto block  ">
           <AdminNavComponent />
+          <div style={{ marginBottom: '20px', maxWidth: '180px' }}>
+            <NetlifyDeployButton />
+          </div>
           {sessionData?.user && (
             <div className="w-auto mx-auto -mt-10 mb-5 text-center">
               <button onClick={() => signOut()}>Se déconnecter</button>
