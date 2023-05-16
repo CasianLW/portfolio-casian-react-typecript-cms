@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
-import NetlifyDeployButton from './NetlifyDeployButton'
+import NetlifyDeployButton from './netlifyDeployButton'
 
 const NetlifyBuildCounter: React.FC<{ siteId: string; accessToken: string }> = ({ siteId }) => {
   // useEffect(() => {
