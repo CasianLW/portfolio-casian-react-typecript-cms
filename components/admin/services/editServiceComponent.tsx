@@ -1,6 +1,6 @@
 import ServicesComponent from '@/components/services/servicesComponent'
 import { IServiceInfo } from '@/pages/admin/services/[id]'
-import { CldImage } from 'next-cloudinary'
+import { CldImage, CldUploadButton } from 'next-cloudinary'
 import { FC, useState } from 'react'
 
 interface EditServiceInterface {
@@ -8,6 +8,15 @@ interface EditServiceInterface {
   dataService: IServiceInfo
 }
 const EditServiceComponent: FC<EditServiceInterface> = ({ dataService, editServiceMethod }) => {
+  interface ICloudinaryUploadResult {
+    event: boolean
+    info: {
+      public_id: string
+    }
+  }
+  interface ICloudinaryWidget {
+    close: () => void
+  }
   const [formData, setFormData] = useState({
     title: dataService.title,
     priceDetails: dataService.priceDetails,
@@ -99,6 +108,16 @@ const EditServiceComponent: FC<EditServiceInterface> = ({ dataService, editServi
         return null
     }
   }
+
+  const uploadedCloudinary = (result: ICloudinaryUploadResult, widget: ICloudinaryWidget) => {
+    if (result.info) {
+      result.info &&
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          imgLink: result.info.public_id,
+        }))
+    }
+  }
   return (
     <>
       {/* <style>{`
@@ -163,7 +182,13 @@ const EditServiceComponent: FC<EditServiceInterface> = ({ dataService, editServi
           </div>
           <div className="grid">
             <label htmlFor="imgLink">Lien image</label>
+            {/* <input required name="imgLink" value={formData.imgLink} onChange={handleInputChange} /> */}
             <input required name="imgLink" value={formData.imgLink} onChange={handleInputChange} />
+            {formData.imgLink && <CldImage width="600" height="600" src={formData.imgLink} alt="Image du service" />}
+            <CldUploadButton
+              onUpload={uploadedCloudinary}
+              uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET}
+            />
           </div>
           <div className="my-10 grid grid-cols-2">
             <div className="grid">
