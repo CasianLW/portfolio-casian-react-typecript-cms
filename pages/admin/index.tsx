@@ -1,4 +1,5 @@
 import { Seo } from '@/cas-types'
+import NetlifyBuildCounter from '@/components/admin/shared/netlifyBuildCounter'
 import AddWorkComponent from '@/components/admin/works/addWorkComponent'
 import AdminNavComponent, { AdminNavLinkEnum } from '@/components/nav/admin'
 import SeoComponent from '@/components/shared/seo-component'
@@ -39,7 +40,9 @@ const AdminPage: NextPage<Props> = () => {
             <div className="col-span-1">how to use Works</div>
             <div className="col-span-1">how to use Services</div>
             <div className="col-span-1">how to use General</div>
-            <div className="col-span-1">how to use General</div>
+            <div className="col-span-1">
+              <NetlifyBuildCounter siteId={'d51d3e82-09d4-47fc-89db-99ac5d5a4840'} accessToken={''} />
+            </div>
           </section>
         </main>
       </>
