@@ -6,7 +6,7 @@ import { useAdminNavSettingsContext } from '@/context/admin-nav-settings-context
 import { logoCasianBlanc } from '@/assets/shared'
 import Image from 'next/image'
 import BurgerComponent from './burger-component'
-import NetlifyBuildDuration from '@/components/admin/shared/netlifyBuildsComponent'
+import NetlifyBuildDuration from '@/components/admin/shared/netlifyBuildCounter'
 
 export enum AdminNavLinkEnum {
   Dashboard = 'Dashboard',
