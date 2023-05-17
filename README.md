@@ -19,6 +19,10 @@ Visitors can access the front pages of the website, while admins can manage work
 
 Instructions for installing the project.
 
+1. Download the git
+2. Run `npm install` to get modules
+3. Run `npm run dev`to launch project
+
 ## Usage
 
 Instructions for using the project.
