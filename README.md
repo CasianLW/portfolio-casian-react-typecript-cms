@@ -33,7 +33,8 @@ Instructions for contributing to the project, including guidelines for pull requ
 
 ## Contact
 
-Your name and contact information, including email and any social media profiles you want to share.
+Casian.C
+casian.fr
 
 ## Acknowledgements
 
@@ -41,4 +42,4 @@ If you want to give credit to anyone who helped with the project, you can do so 
 
 ## License
 
-This project is licensed under the [License Name](LICENSE.md) - replace "License Name" with the actual name of the license you're using.
+This project is licensed under the [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License](LICENSE.md).
