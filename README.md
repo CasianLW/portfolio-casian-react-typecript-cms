@@ -62,7 +62,7 @@ This is how you dropdown.
 
 1.  `npx tailwindcss init -p ` (The -p flag generates a postcss.config.js file in addition to the tailwind.config.js file.)
 
-1.  Options tailwind.config.js (can be found on Tailwindcss website):
+1.  Options tailwind.config.js (can be found on Tailwindcss website)(add content configs):
 
 ```javascript
 /* @type {import('tailwindcss').Config} */
@@ -147,9 +147,9 @@ module.exports = {
 (We can then delete the Home.module.css file, which is no longer needed, as well as the import import styles from '../styles/Home.module.css' in pages/index.tsx.)
 
 <details>
-<summary>rcprettier configuration if not already done:</summary>
+<summary>.prettierrc configuration if not already done:</summary>
 <br>
-Add rcprettier.rc to the project:
+Add .prettierrc.rc to the project:
 
 ```
 {
@@ -170,4 +170,4 @@ Add rcprettier.rc to the project:
 
 </details>
 
-1. `npm run dev` to test if setup is working
+1. `npm run dev` to test if setup is working (or other line, see package.json, `npm run build` and try again if it's not working)
