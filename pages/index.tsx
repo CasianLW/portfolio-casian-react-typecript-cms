@@ -14,42 +14,65 @@ import { IWorkInfo } from './admin/works/[id]'
 
 interface Props {
   seo: Seo
+  actualWorksList: IWorkInfo[]
 }
-
 export const getStaticProps: GetStaticProps = async () => {
   const slug = 'Homepage'
   const seo = await getPageSeoBySlug(slug)
+
+  const responseHp = await fetch('/api/homepage/', {
+    method: 'GET',
+  })
+  const dataHp = await responseHp.json()
+
+  const actualWorksList = dataHp.homepage[0]?.selectedWorks || []
+
   return {
-    props: { seo },
+    props: { seo, actualWorksList },
   }
 }
-const Home: NextPage<Props> = ({ seo }) => {
+
+const Home: NextPage<Props> = ({ seo, actualWorksList }) => {
   const { setActiveNavLink } = useNavSettingsContext()
 
-  // const [actualWorksList, setActualWorksList] = useState<string[]>([])
-  const [actualWorksList, setActualWorksList] = useState<IWorkInfo[]>([])
-  // const [worksList, setWorksList] = useState<IWorkInfo[]>([])
-  // const [sortedWorks, setSortedWorks] = useState<IWorkInfo[]>([])
-
-  const getWorksList = async () => {
-    try {
-      const responseHp = await fetch('/api/homepage/', {
-        method: 'GET',
-      })
-      const dataHp = await responseHp.json()
-      if (responseHp.ok) {
-        setActualWorksList(dataHp.homepage[0]?.selectedWorks || [])
-      }
-    } catch (error: any) {}
-  }
-
   useEffect(() => {
-    const fetchAndSortWorks = async () => {
-      await getWorksList()
-      setActiveNavLink(NavLinkEnum.Home)
-    }
-    fetchAndSortWorks()
+    setActiveNavLink(NavLinkEnum.Home)
   }, [setActiveNavLink])
+
+  // export const getStaticProps: GetStaticProps = async () => {
+  //   const slug = 'Homepage'
+  //   const seo = await getPageSeoBySlug(slug)
+  //   return {
+  //     props: { seo },
+  //   }
+  // }
+  // const Home: NextPage<Props> = ({ seo }) => {
+  //   const { setActiveNavLink } = useNavSettingsContext()
+
+  //   // const [actualWorksList, setActualWorksList] = useState<string[]>([])
+  //   const [actualWorksList, setActualWorksList] = useState<IWorkInfo[]>([])
+  //   // const [worksList, setWorksList] = useState<IWorkInfo[]>([])
+  //   // const [sortedWorks, setSortedWorks] = useState<IWorkInfo[]>([])
+
+  //   const getWorksList = async () => {
+  //     try {
+  //       const responseHp = await fetch('/api/homepage/', {
+  //         method: 'GET',
+  //       })
+  //       const dataHp = await responseHp.json()
+  //       if (responseHp.ok) {
+  //         setActualWorksList(dataHp.homepage[0]?.selectedWorks || [])
+  //       }
+  //     } catch (error: any) {}
+  //   }
+
+  //   useEffect(() => {
+  //     const fetchAndSortWorks = async () => {
+  //       await getWorksList()
+  //       setActiveNavLink(NavLinkEnum.Home)
+  //     }
+  //     fetchAndSortWorks()
+  //   }, [setActiveNavLink])
 
   return (
     <>
