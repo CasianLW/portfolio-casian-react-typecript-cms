@@ -20,7 +20,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const slug = 'Homepage'
   const seo = await getPageSeoBySlug(slug)
 
-  const responseHp = await fetch('/api/homepage/', {
+  const responseHp = await fetch(`${process.env.URL}/api/homepage/`, {
     method: 'GET',
   })
   const dataHp = await responseHp.json()
