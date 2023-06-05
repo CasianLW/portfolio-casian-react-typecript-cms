@@ -66,7 +66,10 @@ const Works: NextPage<Props> = ({ seo, works }) => {
 
   // filter
   function filterPublishedWorks(works: Array<IWorkInfo>): Array<IWorkInfo> {
-    return works.filter((work) => work.published)
+    return works
+      .reverse() // Reverse the sorted array
+      .filter((work) => work.published)
+      .sort((a, b) => a.order - b.order) // Newer works with the same order will remain after older ones
   }
 
   const [projects, setProjects] = useState(filterPublishedWorks(works))
