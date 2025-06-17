@@ -70,8 +70,7 @@ const MentionsLegales: NextPage = () => {
             </p>
             <h2>Informations sur l&apos;entreprise :</h2>
             <p>
-              La société Casian Ciorba est une entreprise individuelle dirigée par Casian Ciorba, développeur/designer,
-              située à 6 impasse Carnot, Sevran 93270.
+              La société Casian Ciorba est une entreprise individuelle dirigée par Casian Ciorba, développeur/designer.
             </p>
             <br />
             <p>
